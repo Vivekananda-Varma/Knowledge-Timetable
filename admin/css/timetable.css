@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'caros-black';
+    src: url(../fonts/caros/cretype\ \ Caros\ Black.otf);
+}
+
+@font-face {
+    font-family: 'caros-extra-bold';
+    src: url(../fonts/caros/cretype\ \ Caros\ ExtraBold.otf);
+}
+
+
+@font-face {
+    font-family: 'caros-medium';
+    src: url(../fonts/caros/cretype\ \ Caros\ Medium.otf);
+}
+
+@media (min-width: 992px) {
+
+	.row-cols-lg-8>* {
+		-ms-flex: 0 0 12.5%;
+		flex: 0 0 12.5%;
+		max-width: 12.5%;
+	}
+	
+	.row-cols-lg-8 div:first-child {
+		border-right: 1px solid rgb(104, 104, 104) !important;
+		border-bottom: 1px solid rgb(104, 104, 104) !important;
+	}
+
+	.row>div {
+		border-right: 1px solid rgb(104, 104, 104);
+		border-bottom: 1px solid rgb(104, 104, 104);
+	}
+
+	.day {
+		border-left: 1px solid rgb(104, 104, 104);
+		border-right: 1px solid rgb(104, 104, 104) !important;
+	}
+
+	.period-header {
+		border-right: 1px solid rgb(104, 104, 104) !important;
+		border-top: 1px solid rgb(104, 104, 104);
+	}
+
+	.period {
+		display: none !important;
+	}
+}
+
+h1 {
+    margin-top: 2%;
+    margin-bottom: 3%;
+    text-align: center;
+    font-family: 'caros-black';
+    font-size: 4rem;
+    color: rgb(219, 44, 0);
+}
+
+.row>div {
+	position: relative;
+	padding: 5px 10px;
+	border-bottom: 1px solid rgb(104, 104, 104);
+}
+
+.day,
+.period-header {
+    font-family: 'caros-extra-bold';
+    font-size: 1.2rem;
+	color: rgb(77, 77, 77);
+	background-color: rgb(222, 222, 222);
+	border-bottom: 1px solid rgb(104, 104, 104) !important;
+}
+
+.period {
+	display: block;
+	position: absolute;
+	right: 5px; 
+	font-size: 10px;
+	color: rgb(104, 104, 104);
+}
+
+.fixed-period,
+.free-period {
+	background-color: rgb(245, 245, 245);;
+}
+
+.subject,
+.teacher {
+    font-family: 'caros-medium';
+    font-size: 1rem;
+    color: rgb(104, 104, 104);
+}
