@@ -1,6 +1,6 @@
 [
   {
-    "day": "Monday",
+    "day": "Mon",
     "periods": [
       { "period": 1, "category": "", "subject": "Tech Lab", "teacher": "Sanjay", "place": "Knowledge" },
       { "period": 1, "category": "", "subject": "Tech Lab", "teacher": "Sanjay", "place": "Knowledge" },
@@ -12,7 +12,7 @@
     ]
   },
   {
-    "day": "Tuesday",
+    "day": "Tue",
     "periods": [
       { "period": 1, "category": "", "subject": "", "teacher": "", "place": "" },
       { "period": 2, "category": "", "subject": "French", "teacher": "Shoma", "place": "Knowledge" },
@@ -24,7 +24,7 @@
     ]
   },
   {
-    "day": "Wednesday",
+    "day": "Wed",
     "periods": [
       { "period": 1, "category": "", "subject": "Global and International", "teacher": "Jay", "place": "Knowledge" },
       { "period": 2, "category": "", "subject": "Governance and Politics", "teacher": "Jay", "place": "Knowledge" },
@@ -36,7 +36,7 @@
     ]
   },
   {
-    "day": "Thursday",
+    "day": "Thu",
     "periods": [
       { "period": 1, "category": "", "subject": "", "teacher": "", "place": "" },
       { "period": 2, "category": "", "subject": "", "teacher": "", "place": "" },
@@ -48,7 +48,7 @@
     ]
   },
   {
-    "day": "Friday",
+    "day": "Fri",
     "periods": [
       { "period": 1, "category": "", "subject": "Essays on the Gita", "teacher": "Yogi", "place": "School" },
       { "period": 2, "category": "", "subject": "English", "teacher": "Avani", "place": "Knowledge" },
@@ -60,7 +60,7 @@
     ]
   },
   {
-    "day": "Saturday",
+    "day": "Sat",
     "periods": [
       { "period": 1, "category": "", "subject": "", "teacher": "", "place": "" },
       { "period": 2, "category": "", "subject": "", "teacher": "", "place": "" },
