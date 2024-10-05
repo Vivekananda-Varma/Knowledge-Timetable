@@ -36,7 +36,7 @@
 	$num_rfqs = GetRFQCount();
 	
 	if ($tokens[1] == 'login') {
-		include('modules/login/login.php');
+		include('login/index.php');
 		exit;
 	} else if ($tokens[1] == 'loginpost') {
 		$username = $_POST['username'];
