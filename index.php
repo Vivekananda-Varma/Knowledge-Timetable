@@ -12,14 +12,7 @@
 	include_once('functions/config.inc');
 	include_once('functions/db.inc');
 	include_once('functions/users.inc');
-	// include_once('functions/suppliers.inc');
-	// include_once('functions/categories.inc');
-	// include_once('functions/parts.inc');
-	// include_once('functions/rfqs.inc');
-	// include_once('functions/misc.inc');
-	// include_once('functions/sitemap.inc');
-	
-	// include_once("strapi/categories.php");
+	include_once('functions/misc.inc');
 	
 	// require_once('filepond/config.php');
 	// require_once("filepond/util/read_write_functions.php");
@@ -33,19 +26,20 @@
 	$gMethod = $_SERVER['REQUEST_METHOD'];
 	
 	$tokens = explode("/", $gUri);					// tokenize url
-	$num_rfqs = GetRFQCount();
+	
+	// print_r($tokens); exit;
 	
 	if ($tokens[1] == 'login') {
-		include('login/index.php');
+		include('login/login.php');
 		exit;
 	} else if ($tokens[1] == 'loginpost') {
-		$username = $_POST['username'];
+		$username = $_POST['email'];
 		$password = $_POST['password'];
 		
         if ($username == $admin_username && $password == $admin_password) {
             $_SESSION['login_user']['is_admin'] = true;
 
-            Redirect('/admin');
+            Redirect('/admin/categories/');
             exit;
         }
 
@@ -55,7 +49,7 @@
 			Redirect('/');
 			exit;
 		} else {
-			Redirect('/login/');
+			Redirect('/login/');	
 			exit;
 		}
 	} else if ($tokens[1] == 'logout') {
@@ -65,34 +59,40 @@
 		exit;
 	}
 	
-	// RequiresAdminLogin();
-	
+	$user = RequiresLogin();
+
 	switch ($tokens[1]) {
 	default:
 		Redirect('/users/');
 		
 		break;
+	
+	case 'admin':
+		RequiresAdminLogin();
 		
-	
-	
-    case 'admin':
         $module = $tokens[2];
 
         switch ($module) {
+			default:
+				Redirect('/admin/dashboard/');
+				break;
+				
             case 'categories':
-                include('admin/modules/categories/index.php');
+                include('admin/modules/categories/index.html');
                 break;
 
-            case 'places'
-
+            case 'places':
+				include('admin/modules/places/index.php');
                 break;
 
             default:
                 Redirect('/admin/categories/');
         }
+		
+		break;
 
     case 'dashboard':
-        include('dashboard.php');
+        include('/admin/dashboard.php');
         
         break;
         
@@ -100,10 +100,7 @@
         $user_id = $tokens[2];
         $user = GetUserById($user_id);
 
-        print_r($user);
-
-    
-			
+        print_r($user);	
 	}
 	
 ?>

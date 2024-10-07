@@ -11,12 +11,12 @@
 	<title>Login</title>
 
 	<link rel="canonical" href="https://appstack.bootlab.io/pages-reset-password.html" />
-	<link rel="shortcut icon" href="img/favicon.ico">
+	<link rel="shortcut icon" href="/admin/dist/img/favicon.ico">
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-	<link class="js-stylesheet" href="../admin/dist/css/light.css" rel="stylesheet">
+	<link class="js-stylesheet" href="/admin/dist/css/light.css" rel="stylesheet">
 	<!-- <script src="js/settings.js"></script> -->
 </head>
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
@@ -28,22 +28,26 @@
 						<div class="d-table-cell align-middle">
 
 							<div class="text-center mt-4">
-								<h1 class="h2">Enter Email</h1>
+								<h1 class="h2">Login</h1>
 								<p class="lead">
-									Enter your email to receive OTP.
+									Enter your email address and password provided to you.
 								</p>
 							</div>
 
 							<div class="card">
 								<div class="card-body">
 									<div class="m-sm-3">
-										<form>
+										<form name="login-form" method="post" action="/loginpost/">
 											<div class="mb-3">
 												<label class="form-label">Email</label>
-												<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
+												<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email or username" />
+											</div>
+											<div class="mb-3">
+												<label class="form-label">Password</label>
+												<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
 											</div>
 											<div class="d-grid gap-2 mt-3">
-												<a href="dashboard-default.html" class="btn btn-lg btn-primary">Send OTP</a>
+												<a href="dashboard-default.html" class="btn btn-lg btn-primary">Sign in</a>
 											</div>
 										</form>
 									</div>
@@ -56,7 +60,7 @@
 		</main>
 	</div>
 
-	<script src="../admin/dist/js/app.js"></script>
+	<script src="/admin/dist/js/app.js"></script>
 
 </body>
 
