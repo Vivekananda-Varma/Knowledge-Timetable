@@ -1,13 +1,13 @@
 <?php
 
-	session_start();
-	
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	ini_set('pcre.jit', '0');
 	ini_set('error_reporting', E_ALL ^ E_WARNING);
 	
 	error_reporting(E_ALL);
+
+	session_start();
 	
 	include_once('functions/config.inc');
 	include_once('functions/db.inc');
@@ -27,48 +27,43 @@
 	
 	$tokens = explode("/", $gUri);					// tokenize url
 	
-	// print_r($tokens); exit;
+	// print_r($tokens);
 	
-	if ($tokens[1] == 'login') {
+	switch ($tokens[1]) {
+	case 'login':
 		include('login/login.php');
 		exit;
-	} else if ($tokens[1] == 'loginpost') {
+
+	case 'loginpost':
 		$username = $_POST['email'];
 		$password = $_POST['password'];
-		
-        if ($username == $admin_username && $password == $admin_password) {
-            $_SESSION['login_user']['is_admin'] = true;
-
-            Redirect('/admin/categories/');
-            exit;
-        }
-
-		if ($user_id = ValidateLogin($username, $password)) {
+	
+    	if ($username == $admin_username && $password == $admin_password) {
+        	$_SESSION['login_user']['is_admin'] = true;
+			
+			// print "Logged in as admin";
+        	Redirect('/admin/categories/');
+    	} else if ($user_id = ValidateLogin($username, $password)) {
 			$_SESSION['login_user'] = GetUserById($user_id);
 			
 			Redirect('/');
-			exit;
 		} else {
 			Redirect('/login/');	
-			exit;
-		}
-	} else if ($tokens[1] == 'logout') {
-		unset($_SESSION['login_user']);
-	
-		Redirect('/login/');
-		exit;
-	}
-	
-	$user = RequiresLogin();
-
-	switch ($tokens[1]) {
-	default:
-		Redirect('/users/');
+		} 
 		
 		break;
+		
+	case 'logout':
+		unset($_SESSION['login_user']);
+
+		Redirect('/login/');
+	}
 	
+	RequiresLogin();
+
+	switch ($tokens[1]) {
 	case 'admin':
-		RequiresAdminLogin();
+		// RequiresAdminLogin();
 		
         $module = $tokens[2];
 
@@ -84,23 +79,11 @@
             case 'places':
 				include('admin/modules/places/index.php');
                 break;
-
-            default:
-                Redirect('/admin/categories/');
         }
 		
 		break;
 
-    case 'dashboard':
-        include('/admin/dashboard.php');
-        
-        break;
-        
-    case 'users':
-        $user_id = $tokens[2];
-        $user = GetUserById($user_id);
-
-        print_r($user);	
+	default: print '404';
 	}
 	
 ?>

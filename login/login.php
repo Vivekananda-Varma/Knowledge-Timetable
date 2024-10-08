@@ -47,7 +47,7 @@
 												<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
 											</div>
 											<div class="d-grid gap-2 mt-3">
-												<a href="dashboard-default.html" class="btn btn-lg btn-primary">Sign in</a>
+												<input class="btn btn-lg btn-primary" type="submit" name="signin-button" value="Sign In">
 											</div>
 										</form>
 									</div>

@@ -6,7 +6,7 @@
 	
 	$app_title = "K Timetable";
 	
-	$admin_username = 'shilpi';
+	$admin_username = 'shilpi@gmail.com';
 	$admin_password = 'shilpi';
 	
 	$TS_PARAMS['docroot'] = $_SERVER['DOCUMENT_ROOT'];						// some servers don't add a trailing slash to DOCROOT

@@ -9,6 +9,7 @@ function LocalForward($relative_url)
 function Redirect($absolute_url)
 {
     header("Location: http://" . $_SERVER['HTTP_HOST'] . $absolute_url);
+    exit;
 }
 
 function EscapeQuotes($array)
