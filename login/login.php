@@ -2,22 +2,7 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Bootstrap 5 Admin &amp; Dashboard Template">
-	<meta name="author" content="Bootlab">
-
-	<title>Login</title>
-
-	<link rel="canonical" href="https://appstack.bootlab.io/pages-reset-password.html" />
-	<link rel="shortcut icon" href="/admin/dist/img/favicon.ico">
-
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-	<link class="js-stylesheet" href="/admin/dist/css/light.css" rel="stylesheet">
-	<!-- <script src="js/settings.js"></script> -->
+	<?php include('templates/head.html'); ?>
 </head>
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
 	<div class="main d-flex justify-content-center w-100">
@@ -37,7 +22,7 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="m-sm-3">
-										<form name="login-form" method="post" action="/loginpost/">
+										<form name="login-form" method="post" action="/login/">
 											<div class="mb-3">
 												<label class="form-label">Email</label>
 												<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email or username" />
@@ -60,7 +45,7 @@
 		</main>
 	</div>
 
-	<script src="/admin/dist/js/app.js"></script>
+	<?php include('templates/foot.html'); ?>
 
 </body>
 

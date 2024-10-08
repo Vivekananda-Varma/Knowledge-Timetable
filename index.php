@@ -31,6 +31,7 @@
 	
 	switch ($tokens[1]) {
 	case 'login':
+		$page_title = 'Sign In';
 		include('login/login.php');
 		exit;
 
@@ -41,7 +42,7 @@
     	if ($username == $admin_username && $password == $admin_password) {
         	$_SESSION['login_user']['is_admin'] = true;
 			
-			// print "Logged in as admin";
+			print "Logged in as admin"; exit;
         	Redirect('/admin/categories/');
     	} else if ($user_id = ValidateLogin($username, $password)) {
 			$_SESSION['login_user'] = GetUserById($user_id);
@@ -73,7 +74,7 @@
 				break;
 				
             case 'categories':
-                include('admin/modules/categories/index.html');
+                include('admin/modules/categories/index.php');
                 break;
 
             case 'places':
