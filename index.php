@@ -42,7 +42,7 @@
     	if ($username == $admin_username && $password == $admin_password) {
         	$_SESSION['login_user']['is_admin'] = true;
 			
-			print "Logged in as admin"; exit;
+			// print "Logged in as admin"; exit;
         	Redirect('/admin/categories/');
     	} else if ($user_id = ValidateLogin($username, $password)) {
 			$_SESSION['login_user'] = GetUserById($user_id);

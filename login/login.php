@@ -22,7 +22,7 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="m-sm-3">
-										<form name="login-form" method="post" action="/login/">
+										<form name="login-form" method="post" action="/loginpost/">
 											<div class="mb-3">
 												<label class="form-label">Email</label>
 												<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email or username" />
