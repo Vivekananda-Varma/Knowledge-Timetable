@@ -14,6 +14,22 @@
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
       <link class="js-stylesheet" href="../../dist/css/light.css" rel="stylesheet">
       <!-- <script src="js/settings.js"></script> -->
+	   <style>
+		.table-action a {
+			opacity: 0;
+			transition: opacity 0.3s ease;
+			margin-right: 10px;
+		}
+		
+		.table-action a:last-child {
+			margin-right: 0;
+		}
+		
+		tr:hover .table-action a {
+			opacity: 1;
+		}
+		
+	   </style>
    </head>
    <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
       <div class="wrapper">
