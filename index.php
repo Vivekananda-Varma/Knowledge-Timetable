@@ -11,9 +11,11 @@
 	
 	include_once('functions/config.inc');
 	include_once('functions/db.inc');
-	include_once('admin/functions/categories.inc');
-	include_once('functions/users.inc');
 	include_once('functions/misc.inc');
+	
+	include_once('admin/functions/categories.inc');
+	include_once('admin/functions/users.inc');
+	include_once('admin/functions/places.inc');
 	
 	// require_once('filepond/config.php');
 	// require_once("filepond/util/read_write_functions.php");
@@ -84,6 +86,30 @@
             case 'places':
 				include('admin/modules/places/index.php');
                 break;
+
+			case 'subjects':
+				include('admin/modules/subjects/index.php');
+				break;
+			
+			case 'users':
+				$filter = $tokens[3];
+
+				switch($filter) {
+					case 'all':
+						include('admin/modules/users/index.php');
+						break;
+					case 'students':
+						
+						break;
+
+					case 'teachers':
+
+						break;
+				}
+
+				include('admin/modules/users/index.php');
+				break;
+			
         }
 		
 		break;

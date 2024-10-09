@@ -6,14 +6,14 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta name="description" content="Responsive Bootstrap 5 Admin &amp; Dashboard Template">
       <meta name="author" content="Bootlab">
-      <title>Categories</title>
+      <title>Subjects</title>
       <link rel="canonical" href="https://appstack.bootlab.io/dashboard-analytics.html" />
       <link rel="shortcut icon" href="../dist/img/favicon.ico">
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
       <link class="js-stylesheet" href="../../dist/css/light.css" rel="stylesheet">
-      <link rel="stylesheet" href="../../styles/table.css">
+	  <link rel="stylesheet" href="../../styles/table.css">
       <!-- <script src="js/settings.js"></script> -->
    </head>
    <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
@@ -50,7 +50,7 @@
                   </a>
                   </li>
                   <li class="sidebar-item"></li>
-                  <a class="sidebar-link" href="subjects.html">
+                  <a class="sidebar-link" href="admin/modules/subjects/index.php">
                   <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Subjects</span>
                   </a>
                   </li>
@@ -321,17 +321,26 @@
             <main class="content">
                <div class="container-fluid p-0">
                   <div class="d-flex justify-content-between align-items-center mb-3">
-                     <h1 class="h1">Categories</h1>
-                     <button class="btn btn-outline-primary">New +</button>
+                     <h1 class="h1">Subjects</h1>
                   </div>
-                  
+                  <!-- First Table -->
                   <div class="row">
                      <div class="col-12 col-xl-12">
                         <div class="card">
+                           <div class="card-header d-flex justify-content-between align-items-center">
+                              <button class="btn btn-outline-primary">New +</button>
+                           </div>
                            <table class="table">
+                              <thead>
+                                 <tr>
+                                    <th style="width:40%;">Name</th>
+                                    <th style="width:25%"></th>
+                                    <th class="d-none d-md-table-cell" style="width:25%"></th>
+                                 </tr>
+                              </thead>
                               <tbody>
                                  <tr>
-                                    <td>Works of Sri Aurobindo and The Mother</td>
+                                    <td>Essays on the Gita</td>
                                     <td></td>
                                     <td class="d-none d-md-table-cell"></td>
                                     <td class="table-action">
@@ -340,7 +349,7 @@
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td>Subjects Related to Teachings of Sri Aurobindo and The Mother</td>
+                                    <td>Letters on Yoga</td>
                                     <td></td>
                                     <td class="d-none d-md-table-cell"></td>
                                     <td class="table-action">
@@ -349,7 +358,7 @@
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td>Foreign Languages</td>
+                                    <td>Savitri</td>
                                     <td></td>
                                     <td class="d-none d-md-table-cell"></td>
                                     <td class="table-action">
@@ -358,34 +367,7 @@
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td>Indian Languages</td>
-                                    <td></td>
-                                    <td class="d-none d-md-table-cell"></td>
-                                    <td class="table-action">
-                                       <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                                       <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td>Science Subjects</td>
-                                    <td></td>
-                                    <td class="d-none d-md-table-cell"></td>
-                                    <td class="table-action">
-                                       <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                                       <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td>other Subjects</td>
-                                    <td></td>
-                                    <td class="d-none d-md-table-cell"></td>
-                                    <td class="table-action">
-                                       <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                                       <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td>Miscellaneous Subjects or Projects</td>
+                                    <td>Foundations of Indian Culture</td>
                                     <td></td>
                                     <td class="d-none d-md-table-cell"></td>
                                     <td class="table-action">
