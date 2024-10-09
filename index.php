@@ -11,6 +11,7 @@
 	
 	include_once('functions/config.inc');
 	include_once('functions/db.inc');
+	include_once('admin/functions/categories.inc');
 	include_once('functions/users.inc');
 	include_once('functions/misc.inc');
 	
@@ -74,6 +75,9 @@
 				break;
 				
             case 'categories':
+				$page_title = "K Timetable App | Categories";
+				$categories = GetCategories();
+				
                 include('admin/modules/categories/index.php');
                 break;
 
