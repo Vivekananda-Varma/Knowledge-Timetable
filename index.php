@@ -11,6 +11,7 @@
 	
 	include_once('functions/config.inc');
 	include_once('functions/db.inc');
+	include_once('functions/users.inc');
 	include_once('functions/misc.inc');
 	
 	include_once('admin/functions/categories.inc');
@@ -64,7 +65,7 @@
 	}
 	
 	RequiresLogin();
-
+	
 	switch ($tokens[1]) {
 	case 'admin':
 		// RequiresAdminLogin();
@@ -73,8 +74,7 @@
 
         switch ($module) {
 			default:
-				Redirect('/admin/dashboard/');
-				break;
+				// Redirect('/admin/dashboard/');
 				
             case 'categories':
 				$page_title = "K Timetable App | Categories";
@@ -83,7 +83,9 @@
                 include('admin/modules/categories/index.php');
                 break;
 
-            case 'places':
+            case 'places': 
+				$page_title = "K Timetable App | Places";
+				$places = GetPlaces();
 				include('admin/modules/places/index.php');
                 break;
 
@@ -96,6 +98,9 @@
 
 				switch($filter) {
 					case 'all':
+						$page_title = "K Timetable App | All Users";
+						$users = GetUsers();
+						
 						include('admin/modules/users/index.php');
 						break;
 					case 'students':
@@ -114,7 +119,12 @@
 		
 		break;
 
-	default: print '404';
+	default: 
+		if ($_SESSION['login_user']['is_admin'] == true) {
+			Redirect('/admin/categories/');
+		} else {
+			print '404';
+		}
 	}
 	
 ?>
