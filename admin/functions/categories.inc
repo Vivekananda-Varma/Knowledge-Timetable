@@ -20,5 +20,22 @@
         
         return $categories;
     }
+    
+    function GetCategoryByID($category_id) {
+        global $mysqli;
+        
+        $query = "
+            SELECT * 
+            FROM `categories` 
+            WHERE `category_id`=$$category_id
+        ";
+        
+        $result = $mysqli->query($query);
+        if ($result->num_rows) {
+            return $result->fetch_assoc();
+        }
+        
+        return false;
+    }
 
 ?>

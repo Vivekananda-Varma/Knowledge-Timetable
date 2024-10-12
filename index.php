@@ -99,16 +99,23 @@
 				switch($filter) {
 					case 'all':
 						$page_title = "K Timetable App | All Users";
+						$heading = 'Users';
 						$users = GetUsers();
 						
-						include('admin/modules/users/index.php');
 						break;
+						
 					case 'students':
+						$page_title = "K Timetable App | Students";
+						$heading = 'Students';
+						$users = GetUsers('students');
 						
 						break;
 
 					case 'teachers':
-
+						$page_title = "K Timetable App | Teachers";
+						$heading = 'Teachers';
+						$users = GetUsers('teachers');
+				
 						break;
 				}
 

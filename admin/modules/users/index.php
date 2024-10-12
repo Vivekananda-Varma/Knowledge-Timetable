@@ -14,17 +14,30 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 					<div class="d-flex justify-content-between align-items-center mb-3">
-						<h1 class="h1">Users</h1>
+						<h1 class="h1"><?= $heading ?></h1>
 						<button class="btn btn-outline-primary">New +</button>
 					</div>
 					
 					<table class="table">
-						  <tbody>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Mobile</th>
+								<th>Email</th>
+								<th>Teacher</th>
+								<th>Last Login</th>
+								<th>&nbsp;</th>
+								<th>&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody>
 				<?php
 					foreach($users as $user) {
 						$user_id = $user['user_id'];
 						$firstname = $user['firstname'];
 						$lastname = $user['lastname'];
+						$fullname = "$firstname $lastname";
+						
 						$mobile = $user['mobile'];
 						$email = $user['email'];
 						$is_teacher = $user['is_teacher'];
@@ -33,8 +46,7 @@
 				?>
 				
 							 <tr>
-								<td><?= $firstname ?></td>
-								<td><?= $lastname ?></td>
+								<td><?= $fullname ?></td>
 								<td><?= $mobile ?></td>
 								<td><?= $email ?></td>
 								<td><?= $is_teacher ?></td>
@@ -49,8 +61,8 @@
 				<?php
 					}
 				?>			 
-						  </tbody>
-					   </table>
+						</tbody>
+					</table>
 				</div>
 			</main>
 
