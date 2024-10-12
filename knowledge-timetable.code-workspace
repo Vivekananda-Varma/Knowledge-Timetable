@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "web-design",
+		"code-runner.clearPreviousOutput": true,
+		"code-runner.showExecutionMessage": false
+	}
+}
