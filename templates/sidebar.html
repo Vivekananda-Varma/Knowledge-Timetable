@@ -14,30 +14,36 @@
             <span class="align-middle me-3">AppStack</span>
         </a>
         <ul class="sidebar-nav">
-            <li class="sidebar-item">
+            <li class="sidebar-item <?= $users_active ?>">
                 <a data-bs-target="#users" data-bs-toggle="collapse" class="sidebar-link collapsed">
                     <i class="align-middle" data-feather="users"></i> <span class="align-middle">Users</span>
                 </a>
-                <ul id="users" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-                    <li class="sidebar-item"><a class="sidebar-link" href="/admin/users/all">All</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="/admin/users/students">Students</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="/admin/users/teachers/">Teachers</a></li>
+                <ul id="users" class="sidebar-dropdown list-unstyled collapse <?= $users_show ?>" data-bs-parent="#sidebar">
+                    <li class="sidebar-item <?= $users_all_active ?>">
+                        <a class="sidebar-link" href="/admin/users/all">All</a>
+                    </li>
+                    <li class="sidebar-item <?= $students_active ?>">
+                        <a class="sidebar-link" href="/admin/users/students">Students</a>
+                    </li>
+                    <li class="sidebar-item <?= $teachers_active ?>">
+                        <a class="sidebar-link" href="/admin/users/teachers/">Teachers</a>
+                    </li>
                 </ul>
             </li>
-            <li class="sidebar-item"></li>
-            <a class="sidebar-link" href="/admin/categories/">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">Categories</span>
-            </a>
+            <li class="sidebar-item <?= $categories_active ?>">
+                <a class="sidebar-link" href="/admin/categories/">
+                    <i class="align-middle" data-feather="book"></i> <span class="align-middle">Categories</span>
+                </a>
             </li>
-            <li class="sidebar-item"></li>
-            <a class="sidebar-link" href="/admin/subjects/">
-                <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Subjects</span>
-            </a>
+            <li class="sidebar-item <?= $subjects_active ?>">
+                <a class="sidebar-link" href="/admin/subjects/">
+                    <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Subjects</span>
+                </a>
             </li>
-            <li class="sidebar-item"></li>
-            <a class="sidebar-link" href="/admin/places/">
-                <i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">Places</span>
-            </a>
+            <li class="sidebar-item <?= $places_active ?>">
+                <a class="sidebar-link" href="/admin/places/">
+                    <i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">Places</span>
+                </a>
             </li>
         </ul>
     </div>

@@ -71,35 +71,55 @@
 		// RequiresAdminLogin();
 		
         $module = $tokens[2];
+		
+		$categories_active = '';
+		$places_active = '';
+		$subjects_active = '';
+		
+		$users_show = '';
+		$users_active = '';
+		$users_all_active = '';
+		$students_active = '';
+		$teachers_active = '';
 
         switch ($module) {
 			default:
-				// Redirect('/admin/dashboard/');
+				// Redirect('/admin/dashboard/');    
 				
             case 'categories':
 				$page_title = "K Timetable App | Categories";
+				$categories_active = 'active';
 				$categories = GetCategories();
 				
                 include('admin/modules/categories/index.php');
+				
                 break;
 
             case 'places': 
 				$page_title = "K Timetable App | Places";
+				$places_active = 'active';
 				$places = GetPlaces();
+				
 				include('admin/modules/places/index.php');
+				
                 break;
 
 			case 'subjects':
+				$subjects_active = 'active';
 				include('admin/modules/subjects/index.php');
+				
 				break;
 			
 			case 'users':
 				$filter = $tokens[3];
-
+				$users_active = 'active';
+				$users_show = 'show';
+				
 				switch($filter) {
 					case 'all':
 						$page_title = "K Timetable App | All Users";
 						$heading = 'Users';
+						$users_all_active = 'active';
 						$users = GetUsers();
 						
 						break;
@@ -107,6 +127,7 @@
 					case 'students':
 						$page_title = "K Timetable App | Students";
 						$heading = 'Students';
+						$students_active = 'active';
 						$users = GetUsers('students');
 						
 						break;
@@ -114,6 +135,7 @@
 					case 'teachers':
 						$page_title = "K Timetable App | Teachers";
 						$heading = 'Teachers';
+						$teachers_active = 'active';
 						$users = GetUsers('teachers');
 				
 						break;
@@ -121,7 +143,6 @@
 
 				include('admin/modules/users/index.php');
 				break;
-			
         }
 		
 		break;
