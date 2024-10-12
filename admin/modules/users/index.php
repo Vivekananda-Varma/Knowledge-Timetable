@@ -54,8 +54,8 @@
 								<td></td>
 								<td class="d-none d-md-table-cell"></td>
 								<td class="table-action">
-								   <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-								   <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+								   <a href="/admin/users/<?= $user_id ?>/edit/"><i class="align-middle" data-feather="edit-2"></i></a>
+								   <a href="/admin/users/<?= $user_id ?>/delete/"><i class="align-middle" data-feather="trash"></i></a>
 								</td>
 							 </tr>
 				<?php
