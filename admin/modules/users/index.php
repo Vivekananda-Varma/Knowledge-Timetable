@@ -18,7 +18,7 @@
 						<button class="btn btn-outline-primary">New +</button>
 					</div>
 					
-					<table class="table">
+					<table id="datatables-reponsive" class="table table-striped table-hover">
 						<thead>
 							<tr>
 								<th>Name</th>
@@ -26,8 +26,6 @@
 								<th>Email</th>
 								<th>Teacher</th>
 								<th>Last Login</th>
-								<th>&nbsp;</th>
-								<th>&nbsp;</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -45,18 +43,12 @@
 						$last_login = $user['last_login'];
 				?>
 				
-							 <tr>
+							 <tr data-href="/admin/users/<?= $user_id ?>/edit/">
 								<td><?= $fullname ?></td>
 								<td><?= $mobile ?></td>
 								<td><?= $email ?></td>
 								<td><?= $is_teacher ?></td>
-								<td><?= $last_login ?></td>
-								<td></td>
-								<td class="d-none d-md-table-cell"></td>
-								<td class="table-action">
-								   <a href="/admin/users/<?= $user_id ?>/edit/"><i class="align-middle" data-feather="edit-2"></i></a>
-								   <a href="/admin/users/<?= $user_id ?>/delete/"><i class="align-middle" data-feather="trash"></i></a>
-								</td>
+								<td><?= $last_login ?></td>								
 							 </tr>
 				<?php
 					}

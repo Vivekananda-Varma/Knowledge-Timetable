@@ -47,7 +47,7 @@
         	$_SESSION['login_user']['is_admin'] = true;
 			
 			// print "Logged in as admin"; exit;
-        	Redirect('/admin/categories/');
+        	Redirect('/admin/users/');
     	} else if ($user_id = ValidateLogin($username, $password)) {
 			$_SESSION['login_user'] = GetUserById($user_id);
 			
@@ -126,13 +126,14 @@
 							Redirect('/admin/modules/users/user_detail.html');
 							
 							break;
-															
+
 						case 'delete':
 							
 							break;
 					}
 				} else {
 					switch($filter) {
+						default:
 						case 'all':
 							$page_title = "All Users";
 							$users_all_active = 'active';
@@ -165,7 +166,7 @@
 
 	default: 
 		if ($_SESSION['login_user']['is_admin'] == true) {
-			Redirect('/admin/categories/');
+			Redirect('/admin/users/');
 		} else {
 			print '404';
 		}
