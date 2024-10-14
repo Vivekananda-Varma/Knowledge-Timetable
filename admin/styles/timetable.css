@@ -1,3 +1,16 @@
+#datatables-reponsive tr[data-href] {
+    cursor: pointer;
+}
+
+#datatables-reponsive td {
+    vertical-align: top;
+}
+
+.card-responsive:hover .card-body {
+    cursor: pointer;
+    background: #E2EAFA;
+}
+
 .table-action {
     text-align: right;
 }
