@@ -87,7 +87,7 @@
 				// Redirect('/admin/dashboard/');    
 				
             case 'categories':
-				$page_title = "K Timetable App | Categories";
+				$page_title = "Categories";
 				$categories_active = 'active';
 				$categories = GetCategories();
 				
@@ -96,7 +96,7 @@
                 break;
 
             case 'places': 
-				$page_title = "K Timetable App | Places";
+				$page_title = "Places";
 				$places_active = 'active';
 				$places = GetPlaces();
 				
@@ -120,8 +120,7 @@
 				if ($action != '') {
 					switch($action) {
 						case 'edit':
-							$page_title = "K Timetable App | Edit User";
-							$heading = 'Users';
+							$page_title = "Edit User";
 							$users_all_active = 'active';
 							
 							Redirect('/admin/modules/users/user_detail.html');
@@ -135,24 +134,21 @@
 				} else {
 					switch($filter) {
 						case 'all':
-							$page_title = "K Timetable App | All Users";
-							$heading = 'Users';
+							$page_title = "All Users";
 							$users_all_active = 'active';
 							$users = GetUsers();
 							
 							break;
 							
 						case 'students':
-							$page_title = "K Timetable App | Students";
-							$heading = 'Students';
+							$page_title = "Students";
 							$students_active = 'active';
 							$users = GetUsers('students');
 							
 							break;
 	
 						case 'teachers':
-							$page_title = "K Timetable App | Teachers";
-							$heading = 'Teachers';
+							$page_title = "Teachers";
 							$teachers_active = 'active';
 							$users = GetUsers('teachers');
 					

@@ -14,7 +14,7 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 					<div class="d-flex justify-content-between align-items-center mb-3">
-						<h1 class="h1"><?= $heading ?></h1>
+						<h1 class="h1"><?= $page_title ?></h1>
 						<button class="btn btn-outline-primary">New +</button>
 					</div>
 					
