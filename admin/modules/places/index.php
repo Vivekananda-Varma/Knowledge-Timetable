@@ -18,8 +18,15 @@
 						<button class="btn btn-outline-primary">New +</button>
 					</div>
 					
-					<table class="table">
-						  <tbody>
+					<table id="datatables-reponsive" class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Subjects</th>
+								<th>Teacher</th>
+							</tr>
+						</thead>
+						<tbody>
 				<?php
 					foreach($places as $place) {
 						$place_id = $place['place_id'];
@@ -30,10 +37,6 @@
 								<td><?= $place_name ?></td>
 								<td></td>
 								<td class="d-none d-md-table-cell"></td>
-								<td class="table-action">
-								   <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-								   <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-								</td>
 							 </tr>
 				<?php
 					}

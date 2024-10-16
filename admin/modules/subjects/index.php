@@ -19,59 +19,38 @@
                             </div>
                         </div>
                         <!-- First Table -->
-                        <div class="row">
-                            <div class="col-12 col-xl-12">
-                                <div class="card">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th style="width:40%;">Name</th>
-                                                <th style="width:25%"></th>
-                                                <th class="d-none d-md-table-cell" style="width:25%"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Essays on the Gita</td>
-                                                <td></td>
-                                                <td class="d-none d-md-table-cell"></td>
-                                                <td class="table-action">
-                                                    <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Letters on Yoga</td>
-                                                <td></td>
-                                                <td class="d-none d-md-table-cell"></td>
-                                                <td class="table-action">
-                                                    <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Savitri</td>
-                                                <td></td>
-                                                <td class="d-none d-md-table-cell"></td>
-                                                <td class="table-action">
-                                                    <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Foundations of Indian Culture</td>
-                                                <td></td>
-                                                <td class="d-none d-md-table-cell"></td>
-                                                <td class="table-action">
-                                                    <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="#"><i class="align-middle" data-feather="trash"></i></a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        <table id="datatables-reponsive" class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Subjects</th>
+                                    <th>Teacher</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Essays on the Gita</td>
+                                    <td></td>
+                                    <td class="d-none d-md-table-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td>Letters on Yoga</td>
+                                    <td></td>
+                                    <td class="d-none d-md-table-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td>Savitri</td>
+                                    <td></td>
+                                    <td class="d-none d-md-table-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td>Foundations of Indian Culture</td>
+                                    <td></td>
+                                    <td class="d-none d-md-table-cell"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                                
                     </div>
                 </main>
                 <footer class="footer">
