@@ -27,7 +27,7 @@
         $query = "
             SELECT * 
             FROM `categories` 
-            WHERE `category_id`=$$category_id
+            WHERE `category_id`=$category_id
         ";
         
         $result = $mysqli->query($query);
@@ -36,6 +36,54 @@
         }
         
         return false;
+    }
+    
+    function CreateCategory($data) {
+        global $mysqli;
+        
+        $category_name = $data['category_name'];
+        $is_academic = $data['is_academic'];
+        
+        $query = "
+            INSERT INTO `categories`
+            SET `category_name`='$category_name',
+                `is_academic`=$is_academic
+        ";
+        
+        $result = $mysqli->query($query);
+        $category_id = $mysqli->insert_id;
+        $category = GetCategoryByID($category_id);
+        
+        return $category;
+    }
+    
+    function UpdateCategory($data) {
+        global $mysqli;
+        
+        $category_name = $data['category_name'];
+        $is_academic = $data['is_academic'];
+        
+        $query = "
+            UPDATE `categories`
+            SET `category_name`='$category_name',
+                `is_academic`=$is_academic
+        ";
+        
+        $result = $mysqli->query($query);
+        $category = GetCategoryByID($category_id);
+        
+        return $category;
+    }
+    
+    function DeleteCategory($category_id) {
+        global $mysqli;
+        
+        $query = "
+            DELETE FROM `categories` 
+            WHERE `category_id`=$category_id
+        ";
+        
+        $result = $mysqli->query($query);
     }
 
 ?>
