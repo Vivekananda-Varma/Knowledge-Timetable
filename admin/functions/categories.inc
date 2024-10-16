@@ -42,12 +42,10 @@
         global $mysqli;
         
         $category_name = $data['category_name'];
-        $is_academic = $data['is_academic'];
         
         $query = "
             INSERT INTO `categories`
             SET `category_name`='$category_name',
-                `is_academic`=$is_academic
         ";
         
         $result = $mysqli->query($query);
@@ -61,12 +59,10 @@
         global $mysqli;
         
         $category_name = $data['category_name'];
-        $is_academic = $data['is_academic'];
         
         $query = "
             UPDATE `categories`
             SET `category_name`='$category_name',
-                `is_academic`=$is_academic
         ";
         
         $result = $mysqli->query($query);

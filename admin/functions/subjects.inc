@@ -42,11 +42,13 @@
         global $mysqli;
         
         $subject_name = $data['subject_name'];
+        $category_id = $data['category_id'];
         $is_academic = $data['is_academic'];
         
         $query = "
             INSERT INTO `subjects`
-            SET `subject_name`='$subject_name',
+            SET `category_id`='$category_id',
+                `subject_name`='$subject_name',
                 `is_academic`=$is_academic
         ";
         
@@ -61,11 +63,13 @@
         global $mysqli;
         
         $subject_name = $data['subject_name'];
+        $category_id = $data['category_id'];
         $is_academic = $data['is_academic'];
         
         $query = "
             UPDATE `subjects`
-            SET `subject_name`='$subject_name',
+            SET `category_id`='$category_id',
+                `subject_name`='$subject_name',
                 `is_academic`=$is_academic
         ";
         
