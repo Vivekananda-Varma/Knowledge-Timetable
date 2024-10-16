@@ -1,0 +1,30 @@
+#datatables-reponsive tr[data-href] {
+    cursor: pointer;
+}
+
+#datatables-reponsive td {
+    vertical-align: top;
+}
+
+.card-responsive:hover .card-body {
+    cursor: pointer;
+    background: #E2EAFA;
+}
+
+.table-action {
+    text-align: right;
+}
+
+.table-action a {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    margin-right: 5px;
+}
+
+.table-action a:last-child {
+    margin-right: 0;
+}
+
+tr:hover .table-action a {
+    opacity: 1;
+}		

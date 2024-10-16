@@ -33,7 +33,7 @@
 						$category_name = $category['category_name']; 
 				?>
 				
-							 <tr>
+							 <tr data-href="/admin/categories/<?= $category_id ?>/edit/">
 								<td><?= $category_name ?></td>
 								<td></td>
 								<td class="d-none d-md-table-cell"></td>

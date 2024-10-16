@@ -105,6 +105,7 @@
                 break;
 
 			case 'subjects':
+				$page_title = "Subjects";
 				$subjects_active = 'active';
 				include('admin/modules/subjects/index.php');
 				

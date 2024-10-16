@@ -1,0 +1,30 @@
+.table-action {
+    text-align: right;
+}
+
+.table-action a {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.table-action a:last-child {
+    margin-right: 0;
+}
+
+tr:hover .table-action a {
+    opacity: 1;
+}
+
+table tr {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+table tr:hover {
+    background-color: white;
+    color: white;
+    cursor: pointer !important;
+}
