@@ -33,16 +33,37 @@
 						$category_name = $category['category_name']; 
 				?>
 				
-							 <tr data-href="/admin/categories/<?= $category_id ?>/edit/">
+				<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary">
 								<td><?= $category_name ?></td>
 								<td></td>
 								<td class="d-none d-md-table-cell"></td>
-							 </tr>
+							</tr>
 				<?php
 					}
-				?>			 
-						  </tbody>
-					   </table>
+				?>
+						<div class="modal fade" id="defaultModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title">Category</h5>
+										</div>
+										<div class="modal-body m-3">
+											<div class="col-sm-12">
+												<input type="text" class="form-control" placeholder="Name">
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-danger">Delete</button>
+											<div class="ms-auto">
+												<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-primary">Save</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</tbody>
+					</table>
 				</div>
 			</main>
 
