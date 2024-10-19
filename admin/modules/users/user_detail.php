@@ -1,3 +1,13 @@
+<?php
+	$firstname = $user['firstname'];
+	$lastname = $user['lastname'];
+	$fullname = "$firstname $lastname";
+	
+	$mobile = $user['mobile'];
+	$email = $user['email'];
+	$is_teacher = $user['is_teacher'];
+	$last_login = $user['last_login'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,8 +34,8 @@
 								  <h5 class="card-title mb-0">Profile Details</h5>
 							   </div>
 							   <div class="card-body text-center">
-								  <img src="../../dist/img/avatars/avatar-4.jpg" alt="Stacie Hall" class="img-fluid rounded-circle mb-2" width="128" height="128" />
-								  <h5 class="card-title mb-0">User Name</h5>
+								  <img src="/admin/dist/img/avatars/avatar-4.jpg" alt="Stacie Hall" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+								  <h5 class="card-title mb-0"><?= $fullname ?></h5>
 							   </div>
 							   <table class="table table-sm my-2">
 									<tbody>
@@ -33,23 +43,23 @@
 											<th>DOB</th>
 											<td>2005</td>
 											</tr>
-									<tr>
-										<th>Section</th>
-										<td>K1</td>
-									</tr>
-									<tr>
-										<th>Email</th>
-										<td>user@gmail.com</td>
-									</tr>
-									<tr>
-									<th>Phone</th>
-									<td>+1234123123123</td>
-									</tr>
-									<tr>
-									<th>Status</th>
-									<td><span class="badge bg-success">Active</span></td>
-									</tr>
-</tbody>
+										<tr>
+											<th>Section</th>
+											<td>K1</td>
+										</tr>
+										<tr>
+											<th>Email</th>
+											<td><?= $email ?></td>
+										</tr>
+										<tr>
+											<th>Phone</th>
+											<td><?= $mobile ?></td>
+										</tr>
+										<tr>
+											<th>Status</th>
+											<td><span class="badge bg-success">Active</span></td>
+										</tr>
+									</tbody>
 							    </table>
 							</div>
 						</div>

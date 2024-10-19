@@ -107,24 +107,28 @@
 			case 'subjects':
 				$page_title = "Subjects";
 				$subjects_active = 'active';
+				
 				include('admin/modules/subjects/index.php');
 				
 				break;
 			
-			case 'users':
+			case 'students':
 				$filter = $tokens[3];
-				$users_active = 'active';
-				$users_show = 'show';
+				$students_active = 'active';
+				$students_show = 'show';
 				
 				$action = $tokens[4] ?? '';
 				
 				if ($action != '') {
 					switch($action) {
 						case 'edit':
-							$page_title = "Edit User";
+							$student_id = $tokens[3];
+							$student = GetStudentByID($student_id);
+								
+							$page_title = "Edit Student";
 							$users_all_active = 'active';
 							
-							Redirect('/admin/modules/users/user_detail.html');
+							include('admin/modules/users/student_detail.php');
 							
 							break;
 
