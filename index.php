@@ -73,8 +73,10 @@
         $module = $tokens[2];
 		
 		$categories_active = '';
-		$places_active = '';
 		$subjects_active = '';
+		$courses_active = '';
+		$places_active = '';
+		
 		
 		$users_show = '';
 		$users_active = '';
@@ -95,7 +97,23 @@
 				
                 break;
 
-            case 'places': 
+			case 'subjects':
+				$page_title = "Subjects";
+				$subjects_active = 'active';
+
+				include('admin/modules/subjects/index.php');
+				
+				break;
+
+			case 'courses':
+				$page_title = "Courses";
+				$courses_active = 'active';
+				
+				include('admin/modules/courses/index.php');
+				
+				break;
+
+			case 'places': 
 				$page_title = "Places";
 				$places_active = 'active';
 				$places = GetPlaces();
@@ -104,15 +122,9 @@
 				
                 break;
 
-			case 'subjects':
-				$page_title = "Subjects";
-				$subjects_active = 'active';
 				
-				include('admin/modules/subjects/index.php');
-				
-				break;
 			
-			case 'students':
+			case 'users':
 				$filter = $tokens[3];
 				$students_active = 'active';
 				$students_show = 'show';
