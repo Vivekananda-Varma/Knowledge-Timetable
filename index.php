@@ -77,13 +77,10 @@
 		$courses_active = '';
 		$places_active = '';
 		
-		
-		$users_show = '';
-		$users_active = '';
-		$users_all_active = '';
+		$students_show = '';
 		$students_active = '';
-		$teachers_active = '';
-
+		$students_all_active = '';
+		
         switch ($module) {
 			default:
 				// Redirect('/admin/dashboard/');    
@@ -122,9 +119,7 @@
 				
                 break;
 
-				
-			
-			case 'users':
+			case 'students':
 				$filter = $tokens[3];
 				$students_active = 'active';
 				$students_show = 'show';
@@ -138,9 +133,9 @@
 							$student = GetStudentByID($student_id);
 								
 							$page_title = "Edit Student";
-							$users_all_active = 'active';
+							$students_all_active = 'active';
 							
-							include('admin/modules/users/student_detail.php');
+							include('admin/modules/students/detail.php');
 							
 							break;
 
@@ -152,28 +147,22 @@
 					switch($filter) {
 						default:
 						case 'all':
-							$page_title = "All Users";
-							$users_all_active = 'active';
-							$users = GetUsers();
+							$page_title = "All Students";
+							$students_all_active = 'active';
+							$students = GetStudents();
 							
 							break;
 							
-						case 'students':
-							$page_title = "Students";
-							$students_active = 'active';
-							$users = GetUsers('students');
+						case 'import':
 							
 							break;
 	
-						case 'teachers':
-							$page_title = "Teachers";
-							$teachers_active = 'active';
-							$users = GetUsers('teachers');
+						case 'export':
 					
 							break;
 					}
 	
-					include('admin/modules/users/index.php');
+					include('admin/modules/students/index.php');
 				}
 				
 				break;
@@ -183,7 +172,7 @@
 
 	default: 
 		if ($_SESSION['login_user']['is_admin'] == true) {
-			Redirect('/admin/users/');
+			Redirect('/admin/students/');
 		} else {
 			print '404';
 		}
