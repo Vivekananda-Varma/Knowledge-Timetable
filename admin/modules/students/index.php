@@ -24,16 +24,11 @@
 								<th>Name</th>
 								<th>Mobile</th>
 								<th>Email</th>
-<<<<<<< HEAD
-=======
-								<th>Teacher</th>
->>>>>>> main
 								<th>Last Login</th>
 							</tr>
 						</thead>
 						<tbody>
 				<?php
-<<<<<<< HEAD
 					foreach($students as $student) {
 						$student_id = $student['user_id'];
 						$firstname = $student['firstname'];
@@ -49,26 +44,6 @@
 								<td><?= $fullname ?></td>
 								<td><?= $mobile ?></td>
 								<td><?= $email ?></td>
-=======
-					foreach($users as $user) {
-						$user_id = $user['user_id'];
-						$firstname = $user['firstname'];
-						$lastname = $user['lastname'];
-						$fullname = "$firstname $lastname";
-						
-						$mobile = $user['mobile'];
-						$email = $user['email'];
-						$is_teacher = $user['is_teacher'];
-						$otp = $user['otp'];
-						$last_login = $user['last_login'];
-				?>
-				
-							 <tr data-href="/admin/users/<?= $user_id ?>/edit/">
-								<td><?= $fullname ?></td>
-								<td><?= $mobile ?></td>
-								<td><?= $email ?></td>
-								<td><?= $is_teacher ?></td>
->>>>>>> main
 								<td><?= $last_login ?></td>								
 							 </tr>
 				<?php
