@@ -17,6 +17,7 @@
 	include_once('admin/functions/categories.inc');
 	include_once('admin/functions/users.inc');
 	include_once('admin/functions/places.inc');
+	include_once('admin/functions/subjects.inc');
 	
 	// require_once('filepond/config.php');
 	// require_once("filepond/util/read_write_functions.php");
@@ -104,6 +105,7 @@
 			case 'subjects':
 				$page_title = "Subjects";
 				$subjects_active = 'active';
+				$subjects = GetSubjects();
 
 				include('admin/modules/subjects/index.php');
 				
