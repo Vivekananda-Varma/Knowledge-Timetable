@@ -21,7 +21,7 @@
 					<table id="datatables-reponsive" class="table table-striped table-hover">
 						<thead>
 							<tr>
-								<th>Name</th>
+								<th>N</th>
 								<th>Mobile</th>
 								<th>Email</th>
 								<th>Last Login</th>
