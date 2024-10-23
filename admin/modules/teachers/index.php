@@ -27,7 +27,7 @@
 								<th>Last Login</th>
 							</tr>
 						</thead>
-						<tbody>
+					<tbody>
 				<?php
 					foreach($teachers as $teacher) {
 						$teacher_id = $teacher['teacher_id'];
@@ -41,7 +41,7 @@
 						$last_login = $teacher['last_login'];
 				?>
 				
-							 <tr data-href="/admin/teacher/<?= $teacher_id ?>/edit/">
+							 <tr data-href="/admin/teachers/<?= $teacher_id ?>/edit/">
 								<td><?= $fullname ?></td>
 								<td><?= $mobile ?></td>
 								<td><?= $email ?></td>
