@@ -88,28 +88,28 @@
 											<div class="card-body text-center">
 												<img src="/admin/images/user-default-profile-pic.jpg" alt="User Default Profile Pic" class="img-fluid rounded-circle mb-2" width="128" height="128">
 											</div>
-											<form>
+											<form name="student-form" method="post" action="/admin/students/<?= $student_id ?>/editpost/">
 											<div class="row">
 													<div class="mb-3 col-md-6">
 														<label class="form-label" for="inputFirstName">First Name</label>
-														<input type="text" class="form-control" id="inputFirstName" value="<?= $firstname ?>" placeholder="First Name" />
+														<input type="text" class="form-control" id="inputFirstName" name="firstname" value="<?= $firstname ?>" placeholder="First Name" />
 													</div>
 													<div class="mb-3 col-md-6">
 														<label class="form-label" for="inputLastName">Last Name</label>
-														<input type="text" class="form-control" id="inputLastName" value="<?= $lastname ?>" placeholder="Last Name" />
+														<input type="text" class="form-control" id="inputLastName" name="lastname" value="<?= $lastname ?>" placeholder="Last Name" />
 													</div>
 												</div>
 												<div class="row">
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputDateOfBirst">Date of Birth</label>
-														<input type="text" class="form-control" id="inputDateOfBirth" placeholder="DD/MM/YYYY" value="<?= $dob ?>" />
+														<input type="text" class="form-control" id="inputDateOfBirth" name="dob" placeholder="DD/MM/YYYY" value="<?= $dob ?>" />
 													</div>
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputYear">Year</label>
-														<select id="inputYear" class="form-control">
+														<select id="inputYear" class="form-control" name="year">
 															<option>Select...</option>
 														<?php
-															for($i = 1; $i < 6; $i++) {
+															for($i = 1; $i < 5; $i++) {
 																$display = "K$i";
 
 																if ($i == $year) {
@@ -126,38 +126,38 @@
 													</div>
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputDateOfBirst">Class of</label>
-														<input type="text" class="form-control" id="inputDateOfBirth" value="<?= $class_of ?>" placeholder="Year of graduation" />
+														<input type="text" class="form-control" id="inputDateOfBirth" name="class_of" value="<?= $class_of ?>" placeholder="Year of graduation" />
 													</div>
 												</div>
 												<div class="row">
 													<div class="mb-3 col-md-8">
 														<label class="form-label" for="inputEmail">Email</label>
-														<input type="email" class="form-control" id="inputEmail" value="<?= $email ?>" placeholder="Email" />
+														<input type="email" class="form-control" id="inputEmail" name="email" value="<?= $email ?>" placeholder="Email" />
 													</div>
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputMobile">Mobile</label>
-														<input type="text" class="form-control" id="inputMobile" value="<?= $email ?>" placeholder="Mobile" />
+														<input type="text" class="form-control" id="inputMobile" name="mobile" value="<?= $mobile ?>" placeholder="Mobile" />
 													</div>
 												</div>
 												<div class="row">
 													<div class="mb-3 col-md-8">
 														<label class="form-label" for="inputAddressLine1">Address Line 1</label>
-														<input type="text" class="form-control" id="inputAddressLine1" value="<?= $address_1 ?>" placeholder="Apartment, studio, or floor" />
+														<input type="text" class="form-control" id="inputAddressLine1" name="address_line_1" value="<?= $address_1 ?>" placeholder="Apartment, studio, or floor" />
 													</div>
 													<div class="mb-3 col-md-8">
 														<label class="form-label" for="inputAddressLine2">Address Line 2</label>
-														<input type="text" class="form-control" id="inputAddressLine2" value="<?= $address_2 ?>" placeholder="Street Name" />
+														<input type="text" class="form-control" id="inputAddressLine2" name="address_line_2" value="<?= $address_2 ?>" placeholder="Street Name" />
 													</div>
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputPincode">Postal Code</label>
-														<input type="text" class="form-control" id="inputPincode" value="<?= $postal_code ?>" placeholder="Pincode" />
+														<input type="text" class="form-control" id="inputPincode" name="postal_code" value="<?= $postal_code ?>" placeholder="Pincode" />
 													</div>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-danger">Delete</button>
 													<div class="ms-auto">
-														<button type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#editProfileCard" style="margin-right: 10px;">Close</button>
-														<button type="button" class="btn btn-primary">Save</button>
+														<button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#editProfileCard" style="margin-right: 10px;">Close</button>
+														<input type="submit" class="btn btn-primary" name="submit" value="Save">
 													</div>
 												</div>
 											</form>

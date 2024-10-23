@@ -80,6 +80,84 @@
         return false;
     }
     
+    function CreateStudent($data) {
+        global $mysqli;
+        
+        $firstname = $data['firstname'];
+        $lastname = $data['lastname'];
+        $mobile = $data['mobile'];
+        $email = $data['email'];
+        $dob = $data['dob'];
+        $address_line_1 = $data['address_line_1'];
+        $address_line_2 = $data['address_line_2'];
+        $postal_code  = $data['postal_code'];
+        
+        $query = "
+            INSERT INTO `users`
+            SET `firstname`='$firstname',
+                `lastname`='$lastname',
+                `mobile`='$mobile',
+                `email`='$email',
+                `dob`='$dob',
+                `address_line_1`='$address_line_1',
+                `address_line_2`='$address_line_2',
+                `postal_code`='$postal_code'
+        ";
+        
+        $result = $mysqli->query($query);
+        $student_id = $mysqli->insert_id;
+        $student = GetStudentByID($student_id);
+        
+        return $student;
+    }
+    
+    function UpdateStudent($student_id, $data) {
+        global $mysqli;
+        
+        $student = GetStudentByID($student_id);
+        $user_id = $student['user_id'];
+        $user = GetUserByID($user_id);
+        
+        $firstname = $data['firstname'];
+        $lastname = $data['lastname'];
+        $mobile = $data['mobile'];
+        $email = $data['email'];
+        $dob = $data['dob'];
+        $address_line_1 = $data['address_line_1'];
+        $address_line_2 = $data['address_line_2'];
+        $postal_code  = $data['postal_code'];
+        
+        $year = $data['year'];
+        $class_of = $data['class_of'];
+        
+        $query1 = "
+            UPDATE `users`
+            SET `firstname`='$firstname',
+                `lastname`='$lastname',
+                `mobile`='$mobile',
+                `email`='$email',
+                `dob`='$dob',
+                `address_line_1`='$address_line_1',
+                `address_line_2`='$address_line_2',
+                `postal_code`='$postal_code'
+            WHERE `user_id`='$user_id'
+        ";
+        
+        $query2 = "
+            UPDATE `students`
+            SET `year`='$year',
+                `class_of`='$class_of'
+            WHERE `student_id`='$student_id'
+        ";
+        
+        $result = $mysqli->query($query1);
+        $result = $mysqli->query($query2);
+        
+        $student = GetStudentByID($student_id);
+        
+        return $student;
+    }
+    
     function GetTeachers() {
         global $mysqli;
         
@@ -122,5 +200,72 @@
         return false;
     }
     
+    function CreateTeacher($data) {
+        global $mysqli;
+        
+        $firstname = $data['firstname'];
+        $lastname = $data['lastname'];
+        $mobile = $data['mobile'];
+        $email = $data['email'];
+        $dob = $data['dob'];
+        $address_line_1 = $data['address_line_1'];
+        $address_line_2 = $data['address_line_2'];
+        $postal_code  = $data['postal_code'];
+        
+        $query = "
+            INSERT INTO `users`
+            SET `firstname`='$firstname',
+                `lastname`='$lastname',
+                `mobile`='$mobile',
+                `email`='$email',
+                `dob`='$dob',
+                `address_line_1`='$address_line_1',
+                `address_line_2`='$address_line_2',
+                `postal_code`='$postal_code'
+        ";
+        
+        $result = $mysqli->query($query);
+        $student_id = $mysqli->insert_id;
+        $student = GetTeacherByID($teacher_id);
+        
+        return $student;
+    }
+    
+    function UpdateTeacher($teacher_id, $data) {
+        global $mysqli;
+        
+        $student = GetTeacherByID($teacher_id);
+        $user_id = $teacher['user_id'];
+        $user = GetUserByID($user_id);
+        
+        $firstname = $data['firstname'];
+        $lastname = $data['lastname'];
+        $mobile = $data['mobile'];
+        $email = $data['email'];
+        $dob = $data['dob'];
+        $address_line_1 = $data['address_line_1'];
+        $address_line_2 = $data['address_line_2'];
+        $postal_code  = $data['postal_code'];
+        
+        $query = "
+            UPDATE `users`
+            SET `firstname`='$firstname',
+                `lastname`='$lastname',
+                `mobile`='$mobile',
+                `email`='$email',
+                `dob`='$dob',
+                `address_line_1`='$address_line_1',
+                `address_line_2`='$address_line_2',
+                `postal_code`='$postal_code'
+            WHERE `user_id`='$user_id'
+        ";
+        
+        $result = $mysqli->query($query1);
+        $result = $mysqli->query($query2);
+        
+        $student = GetTeacherByID($teacher_id);
+        
+        return $teacher;
+    }
 
 ?>

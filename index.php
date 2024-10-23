@@ -129,17 +129,16 @@
                 break;
 
 			case 'students':
-				$filter = $tokens[3];
-				
 				$students_show = 'show';
 				$students_active = 'active';
 				
 				$action = $tokens[4] ?? '';
 				
 				if ($action != '') {
+					$student_id = $tokens[3];
+					
 					switch($action) {
 						case 'edit':
-							$student_id = $tokens[3];
 							$student = GetStudentByID($student_id);
 								
 							$page_title = "Edit Student";
@@ -148,12 +147,21 @@
 							include('admin/modules/students/detail.php');
 							
 							break;
+							
+						case 'editpost':
+							UpdateStudent($student_id, $_POST);
+							
+							Redirect("/admin/students/$student_id/edit/");
+							
+							break;
 
 						case 'delete':
 							
 							break;
 					}
 				} else {
+					$filter = $tokens[3];
+
 					switch($filter) {
 						default:
 						case 'all':
@@ -198,6 +206,12 @@
 						
 						break;
 			
+					case 'editpost':
+						UpdateStudent($student_id, $_POST);
+						
+						Redirect("/admin/students/$student_id/edit/");
+						
+						break;
 					case 'delete':
 						
 						break;
@@ -225,6 +239,9 @@
 			}
 			
 			break;
+			
+			case 'tttest':
+				include('admin/modules/timetable/index.php');
         }
 		
 		break;
