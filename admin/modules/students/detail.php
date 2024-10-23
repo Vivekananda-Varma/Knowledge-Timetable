@@ -92,19 +92,11 @@
 											<div class="row">
 													<div class="mb-3 col-md-6">
 														<label class="form-label" for="inputFirstName">First Name</label>
-<<<<<<< HEAD
 														<input type="text" class="form-control" id="inputFirstName" value="<?= $firstname ?>" placeholder="First Name" />
 													</div>
 													<div class="mb-3 col-md-6">
 														<label class="form-label" for="inputLastName">Last Name</label>
 														<input type="text" class="form-control" id="inputLastName" value="<?= $lastname ?>" placeholder="Last Name" />
-=======
-														<input type="text" class="form-control" id="inputFirstName" placeholder="First Name" />
-													</div>
-													<div class="mb-3 col-md-6">
-														<label class="form-label" for="inputLastName">Last Name</label>
-														<input type="text" class="form-control" id="inputLastName" placeholder="Last Name" />
->>>>>>> main
 													</div>
 												</div>
 												<div class="row">
@@ -115,7 +107,6 @@
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputYear">Year</label>
 														<select id="inputYear" class="form-control">
-<<<<<<< HEAD
 															<option>Select...</option>
 														<?php
 															for($i = 1; $i < 6; $i++) {
@@ -131,47 +122,26 @@
 														<?php
 															}
 														?>
-=======
-															<option selected>Select...</option>
-															<option>1</option>
-															<option>2</option>
-															<option>3</option>
-															<option>4</option>
-															<option>5</option>
->>>>>>> main
 														</select>
 													</div>
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputDateOfBirst">Class of</label>
-<<<<<<< HEAD
 														<input type="text" class="form-control" id="inputDateOfBirth" value="<?= $class_of ?>" placeholder="Year of graduation" />
-=======
-														<input type="text" class="form-control" id="inputDateOfBirth" placeholder="Year of graduation " />
->>>>>>> main
 													</div>
 												</div>
 												<div class="row">
 													<div class="mb-3 col-md-8">
 														<label class="form-label" for="inputEmail">Email</label>
-<<<<<<< HEAD
 														<input type="email" class="form-control" id="inputEmail" value="<?= $email ?>" placeholder="Email" />
 													</div>
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputMobile">Mobile</label>
 														<input type="text" class="form-control" id="inputMobile" value="<?= $email ?>" placeholder="Mobile" />
-=======
-														<input type="email" class="form-control" id="inputEmail" placeholder="Email" />
-													</div>
-													<div class="mb-3 col-md-4">
-														<label class="form-label" for="inputMobile">Mobile</label>
-														<input type="password" class="form-control" id="inputMobile" placeholder="Mobile" />
->>>>>>> main
 													</div>
 												</div>
 												<div class="row">
 													<div class="mb-3 col-md-8">
 														<label class="form-label" for="inputAddressLine1">Address Line 1</label>
-<<<<<<< HEAD
 														<input type="text" class="form-control" id="inputAddressLine1" value="<?= $address_1 ?>" placeholder="Apartment, studio, or floor" />
 													</div>
 													<div class="mb-3 col-md-8">
@@ -181,17 +151,6 @@
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputPincode">Postal Code</label>
 														<input type="text" class="form-control" id="inputPincode" value="<?= $postal_code ?>" placeholder="Pincode" />
-=======
-														<input type="text" class="form-control" id="inputAddressLine1" placeholder="Apartment, studio, or floor" />
-													</div>
-													<div class="mb-3 col-md-8">
-														<label class="form-label" for="inputAddressLine2">Address Line 2</label>
-														<input type="text" class="form-control" id="inputAddressLine2" placeholder="Street Name" />
-													</div>
-													<div class="mb-3 col-md-4">
-														<label class="form-label" for="inputPincode">Postal Code</label>
-														<input type="text" class="form-control" id="inputPincode" placeholder="Pincode" />
->>>>>>> main
 													</div>
 												</div>
 												<div class="modal-footer">
