@@ -1,4 +1,4 @@
-#datatables-reponsive tr[data-href] {
+#datatables-reponsive tr[data-href], #datatables-reponsive tr[onClick] {
     cursor: pointer;
 }
 
