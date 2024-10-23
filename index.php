@@ -80,6 +80,13 @@
 		$students_show = '';
 		$students_active = '';
 		$students_all_active = '';
+		$students_export_active = '';
+		$students_import_active = '';
+		
+		$teachers_active = '';
+		$teachers_all_active = '';
+		$teachers_export_active = '';
+		$teachers_import_active = '';
 		
         switch ($module) {
 			default:
@@ -121,8 +128,9 @@
 
 			case 'students':
 				$filter = $tokens[3];
-				$students_active = 'active';
+				
 				$students_show = 'show';
+				$students_active = 'active';
 				
 				$action = $tokens[4] ?? '';
 				
@@ -166,13 +174,62 @@
 				}
 				
 				break;
+				
+			case 'teachers':
+			$filter = $tokens[3];
+			
+			$teachers_show = 'show';
+			$teachers_active = 'active';
+			
+			$action = $tokens[4] ?? '';
+			
+			if ($action != '') {
+				switch($action) {
+					case 'edit':
+						$teacher_id = $tokens[3];
+						$teacher = GetTeacherByID($teacher_id);
+							
+						$page_title = "Edit Teacher";
+						$teachers_all_active = 'active';
+						
+						include('admin/modules/teachers/detail.php');
+						
+						break;
+			
+					case 'delete':
+						
+						break;
+				}
+			} else {
+				switch($filter) {
+					default:
+					case 'all':
+						$page_title = "All Teachers";
+						$teachers_all_active = 'active';
+						$teachers = GetTeachers();
+						
+						break;
+						
+					case 'import':
+						
+						break;
+			
+					case 'export':
+				
+						break;
+				}
+			
+				include('admin/modules/teachers/index.php');
+			}
+			
+			break;
         }
 		
 		break;
 
 	default: 
 		if ($_SESSION['login_user']['is_admin'] == true) {
-			Redirect('/admin/students/');
+			Redirect('/admin/teachers/');
 		} else {
 			print '404';
 		}

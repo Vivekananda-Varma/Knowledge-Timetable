@@ -1,18 +1,16 @@
 <?php
-	$firstname = $student['firstname'];
-	$lastname = $student['lastname'];
+	$firstname = $teacher['firstname'];
+	$lastname = $teacher['lastname'];
 	$fullname = "$firstname $lastname";
 	
-	$mobile = $student['mobile'];
-	$email = $student['email'];
-	$dob = $student['dob'] ?? '01/01/2000';
-	$class_of = $student['class_of'] ?? '2025';
-	$year = $student['year'] ?? '1';
-	$last_login = $student['last_login'];
+	$mobile = $teacher['mobile'];
+	$email = $teacher['email'];
+	$dob = $teacher['dob'] ?? '01/01/2000';
+	$last_login = $teacher['last_login'];
 	
-	$address_1 = $student['address_line_1'] ?? 'No. 15, Rue Suffren Street';
-	$address_2 = $student['address_line_2'] ?? 'White Town';
-	$postal_code = $student['postal_code'] ?? '605001';
+	$address_1 = $teacher['address_line_1'] ?? 'No. 15, Rue Suffren Street';
+	$address_2 = $teacher['address_line_2'] ?? 'White Town';
+	$postal_code = $teacher['postal_code'] ?? '605001';
 	
 	$address = "$address_1, $address_2, Pondicherry $postal_code";
 ?>
@@ -54,14 +52,6 @@
 													<td><?= $dob ?></td>
 												</tr>
 												<tr>
-													<th>Year</th>
-													<td>K<?= $year ?></td>
-												</tr>
-												<tr>
-													<th>Class of</th>
-													<td><?= $class_of ?></td>
-												</tr>
-												<tr>
 													<th>Email</th>
 													<td><?= $email ?></td>
 												</tr>
@@ -90,67 +80,41 @@
 											</div>
 											<form>
 											<div class="row">
-													<div class="mb-3 col-md-6">
+													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputFirstName">First Name</label>
-														<input type="text" class="form-control" id="inputFirstName" value="<?= $firstname ?>" placeholder="First Name" />
+														<input type="text" class="form-control" id="inputFirstName" placeholder="First Name" />
 													</div>
-													<div class="mb-3 col-md-6">
+													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputLastName">Last Name</label>
-														<input type="text" class="form-control" id="inputLastName" value="<?= $lastname ?>" placeholder="Last Name" />
+														<input type="text" class="form-control" id="inputLastName" placeholder="Last Name" />
 													</div>
-												</div>
-												<div class="row">
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputDateOfBirst">Date of Birth</label>
 														<input type="text" class="form-control" id="inputDateOfBirth" placeholder="DD/MM/YYYY" value="<?= $dob ?>" />
-													</div>
-													<div class="mb-3 col-md-4">
-														<label class="form-label" for="inputYear">Year</label>
-														<select id="inputYear" class="form-control">
-															<option>Select...</option>
-														<?php
-															for($i = 1; $i < 6; $i++) {
-																$display = "K$i";
-
-																if ($i == $year) {
-																	$selected = 'selected';
-																} else {
-																	$selected = '';
-																}
-														?>
-															<option value="<?= $i ?>" <?= $selected ?>><?= $display ?></option>
-														<?php
-															}
-														?>
-														</select>
-													</div>
-													<div class="mb-3 col-md-4">
-														<label class="form-label" for="inputDateOfBirst">Class of</label>
-														<input type="text" class="form-control" id="inputDateOfBirth" value="<?= $class_of ?>" placeholder="Year of graduation" />
 													</div>
 												</div>
 												<div class="row">
 													<div class="mb-3 col-md-8">
 														<label class="form-label" for="inputEmail">Email</label>
-														<input type="email" class="form-control" id="inputEmail" value="<?= $email ?>" placeholder="Email" />
+														<input type="email" class="form-control" id="inputEmail" placeholder="Email" />
 													</div>
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputMobile">Mobile</label>
-														<input type="text" class="form-control" id="inputMobile" value="<?= $email ?>" placeholder="Mobile" />
+														<input type="password" class="form-control" id="inputMobile" placeholder="Mobile" />
 													</div>
 												</div>
 												<div class="row">
 													<div class="mb-3 col-md-8">
 														<label class="form-label" for="inputAddressLine1">Address Line 1</label>
-														<input type="text" class="form-control" id="inputAddressLine1" value="<?= $address_1 ?>" placeholder="Apartment, studio, or floor" />
+														<input type="text" class="form-control" id="inputAddressLine1" placeholder="Apartment, studio, or floor" />
 													</div>
 													<div class="mb-3 col-md-8">
 														<label class="form-label" for="inputAddressLine2">Address Line 2</label>
-														<input type="text" class="form-control" id="inputAddressLine2" value="<?= $address_2 ?>" placeholder="Street Name" />
+														<input type="text" class="form-control" id="inputAddressLine2" placeholder="Street Name" />
 													</div>
 													<div class="mb-3 col-md-4">
 														<label class="form-label" for="inputPincode">Postal Code</label>
-														<input type="text" class="form-control" id="inputPincode" value="<?= $postal_code ?>" placeholder="Pincode" />
+														<input type="text" class="form-control" id="inputPincode" placeholder="Pincode" />
 													</div>
 												</div>
 												<div class="modal-footer">
