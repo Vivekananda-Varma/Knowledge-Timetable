@@ -225,10 +225,10 @@
         ";
         
         $result = $mysqli->query($query);
-        $student_id = $mysqli->insert_id;
-        $student = GetTeacherByID($teacher_id);
+        $teacher_id = $mysqli->insert_id;
+        $teacher = GetTeacherByID($teacher_id);
         
-        return $student;
+        return $teacher;
     }
     
     function UpdateTeacher($teacher_id, $data) {
@@ -260,7 +260,6 @@
         ";
         
         $result = $mysqli->query($query);
-        
         $teacher = GetTeacherByID($teacher_id);
         
         return $teacher;
