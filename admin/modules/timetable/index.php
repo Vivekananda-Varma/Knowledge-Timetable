@@ -1,7 +1,7 @@
 <?php
 
 	$name = $_GET['name'];
-	$json_filename = "json/$name.json";
+	$json_filename = "admin/modules/timetable/json/$name.json";
 
 	$json = file_get_contents($json_filename);
 	$timetable = json_decode($json, true);
@@ -45,46 +45,19 @@
 										</div>
 										<div class="card-body text-center">
 											<img src="/admin/images/user-default-profile-pic.jpg" alt="Stacie Hall" class="img-fluid rounded-circle mb-2" width="128" height="128" />
-											<h5 class="card-title mb-0"><?= $fullname ?></h5>
+											<h5 class="card-title mb-0">Test</h5>
 										</div>
-										<table class="table table-sm my-2">
-											<tbody>
-												<tr>
-													<th>DOB</th>
-													<td><?= $dob ?></td>
-												</tr>
-												<tr>
-													<th>Year</th>
-													<td>K<?= $year ?></td>
-												</tr>
-												<tr>
-													<th>Class of</th>
-													<td><?= $class_of ?></td>
-												</tr>
-												<tr>
-													<th>Email</th>
-													<td><?= $email ?></td>
-												</tr>
-												<tr>
-													<th>Phone</th>
-													<td><?= $mobile ?></td>
-												</tr>
-												<tr>
-													<th>Address</th> 
-													<td><?= $address ?></td> 
-												</tr>
-											</tbody>
-										</table>
+										
 									</div>
 								</div>
 
 
 
 								<!-- Profile Card Popup -->
-								<div class="col-md-4 col-xl-9 collapse" id="editProfileCard">
+								<div class="col-md-8 col-xl-9" id="timetableCard">
 									<div class="card">
 										<div class="card-header">
-											<h5 class="card-title">Edit Profile</h5>
+											<h5 class="card-title">Timetable</h5>
 										</div>
 										<div class="card-body">	
 										<table>

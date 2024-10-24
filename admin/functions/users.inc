@@ -234,9 +234,8 @@
     function UpdateTeacher($teacher_id, $data) {
         global $mysqli;
         
-        $student = GetTeacherByID($teacher_id);
+        $teacher = GetTeacherByID($teacher_id);
         $user_id = $teacher['user_id'];
-        $user = GetUserByID($user_id);
         
         $firstname = $data['firstname'];
         $lastname = $data['lastname'];
@@ -260,10 +259,9 @@
             WHERE `user_id`='$user_id'
         ";
         
-        $result = $mysqli->query($query1);
-        $result = $mysqli->query($query2);
+        $result = $mysqli->query($query);
         
-        $student = GetTeacherByID($teacher_id);
+        $teacher = GetTeacherByID($teacher_id);
         
         return $teacher;
     }

@@ -186,61 +186,64 @@
 				break;
 				
 			case 'teachers':
-			$filter = $tokens[3];
-			
-			$teachers_show = 'show';
-			$teachers_active = 'active';
-			
-			$action = $tokens[4] ?? '';
-			
-			if ($action != '') {
-				switch($action) {
-					case 'edit':
-						$teacher_id = $tokens[3];
-						$teacher = GetTeacherByID($teacher_id);
-							
-						$page_title = "Edit Teacher";
-						$teachers_all_active = 'active';
-						
-						include('admin/modules/teachers/detail.php');
-						
-						break;
-			
-					case 'editpost':
-						UpdateStudent($student_id, $_POST);
-						
-						Redirect("/admin/students/$student_id/edit/");
-						
-						break;
-					case 'delete':
-						
-						break;
-				}
-			} else {
-				switch($filter) {
-					default:
-					case 'all':
-						$page_title = "All Teachers";
-						$teachers_all_active = 'active';
-						$teachers = GetTeachers();
-						
-						break;
-						
-					case 'import':
-						
-						break;
-			
-					case 'export':
+				$teachers_show = 'show';
+				$teachers_active = 'active';
 				
-						break;
+				$action = $tokens[4] ?? '';
+				
+				if ($action != '') {
+					$teacher_id = $tokens[3];
+					
+					switch($action) {
+						case 'edit':
+							$teacher_id = $tokens[3];
+							$teacher = GetTeacherByID($teacher_id);
+								
+							$page_title = "Edit Teacher";
+							$teachers_all_active = 'active';
+							
+							include('admin/modules/teachers/detail.php');
+							
+							break;
+				
+						case 'editpost':
+							UpdateTeacher($teacher_id, $_POST);
+							
+							Redirect("/admin/teachers/$teacher_id/edit/");
+							
+							break;
+						case 'delete':
+							
+							break;
+					}
+				} else {
+					$filter = $tokens[3];
+								
+					switch($filter) {
+						default:
+						case 'all':
+							$page_title = "All Teachers";
+							$teachers_all_active = 'active';
+							$teachers = GetTeachers();
+							
+							break;
+							
+						case 'import':
+							
+							break;
+				
+						case 'export':
+					
+							break;
+					}
+				
+					include('admin/modules/teachers/index.php');
 				}
 			
-				include('admin/modules/teachers/index.php');
-			}
-			
-			break;
+				break;
 			
 			case 'tttest':
+				$page_title = "Timetable";
 				include('admin/modules/timetable/index.php');
         }
 		
