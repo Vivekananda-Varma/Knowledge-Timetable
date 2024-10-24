@@ -11,16 +11,6 @@
 
 <head>
 	<?php include 'templates/head.html'; ?>
-	<style>
-		table {
-			border-collapse: collapse;
-		}
-		
-		td {
-			border: 1px #ccc solid;
-			padding: 2px 5px;
-		}
-    </style>
 </head>
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
@@ -51,24 +41,34 @@
 									</div>
 								</div>
 
-
-
 								<!-- Profile Card Popup -->
 								<div class="col-md-8 col-xl-9" id="timetableCard">
 									<div class="card">
 										<div class="card-header">
-											<h5 class="card-title">Timetable</h5>
+											<h5 class="card-title mb-0">Timetable</h5>
 										</div>
 										<div class="card-body">	
-										<table>
+										<table class="timetable">
+											<thead>
+												<tr>
+													<th class="timetable-head">&nbsp;</div>
+													<th class="timetable-head">1</th>
+													<th class="timetable-head">2</th>
+													<th class="timetable-head">3</th>
+													<th class="timetable-head">4</th>
+													<th class="timetable-head">5</th>
+													<th class="timetable-head">6</th>
+													<th class="timetable-head">7</th>
+												</tr>
+											</thead>
 									<?php    
 											for($i = 0; $i < count($timetable); $i++) {
 												$row = $timetable[$i];
 												$day = $row['day'];
 												$periods = $row['periods'];
 									?>
-												<tr>
-													<td><?= $day ?></td>                
+												<tr class="timetable-row">
+													<td class="timetable-day"><?= substr($day, 0, 3) ?></td>
 									<?php    
 												for ($j = 0; $j < count($periods); $j++) {
 													$period = $periods[$j];
@@ -77,11 +77,10 @@
 													$teacher = $period['teacher'];
 													$place = $period['place'];
 									?>
-													<td>
-														<?= $category ?><br>
-														<?= $subject ?><br>
-														<?= $teacher ?><br>
-														<?= $place ?>   
+													<td class="timetable-period">
+														<span class="timetable-period-subject"><?= $subject ?></span><br>
+														<span class="timetable-period-teacher"><?= $teacher ?></span><br>
+														<span class="timetable-period-place"><?= $place ?></span>
 													</td>
 									<?php
 												}
@@ -94,8 +93,6 @@
 										</div>
 									</div>
 								</div>
-
-
 							</div>
 						</div>
 					</div>

@@ -35,3 +35,37 @@ tr:hover .table-action a {
     align-items: center;
     padding: 10px;
 }
+
+.timetable {
+    font-size: 9pt;
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%; /* Ensure the table takes full width */
+}
+
+.timetable-head, .timetable-day, .timetable-period {
+    border: 1px #000000 solid !important;
+    padding: 2px 5px;
+    width: 12.5%; /* Each column takes up an equal width */
+    height: 50px;
+}
+
+.timetable-period {
+    width: 12.5%;
+    height: 50px;
+}
+
+.timetable-day {
+    font-size: 9pt;
+    font-weight: bold;    
+    text-transform: uppercase;
+}
+
+.timetable-period-subject {
+    font-weight: bold;
+}
+
+.timetable-period-place {
+    text-transform: uppercase;
+    font-size: 7pt;
+}
