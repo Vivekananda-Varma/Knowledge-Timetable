@@ -18,6 +18,7 @@
 	include_once('admin/functions/users.inc');
 	include_once('admin/functions/places.inc');
 	include_once('admin/functions/subjects.inc');
+	include_once('admin/functions/courses.inc');
 	
 	// require_once('filepond/config.php');
 	// require_once("filepond/util/read_write_functions.php");
@@ -114,6 +115,7 @@
 			case 'courses':
 				$page_title = "Courses";
 				$courses_active = 'active';
+				$courses = GetCourses();
 				
 				include('admin/modules/courses/index.php');
 				
