@@ -23,7 +23,7 @@
 							<tr>
 								<th>Name</th>
 								<th>Subjects</th>
-								<th>Teacher</th>
+								<th>Teachers</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -35,8 +35,8 @@
 				
 					<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $place_id ?>, '<?= $place_name ?>')">
 						<td><?= $place_name ?></td>
-						<td></td>
-						<td class="d-none d-md-table-cell"></td>
+						<td width="50" class="text-center"></td>
+						<td width="50" class="text-center"></td>
 					</tr>
 				<?php
 					}

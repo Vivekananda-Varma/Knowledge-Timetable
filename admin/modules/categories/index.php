@@ -22,8 +22,8 @@
 						<thead>
 							<tr>
 								<th>Name</th>
-								<th>Subjects</th>
-								<th>Teacher</th>
+								<th class="text-center">Subjects</th>
+								<th>Teachers</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -31,12 +31,22 @@
 					foreach($categories as $category) {
 						$category_id = $category['category_id'];
 						$category_name = $category['category_name']; 
+						$num_subjects = $category['num_subjects']; 
+						$num_teachers = $category['num_teachers'];
+						
+						if ($num_subjects == 0) {
+							$num_subjects = '';
+						}
+						
+						if ($num_teachers == 0) {
+							$num_teachers = '';
+						}
 				?>
 				
 					<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $category_id ?>, '<?= $category_name ?>')">
 						<td><?= $category_name ?></td>
-						<td></td>
-						<td class="d-none d-md-table-cell"></td>
+						<td width="50" class="text-center"><?= $num_subjects ?></td>
+						<td width="50" class="text-center"><?= $num_teachers ?></td>
 					</tr>
 				<?php
 					}

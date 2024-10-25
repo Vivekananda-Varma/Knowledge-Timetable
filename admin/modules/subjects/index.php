@@ -21,9 +21,9 @@
 					<table id="datatables-reponsive" class="table table-striped table-hover">
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Subjects</th>
-								<th>Teacher</th>
+								<th>Subject</th>
+								<th>Course</th>
+								<th>Teachers</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -36,7 +36,7 @@
 					<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $subject_id ?>, '<?= $subject_name ?>')">
 						<td><?= $subject_name ?></td>
 						<td></td>
-						<td class="d-none d-md-table-cell"></td>
+						<td></td>
 					</tr>
 				<?php
 					}

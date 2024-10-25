@@ -21,8 +21,7 @@
 					<table id="datatables-reponsive" class="table table-striped table-hover">
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Courses</th>
+								<th>Course</th>
 								<th>Subject</th>
 								<th>Teacher</th>
 							</tr>
@@ -42,7 +41,6 @@
 								<td><?= $course_name ?></td>
 								<td><?= $subject_name ?></td>
 								<td><?= $fullname ?></td>
-								<td class="d-none d-md-table-cell"></td>
 							</tr>
 						<?php
 							}
