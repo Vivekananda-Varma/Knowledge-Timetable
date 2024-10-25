@@ -1,6 +1,6 @@
 <?php
 
-	$name = $_GET['name'];
+	$name = $_GET['name'] ?? 'aadya';
 	$json_filename = "admin/modules/students/json/$name.json";
 
 	$json = file_get_contents($json_filename);
@@ -47,7 +47,7 @@
 									<div class="card mb-3">
 										<div class="card-header d-flex justify-content-between align-items-center">
 											<h5 class="card-title mb-0">Profile Details</h5>
-											<button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#editProfileCard" aria-expanded="false" aria-controls="editProfileCard" title="Edit Profile">
+											<button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#editProfileCard" aria-expanded="false" aria-controls="editProfileCard" title="Edit Profile">
 												Edit
 											</button>
 										</div>
@@ -55,34 +55,36 @@
 											<img src="/admin/images/user-default-profile-pic.jpg" alt="Stacie Hall" class="img-fluid rounded-circle mb-2" width="128" height="128" />
 											<h5 class="card-title mb-0"><?= $fullname ?></h5>
 										</div>
-										<table class="table table-sm my-2">
-											<tbody>
-												<tr>
-													<th>DOB</th>
-													<td><?= $dob ?></td>
-												</tr>
-												<tr>
-													<th>Year</th>
-													<td>K<?= $year ?></td>
-												</tr>
-												<tr>
-													<th>Class of</th>
-													<td><?= $class_of ?></td>
-												</tr>
-												<tr>
-													<th>Email</th>
-													<td><?= $email ?></td>
-												</tr>
-												<tr>
-													<th>Phone</th>
-													<td><?= $mobile ?></td>
-												</tr>
-												<tr>
-													<th>Address</th> 
-													<td><?= $address ?></td> 
-												</tr>
-											</tbody>
-										</table>
+										<div class="card-body">
+											<table class="table table-sm my-2">
+												<tbody>
+													<tr>
+														<th>DOB</th>
+														<td><?= $dob ?></td>
+													</tr>
+													<tr>
+														<th>Year</th>
+														<td>K<?= $year ?></td>
+													</tr>
+													<tr>
+														<th>Class of</th>
+														<td><?= $class_of ?></td>
+													</tr>
+													<tr>
+														<th>Email</th>
+														<td><?= $email ?></td>
+													</tr>
+													<tr>
+														<th>Phone</th>
+														<td><?= $mobile ?></td>
+													</tr>
+													<tr>
+														<th>Address</th> 
+														<td><?= $address ?></td> 
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 
@@ -164,7 +166,7 @@
 												<div class="modal-footer">
 													<button type="button" class="btn btn-danger">Delete</button>
 													<div class="ms-auto">
-														<button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#editProfileCard" style="margin-right: 10px;">Close</button>
+														<a class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#editProfileCard" style="margin-right: 10px;">Close</a>
 														<input type="submit" class="btn btn-primary" name="submit" value="Save">
 													</div>
 												</div>
