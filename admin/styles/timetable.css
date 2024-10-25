@@ -40,22 +40,20 @@ tr:hover .table-action a {
     font-size: 9pt;
     border-collapse: collapse;
     text-align: center;
-    width: 100%; /* Ensure the table takes full width */
+    width: 100%;
 }
 
 .timetable-head, .timetable-day, .timetable-period {
     border: 1px #000000 solid !important;
-    padding: 2px 5px;
-    width: 12.5%; /* Each column takes up an equal width */
-    height: 50px;
 }
 
 .timetable-period {
-    width: 12.5%;
+    width: 13.5%;
     height: 50px;
 }
 
 .timetable-day {
+    width: 5.5%;
     font-size: 9pt;
     font-weight: bold;    
     text-transform: uppercase;
