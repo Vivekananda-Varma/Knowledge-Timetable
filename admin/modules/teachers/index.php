@@ -24,7 +24,8 @@
 								<th>Name</th>
 								<th>Mobile</th>
 								<th>Email</th>
-								<th>Last Login</th>
+								<th>Students</th>
+								<th>Periods</th>
 							</tr>
 						</thead>
 					<tbody>
@@ -38,14 +39,21 @@
 						$mobile = $teacher['mobile'];
 						$email = $teacher['email'];
 						$otp = $teacher['otp'];
-						$last_login = $teacher['last_login'];
+						$last_login = $teacher['last_login'] ?? 'Today 7:51 pm';
 				?>
 				
 							 <tr data-href="/admin/teachers/<?= $teacher_id ?>/edit/">
-								<td><?= $fullname ?></td>
+								<td>
+									<img src="/admin/dist/img/avatars/avatar-5.jpg" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
+									<div style="display: inline-block">
+										<?= $fullname ?><br>
+										<small class="text-muted"><?= $last_login ?></small>
+									</div>
+								</td>
 								<td><?= $mobile ?></td>
 								<td><?= $email ?></td>
-								<td><?= $last_login ?></td>								
+								<td width="50" class="text-center"></td>
+								<td width="50" class="text-center"></td>
 							 </tr>
 				<?php
 					}

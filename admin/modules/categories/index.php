@@ -21,7 +21,7 @@
 					<table id="datatables-reponsive" class="table table-striped table-hover">
 						<thead>
 							<tr>
-								<th>Name</th>
+								<th>Category Name</th>
 								<th class="text-center">Subjects</th>
 								<th>Teachers</th>
 							</tr>
