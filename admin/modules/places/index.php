@@ -45,7 +45,7 @@
 								<div class="modal-dialog" role="document">
 									<div class="card">
 										<div class="card-header">
-											<h5 class="card-title mb-0">Place</h5>
+											<h5 class="card-title mb-0">Edit Place</h5>
 										</div>
 										<div class="card-body">
 											<input id="place-name" type="text" class="form-control" value="" placeholder="Name">

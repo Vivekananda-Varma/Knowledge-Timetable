@@ -51,17 +51,100 @@
 						<div class="modal-dialog" role="document">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title mb-0">Course</h5>
+									<h5 class="card-title mb-0">Edit Course</h5>
 								</div>
 								<div class="card-body">
-									<input id="course-name" type="text" class="form-control" value="" placeholder="Name"><br>
-									<input id="" type="text" class="form-control" value="" placeholder="Category"><br>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-										<label class="form-check-label" for="flexCheckDefault">
-											Academic
-										</label>
+									<input id="course-name" type="text" class="form-control" value="" placeholder="Course Name"><br>
+									<div class="row">
+										<div class="mb-3 col-md-6">
+											<select id="inputCategory" class="form-control">
+												<option selected>Select Category...</option>
+												<option>Foreign Languages</option>
+												<option>Indian Languages</option>
+												<option>Science Subjects</option>
+											</select>
+										</div>
+										<div class="mb-3 col-md-6">
+											<select id="inputSubject" class="form-control">
+												<option selected>Select Subject...</option>
+												<option>English</option>
+												<option>French</option>
+												<option>German</option>
+											</select>
+										</div>
 									</div>
+									<div class="row">
+										<div class="mb-3 col-md-6">
+											<select id="inputTeacher" class="form-control">
+												<option selected>Select Teacher...</option>
+												<option>Nandini</option>
+												<option>Avani</option>
+												<option>Ragan</option>
+											</select>
+										</div>
+										<div class="mb-3 col-md-6">
+											<select id="inputPlace" class="form-control">
+												<option selected>Select Place...</option>
+												<option>Knowledge</option>
+												<option>School</option>
+												<option>Miscellaneous</option>
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="mb-3 col-md-4">
+											<fieldset class="mb-3">
+												<div class="row">
+													<label class="col-form-label col-sm-12 text-sm-right pt-sm-0">Duration of the Course</label>
+													<div class="col-sm-10">
+														<label class="form-check">
+															<input name="radio-3" type="radio" class="form-check-input" checked />
+															<span class="form-check-label">1 Year</span>
+														</label>
+														<label class="form-check">
+															<input name="radio-3" type="radio" class="form-check-input" />
+															<span class="form-check-label">2 Years</span>
+														</label>
+														<label class="form-check">
+															<input name="radio-3" type="radio" class="form-check-input" />
+															<span class="form-check-label">3 Years</span>
+														</label>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+										<div class="mb-3 col-md-4">
+											<label class="col-form-label col-sm-12 text-sm-right pt-sm-0">Nature of the course</label>
+											<div class="col-sm-10">
+												<label class="form-check m-0">
+													<input type="checkbox" class="form-check-input">
+													<span class="form-check-label">Academic</span>
+												</label>
+											</div>
+										</div>
+										<div class="mb-3 col-md-4">
+											<fieldset class="mb-3">
+												<div class="row">
+													<label class="col-form-label col-sm-12 text-sm-right pt-sm-0">The course is offered as</label>
+													<div class="col-sm-10">
+														<label class="form-check">
+															<input name="radio-3" type="radio" class="form-check-input" />
+															<span class="form-check-label">A Major</span>
+														</label>
+														<label class="form-check">
+															<input name="radio-3" type="radio" class="form-check-input" />
+															<span class="form-check-label">A Minor</span>
+														</label>
+														<label class="form-check">
+															<input name="radio-3" type="radio" class="form-check-input" />
+															<span class="form-check-label">A Project</span>
+														</label>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
+									<textarea id="message" type="text"  class="form-control" placeholder="Blurb"></textarea>
 								</div>
 								<div class="card-footer d-flex module-footer-btn-container">
 									<button type="button" class="btn btn-danger">Delete</button>

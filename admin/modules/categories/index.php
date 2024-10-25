@@ -55,7 +55,7 @@
 								<div class="modal-dialog" role="document">
 									<div class="card">
 										<div class="card-header">
-											<h5 class="card-title mb-0">Category</h5>
+											<h5 class="card-title mb-0">Edit Category</h5>
 										</div>
 										<div class="card-body">
 											<input id="category-name" type="text" class="form-control" value="" placeholder="Name">
