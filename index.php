@@ -95,11 +95,30 @@
 				// Redirect('/admin/dashboard/');    
 				
             case 'categories':
-				$page_title = "Categories";
-				$categories_active = 'active';
-				$categories = GetCategories();
+				$action = $tokens[4] ?? '';
 				
-                include('admin/modules/categories/index.php');
+				if ($action != '') {
+					$category_id = $tokens[3];
+					
+					switch($action) {
+						case 'editpost':
+							UpdateCategory($category_id, $_POST);
+							
+							Redirect("/admin/categories/");
+							
+							break;
+				
+						case 'delete':
+							
+							break;
+					}
+				} else {
+					$page_title = "Categories";
+					$categories_active = 'active';
+					$categories = GetCategories();
+					
+                	include('admin/modules/categories/index.php');
+				}
 				
                 break;
 
@@ -122,12 +141,31 @@
 				
 				break;
 
-			case 'places': 
-				$page_title = "Places";
-				$places_active = 'active';
-				$places = GetPlaces();
+			case 'places':
+				$action = $tokens[4] ?? '';
 				
-				include('admin/modules/places/index.php');
+				if ($action != '') {
+					$place_id = $tokens[3];																
+					
+					switch($action) {
+						case 'editpost':
+							UpdatePlace($place_id, $_POST);
+							
+							Redirect("/admin/places/");
+							
+							break;
+				
+						case 'delete':
+							
+							break;
+					}
+				} else {
+					$page_title = "Places";
+					$places_active = 'active';
+					$places = GetPlaces();
+					
+					include('admin/modules/places/index.php');
+				}
 				
                 break;
 

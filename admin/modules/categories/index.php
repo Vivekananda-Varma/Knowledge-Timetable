@@ -23,13 +23,11 @@
 							<tr>
 								<th>Category Name</th>
 								<th class="text-center">Subjects</th>
-								<th>Teachers</th>
+								<th class="text-center">Teachers</th>
 							</tr>
 						</thead>
 						<tbody>
 						<?php
-						print_r($categories);
-						
 							foreach($categories as $category) {
 								$category_id = $category['category_id'];
 								$category_name = $category['category_name'];

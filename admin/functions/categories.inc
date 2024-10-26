@@ -64,14 +64,15 @@
         return $category;
     }
     
-    function UpdateCategory($data) {
+    function UpdateCategory($category_id, $data) {
         global $mysqli;
         
         $category_name = $data['category_name'];
         
         $query = "
             UPDATE `categories`
-            SET `category_name`='$category_name',
+            SET `category_name`='$category_name'
+            WHERE `category_id`=$category_id
         ";
         
         $result = $mysqli->query($query);

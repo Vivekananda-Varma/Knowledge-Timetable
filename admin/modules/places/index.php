@@ -27,41 +27,43 @@
 							</tr>
 						</thead>
 						<tbody>
-				<?php
-					foreach($places as $place) {
-						$place_id = $place['place_id'];
-						$place_name = $place['place_name']; 
-				?>
-				
-					<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $place_id ?>, '<?= $place_name ?>')">
-						<td><?= $place_name ?></td>
-						<td width="50" class="text-center"></td>
-						<td width="50" class="text-center"></td>
-					</tr>
-				<?php
-					}
-				?>			 
-							<div class="modal fade" id="defaultModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="card">
-										<div class="card-header">
-											<h5 class="card-title mb-0">Edit Place</h5>
-										</div>
-										<div class="card-body">
-											<input id="place-name" type="text" class="form-control" value="" placeholder="Name">
-										</div>
-										<div class="card-footer d-flex module-footer-btn-container">
-											<button type="button" class="btn btn-danger">Delete</button>
-											<div class="ms-auto">
-												<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save</button>
-											</div>
-										</div>
+						<?php
+							foreach($places as $place) {
+								$place_id = $place['place_id'];
+								$place_name = $place['place_name']; 
+						?>
+						
+							<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $place_id ?>, '<?= $place_name ?>')">
+								<td><?= $place_name ?></td>
+								<td width="50" class="text-center"></td>
+								<td width="50" class="text-center"></td>
+							</tr>
+						<?php
+							}
+						?>			 							
+						</tbody>
+					</table>
+					
+					<div class="modal fade" id="defaultModalPrimary" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+						<form class="modal-dialog" id="place-form" name="category-form" method="post" action="">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Edit Place</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<input id="place-name" type="text" class="form-control" name="place_name" value="" placeholder="Name">
+								</div>
+								<div class="modal-footer justify-content-between">
+									<button type="button" class="btn btn-danger mr-auto">Delete</button>
+									<div>
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										<input type="submit" class="btn btn-primary" value="Save">
 									</div>
 								</div>
 							</div>
-						</tbody>
-					</table>
+						</form>
+					</div>
 				</div>
 			</main>
 
@@ -74,6 +76,7 @@
 	<script>
 		function ShowModal(id, name) {
 			$("#place-name").attr('value', name);
+			$("#place-form").attr("action", "/admin/places/" + id + "/editpost/");
 		}
 	</script>
 </body>

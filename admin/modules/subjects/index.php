@@ -23,8 +23,8 @@
 							<tr>
 								<th>Subject</th>
 								<th>Category</th>
-								<th>Courses</th>
-								<th>Teachers</th>
+								<th class="text-center">Courses</th>
+								<th class="text-center">Teachers</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -34,13 +34,24 @@
 								$category_name = $subject['category_name'];
 								$subject_id = $subject['subject_id'];
 								$subject_name = $subject['subject_name'];
+								
+								$num_courses = $subject['num_courses']; 
+								$num_teachers = $subject['num_teachers'];
+								
+								if ($num_courses == 0) {
+									$num_courses = '';
+								}
+								
+								if ($num_teachers == 0) {
+									$num_teachers = '';
+								}
 						?>
 						
 							<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $subject_id ?>, '<?= $subject_name ?>')">
 								<td><?= $subject_name ?></td>
 								<td><?= $category_name ?></td>
-								<td></td>
-								<td></td>
+								<td width="50" class="text-center"><?= $num_courses ?></td>
+								<td width="50" class="text-center"><?= $num_teachers ?></td>
 							</tr>
 						<?php
 							}

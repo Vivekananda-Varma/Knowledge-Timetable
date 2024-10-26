@@ -54,14 +54,15 @@
         return $place;
     }
     
-    function UpdatePlace($data) {
+    function UpdatePlace($place_id, $data) {
         global $mysqli;
         
         $place_name = $data['place_name'];
         
         $query = "
             UPDATE `places`
-            SET `place_name`='$place_name',
+            SET `place_name`='$place_name'
+            WHERE `place_id`=$place_id
         ";
         
         $result = $mysqli->query($query);
