@@ -22,53 +22,76 @@
 						<thead>
 							<tr>
 								<th>Subject</th>
-								<th>Course</th>
+								<th>Category</th>
+								<th>Courses</th>
 								<th>Teachers</th>
 							</tr>
 						</thead>
 						<tbody>
-				<?php
-					foreach($subjects as $subject) {
-						$subject_id = $subject['subject_id'];
-						$subject_name = $subject['subject_name']; 
-				?>
-				
-					<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $subject_id ?>, '<?= $subject_name ?>')">
-						<td><?= $subject_name ?></td>
-						<td></td>
-						<td></td>
-					</tr>
-				<?php
-					}
-				?>
-							<div class="modal fade" id="defaultModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="card">
-										<div class="card-header">
-											<h5 class="card-title mb-0">Edit Subject</h5>
-										</div>
-										<div class="card-body">
-											<input id="subject-name" type="text" class="form-control" value="" placeholder="Name"><br>
-                                            <input id="" type="text" class="form-control" value="" placeholder="Category"><br>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    Academic
-                                                </label>
-                                            </div>
-										</div>
-										<div class="card-footer d-flex module-footer-btn-container">
-											<button type="button" class="btn btn-danger">Delete</button>
-											<div class="ms-auto">
-												<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save</button>
-											</div>
-										</div>
+						<?php
+							foreach($subjects as $subject) {
+								$category_id = $subject['category_id'];
+								$category_name = $subject['category_name'];
+								$subject_id = $subject['subject_id'];
+								$subject_name = $subject['subject_name'];
+						?>
+						
+							<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $subject_id ?>, '<?= $subject_name ?>')">
+								<td><?= $subject_name ?></td>
+								<td><?= $category_name ?></td>
+								<td></td>
+								<td></td>
+							</tr>
+						<?php
+							}
+						?>							
+						</tbody>
+					</table>
+					
+					<div class="modal fade" id="defaultModalPrimary" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+						<form class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Edit Subject</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<input id="subject-name" type="text" class="form-control" value="" placeholder="Name"><br>
+									<select id="inputCategory" class="form-control" name="category">
+										<option>Category...</option>
+									<?php
+										foreach($categories as $category) {
+											$category_id = $category['category_id'];
+											$category_name = $category['category_name']; 
+									
+											// if ($i == $year) {
+											// 	$selected = 'selected';
+											// } else {
+											// 	$selected = '';
+											// }
+									?>
+										<option value="<?= $category_id ?>"><?= $category_name ?></option>
+									<?php
+										}
+									?>
+									</select>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+										<label class="form-check-label" for="flexCheckDefault">
+											Academic
+										</label>
+									</div>
+								</div>
+								<div class="modal-footer justify-content-between">
+									<button type="button" class="btn btn-danger mr-auto">Delete</button>
+									<div>
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary">Save</button>
 									</div>
 								</div>
 							</div>
-						</tbody>
-					</table>
+						</form>
+					</div>
 				</div>
 			</main>
 

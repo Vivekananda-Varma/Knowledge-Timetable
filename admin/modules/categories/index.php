@@ -27,51 +27,55 @@
 							</tr>
 						</thead>
 						<tbody>
-				<?php
-					foreach($categories as $category) {
-						$category_id = $category['category_id'];
-						$category_name = $category['category_name']; 
-						$num_subjects = $category['num_subjects']; 
-						$num_teachers = $category['num_teachers'];
+						<?php
+						print_r($categories);
 						
-						if ($num_subjects == 0) {
-							$num_subjects = '';
-						}
+							foreach($categories as $category) {
+								$category_id = $category['category_id'];
+								$category_name = $category['category_name'];
+								$num_subjects = $category['num_subjects']; 
+								$num_teachers = $category['num_teachers'];
+								
+								if ($num_subjects == 0) {
+									$num_subjects = '';
+								}
+								
+								if ($num_teachers == 0) {
+									$num_teachers = '';
+								}
+						?>
 						
-						if ($num_teachers == 0) {
-							$num_teachers = '';
-						}
-				?>
-				
-					<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $category_id ?>, '<?= $category_name ?>')">
-						<td><?= $category_name ?></td>
-						<td width="50" class="text-center"><?= $num_subjects ?></td>
-						<td width="50" class="text-center"><?= $num_teachers ?></td>
-					</tr>
-				<?php
-					}
-				?>
-							<div class="modal fade" id="defaultModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="card">
-										<div class="card-header">
-											<h5 class="card-title mb-0">Edit Category</h5>
-										</div>
-										<div class="card-body">
-											<input id="category-name" type="text" class="form-control" value="" placeholder="Name">
-										</div>
-										<div class="card-footer d-flex module-footer-btn-container">
-											<button type="button" class="btn btn-danger">Delete</button>
-											<div class="ms-auto">
-												<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save</button>
-											</div>
-										</div>
+							<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $category_id ?>, '<?= $category_name ?>')">
+								<td><?= $category_name ?></td>
+								<td width="50" class="text-center"><?= $num_subjects ?></td>
+								<td width="50" class="text-center"><?= $num_teachers ?></td>
+							</tr>
+						<?php
+							}
+						?>
+						</tbody>
+					</table>
+					
+					<div class="modal fade" id="defaultModalPrimary" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+						<form class="modal-dialog" id="category-form" name="category-form" method="post" action="">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Edit Category</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<input id="category-name" type="text" class="form-control" name="category_name" value="" placeholder="Name">
+								</div>
+								<div class="modal-footer justify-content-between">
+									<button type="button" class="btn btn-danger mr-auto">Delete</button>
+									<div>
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										<input type="submit" class="btn btn-primary" value="Save">
 									</div>
 								</div>
 							</div>
-						</tbody>
-					</table>
+						</form>
+					</div>
 				</div>
 			</main>
 
@@ -83,7 +87,8 @@
 
 	<script>
 		function ShowModal(id, name) {
-			$("#category-name").attr('value', name);
+			$("#category-name").attr("value", name);
+			$("#category-form").attr("action", "/admin/categories/" + id + "/editpost/");
 		}
 	</script>
 </body>

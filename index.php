@@ -107,6 +107,7 @@
 				$page_title = "Subjects";
 				$subjects_active = 'active';
 				$subjects = GetSubjects();
+				$categories = GetCategories();
 
 				include('admin/modules/subjects/index.php');
 				

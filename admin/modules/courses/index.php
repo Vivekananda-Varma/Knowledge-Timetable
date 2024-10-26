@@ -49,7 +49,8 @@
 					</table>
 					<div class="modal fade" id="defaultModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog" role="document">
-							<div class="card">
+							<form>
+								<div class="card">
 								<div class="card-header">
 									<h5 class="card-title mb-0">Edit Course</h5>
 								</div>
@@ -154,6 +155,7 @@
 									</div>
 								</div>
 							</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -167,7 +169,7 @@
 
 	<script>
 		function ShowModal(course_id, subject_id, course_name) {
-			$("#course-name").attr('value', name);
+			$("#course-name").attr('value', course_name);
 		}
 	</script>
 </body>

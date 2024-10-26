@@ -6,8 +6,10 @@
         $subjects = array();
         
         $query = "
-            SELECT * 
-            FROM `subjects` 
+            SELECT `subjects`.*, `categories`.`category_name`
+            FROM `subjects`
+            LEFT JOIN `categories` 
+            ON `subjects`.`category_id`=`categories`.`category_id`
             ORDER BY `subject_name`
         ";
         
