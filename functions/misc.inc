@@ -618,9 +618,7 @@ function DateToMySQLDate($date)
     if ($date == '')
         return 'NULL';
     
-    $date = date("Y-m-d", strtotime($date));
-    
-    return "'$date'";
+    return date("Y-m-d", strtotime($date));
 }
 
 function MySQLDateToDate($date)

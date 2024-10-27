@@ -111,6 +111,47 @@
         return $student;
     }
     
+    function ImportStudent($data) {
+        global $mysqli;
+        
+        $firstname = $data['firstname'];
+        $lastname = $data['lastname'];
+        $legalname = $data['legalname'];
+        $display_name = $data['display_name'];
+        $mobile = $data['mobile'];
+        $email = $data['email'];
+        $dob = $data['dob'];
+        $year = $data['year'];
+        
+        $query = "
+            INSERT INTO `users`
+            SET `firstname`='$firstname',
+                `lastname`='$lastname',
+                `legalname`='$legalname',
+                `display_name`='$display_name',
+                `mobile`='$mobile',
+                `email`='$email',
+                `dob`='$dob'
+        ";
+        
+        // print "$query<br><br>";
+        
+        $result = $mysqli->query($query);
+        $user_id = $mysqli->insert_id;
+        
+        $query = "
+            INSERT INTO `students`
+            SET `user_id`='$user_id',
+                `year`='$year'
+        ";
+        
+        $result = $mysqli->query($query);
+        $student_id = $mysqli->insert_id;
+        $student = GetTeacherByID($student_id);
+        
+        return $student;
+    }
+    
     function UpdateStudent($student_id, $data) {
         global $mysqli;
         

@@ -15,7 +15,7 @@
 				<div class="container-fluid p-0">
 					<div class="d-flex justify-content-between align-items-center mb-3">
 						<h1 class="h1">Places</h1>
-						<button class="btn btn-outline-primary">New +</button>
+						<button class="btn btn-outline-primary" onClick="ShowModal('', '')">New +</button>
 					</div>
 					
 					<table id="datatables-reponsive" class="table table-striped table-hover">
@@ -33,7 +33,7 @@
 								$place_name = $place['place_name']; 
 						?>
 						
-							<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $place_id ?>, '<?= $place_name ?>')">
+							<tr data-bs-toggle="modal" data-bs-target="#modal-alert" onClick="ShowModal(<?= $place_id ?>, '<?= $place_name ?>')">
 								<td><?= $place_name ?></td>
 								<td width="50" class="text-center"></td>
 								<td width="50" class="text-center"></td>
@@ -44,11 +44,11 @@
 						</tbody>
 					</table>
 					
-					<div class="modal fade" id="defaultModalPrimary" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal fade" id="modal-alert" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
 						<form class="modal-dialog" id="place-form" name="category-form" method="post" action="">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h1 class="modal-title fs-5" id="exampleModalLabel">Edit Place</h1>
+									<h1 class="modal-title fs-5" id="modal-title">Edit Place</h1>
 									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
@@ -75,8 +75,17 @@
 
 	<script>
 		function ShowModal(id, name) {
-			$("#place-name").attr('value', name);
-			$("#place-form").attr("action", "/admin/places/" + id + "/editpost/");
+			if (name == '') {
+				$("#modal-title").html("New Place");
+				$("#place-form").attr("action", "/admin/places/create/");
+				
+				$('#modal-alert').modal('toggle');
+			} else {
+				$("#modal-title").innerHTML = "Edit Place";
+				
+				$("#place-name").attr('value', name);
+				$("#place-form").attr("action", "/admin/places/" + id + "/editpost/");
+			}
 		}
 	</script>
 </body>

@@ -34,7 +34,7 @@
 						$teacher_id = $teacher['teacher_id'];
 						$firstname = $teacher['firstname'];
 						$lastname = $teacher['lastname'];
-						$fullname = "$firstname $lastname";
+						$fullname = "<b>$firstname</b> $lastname";
 						
 						$mobile = $teacher['mobile'];
 						$email = $teacher['email'];

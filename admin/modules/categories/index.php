@@ -15,7 +15,7 @@
 				<div class="container-fluid p-0">
 					<div class="d-flex justify-content-between align-items-center mb-3">
 						<h1 class="h1">Categories</h1>
-						<button class="btn btn-outline-primary">New +</button>
+						<button class="btn btn-outline-primary" onClick="ShowModal('', '')">New +</button>
 					</div>
 					
 					<table id="datatables-reponsive" class="table table-striped table-hover">
@@ -43,7 +43,7 @@
 								}
 						?>
 						
-							<tr data-bs-toggle="modal" data-bs-target="#defaultModalPrimary" onClick="ShowModal(<?= $category_id ?>, '<?= $category_name ?>')">
+							<tr data-bs-toggle="modal" data-bs-target="#modal-alert" onClick="ShowModal(<?= $category_id ?>, '<?= $category_name ?>')">
 								<td><?= $category_name ?></td>
 								<td width="50" class="text-center"><?= $num_subjects ?></td>
 								<td width="50" class="text-center"><?= $num_teachers ?></td>
@@ -54,11 +54,11 @@
 						</tbody>
 					</table>
 					
-					<div class="modal fade" id="defaultModalPrimary" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal fade" id="modal-alert" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
 						<form class="modal-dialog" id="category-form" name="category-form" method="post" action="">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h1 class="modal-title fs-5" id="exampleModalLabel">Edit Category</h1>
+									<h1 class="modal-title fs-5" id="modal-title">Edit Category</h1>
 									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
@@ -85,8 +85,17 @@
 
 	<script>
 		function ShowModal(id, name) {
-			$("#category-name").attr("value", name);
-			$("#category-form").attr("action", "/admin/categories/" + id + "/editpost/");
+			if (name == '') {
+				$("#modal-title").html("New Category");
+				$("#category-form").attr("action", "/admin/categories/create/");
+				
+				$('#modal-alert').modal('toggle');
+			} else {
+				$("#modal-title").innerHTML = "Edit Place";
+				
+				$("#category-name").attr("value", name);
+				$("#category-form").attr("action", "/admin/categories/" + id + "/editpost/");
+			}
 		}
 	</script>
 </body>

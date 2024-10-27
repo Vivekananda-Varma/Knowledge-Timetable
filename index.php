@@ -247,21 +247,25 @@
 										
 										$data = array();
 										
-										$firstname = $row[1];
-										
-										if (strpos(' ', $firstname) !== false) {
-											list($firstname, $lastname) = explode(' ', $row[1]);
-										} else {
-											$lastname = '';
-										}
+										$legalname = $row[1];
+										$display_name = $row[2];
+										$firstname = $row[3];
+										$lastname = $row[4];
+										$year = substr($row[5], 0, 1);			// 1st, 2nd, 3rd
+										$mobile = $row[6];
+										$email = $row[7];
+										$dob = $row[8];										
 										 
 										$data['firstname'] = $firstname;
 										$data['lastname'] = $lastname;
+										$data['legalname'] = $legalname;
+										$data['display_name'] = $display_name;
+										$data['mobile'] = $mobile;
+										$data['email'] = $email;
+										$data['dob'] = DateToMySQLDate($dob);
+										$data['year'] = $year;
 										
-										$data['email'] = $row[2];
-										$data['mobile'] = $row[3];
-										
-										// $student = CreateStudent($data);
+										$student = ImportStudent($data);
 									}
 								}
 							}

@@ -22,6 +22,7 @@
 						<thead>
 							<tr>
 								<th>Name</th>
+								<th>Year</th>
 								<th>Mobile</th>
 								<th>Email</th>
 								<th>Periods</th>
@@ -30,14 +31,20 @@
 						<tbody>
 				<?php
 					foreach($students as $student) {
-						$student_id = $student['user_id'];
+						$student_id = $student['student_id'];
 						$firstname = $student['firstname'];
 						$lastname = $student['lastname'];
-						$fullname = "$firstname $lastname";
+						$fullname = "<b>$firstname</b> $lastname";
+						$year = $student['year'];
+						$class_of = $student['class_of'];
 						
 						$mobile = $student['mobile'];
 						$email = $student['email'];
 						$last_login = $student['last_login'];
+						
+						if ($class_of == '') {
+							$class_of = date('Y') - $year + 3;
+						}
 				?>
 				
 							 <tr data-href="/admin/students/<?= $student_id ?>/edit/">
@@ -45,9 +52,10 @@
 									<img src="/admin/dist/img/avatars/avatar-5.jpg" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
 									<div style="display: inline-block">
 										<?= $fullname ?><br>
-										<small class="text-muted">Today 7:51 pm</small>
+										<small class="text-muted">Class of <?= $class_of ?></small>
 									</div>
 								</td>
+								<td width="50" class="text-center">K<?= $year ?></td>
 								<td><?= $mobile ?></td>
 								<td><?= $email ?></td>
 								<td width="50" class="text-center"></td>

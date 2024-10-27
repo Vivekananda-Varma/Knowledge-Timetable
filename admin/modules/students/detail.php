@@ -13,8 +13,8 @@
 	
 	$mobile = $student['mobile'];
 	$email = $student['email'];
-	$dob = $student['dob'] ?? '01/01/2000';
-	$class_of = $student['class_of'] ?? '2025';
+	$dob = MySQLDateToDate($student['dob']);
+	$class_of = $student['class_of'];
 	$year = $student['year'] ?? '1';
 	$last_login = $student['last_login'];
 	
@@ -23,6 +23,10 @@
 	$postal_code = $student['postal_code'] ?? '605001';
 	
 	$address = "$address_1, $address_2, Pondicherry $postal_code";
+	
+	if ($class_of == '') {
+		$class_of = date('Y') - $year + 3;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
