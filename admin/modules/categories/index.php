@@ -15,7 +15,11 @@
 				<div class="container-fluid p-0">
 					<div class="d-flex justify-content-between align-items-center mb-3">
 						<h1 class="h1">Categories</h1>
-						<button class="btn btn-outline-primary" onClick="ShowModal('', '')">New +</button>
+						<div>
+							<a class="btn btn-outline-primary" href="">Export</a>
+							<a class="btn btn-outline-primary" href="">Import</a>
+							<button class="btn btn-primary" onClick="ShowModal('', '')">New +</button>
+						</div>
 					</div>
 					
 					<table id="datatables-reponsive" class="table table-striped table-hover">
@@ -31,16 +35,16 @@
 							foreach($categories as $category) {
 								$category_id = $category['category_id'];
 								$category_name = $category['category_name'];
-								$num_subjects = $category['num_subjects']; 
-								$num_teachers = $category['num_teachers'];
+								$num_subjects = ''; // $category['num_subjects']; 
+								$num_teachers = ''; // $category['num_teachers'];
 								
 								if ($num_subjects == 0) {
 									$num_subjects = '';
 								}
 								
-								if ($num_teachers == 0) {
-									$num_teachers = '';
-								}
+								// if ($num_teachers == 0) {
+								// 	$num_teachers = '';
+								// }
 						?>
 						
 							<tr data-bs-toggle="modal" data-bs-target="#modal-alert" onClick="ShowModal(<?= $category_id ?>, '<?= $category_name ?>')">

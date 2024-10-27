@@ -25,7 +25,7 @@
 										<!-- We'll transform this input into a pond -->
 										<input type="file" class="filepond" name="filepond[]" data-max-file-size="10MB" data-max-files="1">
 									</div>
-									<a class="btn btn-secondary" href="/admin/teachers/all/">Cancel</a>&nbsp;
+									<a class="btn btn-secondary" href="/admin/teachers/">Cancel</a>&nbsp;
 									<button type="submit" class="btn btn-primary">Import</button>
 								</div>
 							</div>

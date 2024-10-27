@@ -6,11 +6,9 @@
         $subjects = array();
         
         $query = "
-            SELECT `subjects`.*, `categories`.`category_name`, COUNT(courses.subject_id) AS num_courses, COUNT(courses.subject_id) AS num_teachers
+            SELECT `subjects`.*, `categories`.`category_name`
             FROM `subjects`
             LEFT JOIN `categories` ON `subjects`.`category_id`=`categories`.`category_id`
-            LEFT JOIN `courses` ON `subjects`.`subject_id`=`courses`.`subject_id`
-            GROUP BY courses.subject_id
             ORDER BY `subject_name`
         ";
         
@@ -44,16 +42,17 @@
     function CreateSubject($data) {
         global $mysqli;
         
-        $subject_name = $data['subject_name'];
+        $subject_name = SanitiseUserInput($data['subject_name']);
         $category_id = $data['category_id'];
-        $is_academic = $data['is_academic'];
+        // $is_academic = $data['is_academic'];
         
         $query = "
             INSERT INTO `subjects`
             SET `category_id`='$category_id',
-                `subject_name`='$subject_name',
-                `is_academic`=$is_academic
+                `subject_name`='$subject_name'
         ";
+        
+        print $query; exit;
         
         $result = $mysqli->query($query);
         $subject_id = $mysqli->insert_id;

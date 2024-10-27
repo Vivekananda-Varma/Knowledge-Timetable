@@ -15,7 +15,11 @@
 				<div class="container-fluid p-0">
 					<div class="d-flex justify-content-between align-items-center mb-3">
 						<h1 class="h1"><?= $page_title ?></h1>
-						<button class="btn btn-outline-primary">New +</button>
+						<div>
+							<a class="btn btn-outline-primary" href="/admin/students/export/">Export</a>
+							<a class="btn btn-outline-primary" href="/admin/students/import/">Import</a>
+							<button class="btn btn-primary">New +</button>
+						</div>
 					</div>
 					
 					<table id="datatables-reponsive" class="table table-striped table-hover">
@@ -46,7 +50,6 @@
 							$class_of = date('Y') - $year + 3;
 						}
 				?>
-				
 							 <tr data-href="/admin/students/<?= $student_id ?>/edit/">
 								<td>
 									<img src="/admin/dist/img/avatars/avatar-5.jpg" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">

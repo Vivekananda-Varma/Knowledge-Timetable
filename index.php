@@ -123,12 +123,35 @@
                 break;
 
 			case 'subjects':
-				$page_title = "Subjects";
-				$subjects_active = 'active';
-				$subjects = GetSubjects();
-				$categories = GetCategories();
-
-				include('admin/modules/subjects/index.php');
+				if ( $tokens[3] == 'create') {
+					CreateSubject($_POST);
+					Redirect("/admin/subjects/");
+				}
+				
+				$action = $tokens[4] ?? '';
+				
+				if ($action != '') {
+					$subject_id = $tokens[3] ?? '';																
+					
+					switch($action) {
+						case 'editpost':
+							UpdateSubject($subject_id, $_POST);
+							Redirect("/admin/subjects/");
+							
+							break;
+				
+						case 'delete':
+							
+							break;
+					}
+				} else {
+					$page_title = "Subjects";
+					$subjects_active = 'active';
+					$subjects = GetSubjects();
+					$categories = GetCategories();
+					
+					include('admin/modules/subjects/index.php');
+				}
 				
 				break;
 
@@ -142,15 +165,19 @@
 				break;
 
 			case 'places':
+				if ( $tokens[3] == 'create') {
+					CreatePlace($_POST);
+					Redirect("/admin/places/");
+				}
+				
 				$action = $tokens[4] ?? '';
 				
 				if ($action != '') {
-					$place_id = $tokens[3];																
+					$place_id = $tokens[3] ?? '';																
 					
 					switch($action) {
 						case 'editpost':
 							UpdatePlace($place_id, $_POST);
-							
 							Redirect("/admin/places/");
 							
 							break;
@@ -205,9 +232,8 @@
 
 					switch($filter) {
 						default:
-						case 'all':
-							$page_title = "All Students";
-							$students_all_active = 'active';
+						case '':
+							$page_title = "Students";
 							$students = GetStudents();
 							
 							include('admin/modules/students/index.php');
@@ -216,7 +242,6 @@
 							
 						case 'import':
 							$page_title = "Import Students";
-							$students_import_active = 'active';
 							
 							include('admin/modules/students/import.php');
 							
@@ -270,7 +295,7 @@
 								}
 							}
 						
-							Redirect('/admin/students/all/');
+							Redirect('/admin/students/');
 							
 							break;
 					}
@@ -314,9 +339,8 @@
 								
 					switch($filter) {
 						default:
-						case 'all':
-							$page_title = "All Teachers";
-							$teachers_all_active = 'active';
+						case '':
+							$page_title = "Teachers";
 							$teachers = GetTeachers();
 							
 							include('admin/modules/teachers/index.php');
@@ -325,7 +349,6 @@
 							
 						case 'import':
 							$page_title = "Import Teachers";
-							$teachers_import_active = 'active';
 							
 							include('admin/modules/teachers/import.php');
 							
@@ -375,7 +398,7 @@
 								}
 							}
 
-							Redirect('/admin/teachers/all/');
+							Redirect('/admin/teachers/');
 							
 							break;
 				

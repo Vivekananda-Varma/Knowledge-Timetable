@@ -21,7 +21,11 @@
 				<div class="container-fluid p-0">
 					<div class="d-flex justify-content-between align-items-center mb-3">
 						<h1 class="h1">Subjects</h1>
-						<button class="btn btn-outline-primary" onClick="ShowModal('', '', '')">New +</button>
+						<div>
+							<a class="btn btn-outline-primary" href="">Export</a>
+							<a class="btn btn-outline-primary" href="">Import</a>
+							<button class="btn btn-primary" onClick="ShowModal('', '', '')">New +</button>
+						</div>
 					</div>
 					
 					<table id="datatables-reponsive" class="table table-striped table-hover">
@@ -41,8 +45,8 @@
 								$subject_id = $subject['subject_id'];
 								$subject_name = $subject['subject_name'];
 								
-								$num_courses = $subject['num_courses']; 
-								$num_teachers = $subject['num_teachers'];
+								$num_courses = ''; // $subject['num_courses']; 
+								$num_teachers = ''; // $subject['num_teachers'];
 								
 								if ($num_courses == 0) {
 									$num_courses = '';
@@ -66,15 +70,15 @@
 					</table>
 					
 					<div class="modal fade" id="modal-alert" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
-						<form class="modal-dialog">
+						<form class="modal-dialog" id="subject-form" name="subject-form" method="post" action="">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h1 class="modal-title fs-5" id="modal-title">Edit Subject</h1>
 									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
-									<input id="subject-name" type="text" class="form-control" value="" placeholder="Name"><br>
-									<select id="inputCategory" class="form-control" name="category">
+									<input id="subject-name" type="text" class="form-control" name="subject_name" value="" placeholder="Name"><br>
+									<select id="inputCategory" class="form-control" name="category_id">
 										<option>Select Category...</option>
 									</select>
 									<!-- <div class="form-check">
@@ -88,7 +92,7 @@
 									<button type="button" class="btn btn-danger mr-auto">Delete</button>
 									<div>
 										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary">Save</button>
+										<input type="submit" class="btn btn-primary" value="Save">
 									</div>
 								</div>
 							</div>

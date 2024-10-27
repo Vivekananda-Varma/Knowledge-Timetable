@@ -5,18 +5,10 @@
         
         $categories = array();
         
-        // $query = "
-        //     SELECT * 
-        //     FROM `categories` 
-        //     ORDER BY `category_name`
-        // ";
-        
         $query = "
-            SELECT categories.*, COUNT(subjects.category_id) AS num_subjects, COUNT(courses.subject_id) AS num_teachers
+            SELECT categories.*
             FROM `categories`
             LEFT JOIN `subjects` ON categories.category_id=subjects.category_id
-            LEFT JOIN `courses` ON subjects.subject_id=courses.subject_id
-            GROUP BY subjects.category_id, courses.subject_id
             ORDER BY `category_name`
         ";
         
@@ -50,11 +42,11 @@
     function CreateCategory($data) {
         global $mysqli;
         
-        $category_name = $data['category_name'];
+        $category_name = SanitiseUserInput($data['category_name']);
         
         $query = "
             INSERT INTO `categories`
-            SET `category_name`='$category_name',
+            SET `category_name`='$category_name'
         ";
         
         $result = $mysqli->query($query);

@@ -45,7 +45,7 @@
 					</table>
 					
 					<div class="modal fade" id="modal-alert" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
-						<form class="modal-dialog" id="place-form" name="category-form" method="post" action="">
+						<form class="modal-dialog" id="place-form" name="place-form" method="post" action="">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h1 class="modal-title fs-5" id="modal-title">Edit Place</h1>

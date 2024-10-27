@@ -40,11 +40,11 @@
     function CreatePlace($data) {
         global $mysqli;
         
-        $place_name = $data['place_name'];
+        $place_name = SanitiseUserInput($data['place_name']);
         
         $query = "
             INSERT INTO `places`
-            SET `place_name`='$place_name',
+            SET `place_name`='$place_name'
         ";
         
         $result = $mysqli->query($query);
@@ -57,12 +57,12 @@
     function UpdatePlace($place_id, $data) {
         global $mysqli;
         
-        $place_name = $data['place_name'];
+        $place_name = SanitiseUserInput($data['place_name']);
         
         $query = "
             UPDATE `places`
             SET `place_name`='$place_name'
-            WHERE `place_id`=$place_id
+            WHERE `place_id`='$place_id'
         ";
         
         $result = $mysqli->query($query);

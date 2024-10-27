@@ -15,7 +15,11 @@
 				<div class="container-fluid p-0">
 					<div class="d-flex justify-content-between align-items-center mb-3">
 						<h1 class="h1"><?= $page_title ?></h1>
-						<button class="btn btn-outline-primary">New +</button>
+						<div>
+							<a class="btn btn-outline-primary" href="/admin/teachers/export/">Export</a>
+							<a class="btn btn-outline-primary" href="/admin/teachers/import/">Import</a>
+							<button class="btn btn-primary">New +</button>
+						</div>
 					</div>
 					
 					<table id="datatables-reponsive" class="table table-striped table-hover">
