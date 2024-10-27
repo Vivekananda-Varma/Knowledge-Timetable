@@ -180,6 +180,7 @@
 				$courses_active = 'active';
 				$courses = GetCourses();
 				$categories = GetCategories();
+				$places = GetPlaces();
 				
 				include('admin/modules/courses/index.php');
 				

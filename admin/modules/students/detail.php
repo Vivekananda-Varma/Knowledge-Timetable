@@ -92,9 +92,10 @@
 									</div>
 								</div>
 
-								<!-- Profile Card Popup -->
-								<div class="col-md-4 col-xl-9 collapse" id="editProfileCard">
-									<div class="card">
+								<div class="col-md-8 col-xl-9">
+									<!-- Profile Card Popup -->
+									<div class="collapse" id="editProfileCard">
+										<div class="card">
 										<div class="card-header">
 											<h5 class="card-title">Edit Profile</h5>
 										</div>
@@ -177,61 +178,60 @@
 											</form>
 										</div>
 									</div>
-								</div>
-
-								<!-- Timetable -->
-								<div class="col-md-8 col-xl-9" id="timetableCard">
-									<div class="card">
-										<div class="card-header">
-											<h5 class="card-title mb-0">Timetable</h5>
-										</div>
-										<div class="card-body">	
-										<table class="timetable">
-											<thead>
-												<tr>
-													<th class="timetable-head">&nbsp;</div>
-													<th class="timetable-head">1</th>
-													<th class="timetable-head">2</th>
-													<th class="timetable-head">3</th>
-													<th class="timetable-head">4</th>
-													<th class="timetable-head">5</th>
-													<th class="timetable-head">6</th>
-													<th class="timetable-head">7</th>
-												</tr>
-											</thead>
-									<?php    
-											for($i = 0; $i < count($timetable); $i++) {
-												$row = $timetable[$i];
-												$day = $row['day'];
-												$periods = $row['periods'];
-									?>
-												<tr class="timetable-row">
-													<td class="day"><?= substr($day, 0, 3) ?></td>
-									<?php    
-												for ($j = 0; $j < count($periods); $j++) {
-													$period = $periods[$j];
-													$category = $period['category'];
-													$subject = $period['subject'];
-													$teacher = $period['teacher'];
-													$place = $period['place'];
-									?>
-													<td class="period">
-														<div class="subject text-secondary"><?= $subject ?></div>
-														<div class="teacher text-primary"><?= $teacher ?></div>
-														<div class="place text-sm"><?= $place ?></div>
-													</td>
-									<?php
-												}
-									?>
-												</tr>
-									<?php
-											}
-									?>
-											</table>
-										</div>
 									</div>
+									
+									<!-- Timetable -->
+									<div id="timetableCard">
+										<div class="card">
+											<div class="card-header">
+												<h5 class="card-title mb-0">Timetable</h5>
+											</div>
+											<div class="card-body">	
+											<table class="timetable">
+												<thead>
+													<tr>
+														<th class="timetable-head">&nbsp;</div>
+														<th class="timetable-head">1</th>
+														<th class="timetable-head">2</th>
+														<th class="timetable-head">3</th>
+														<th class="timetable-head">4</th>
+														<th class="timetable-head">5</th>
+														<th class="timetable-head">6</th>
+														<th class="timetable-head">7</th>
+													</tr>
+												</thead>
+										<?php    
+												for($i = 0; $i < count($timetable); $i++) {
+													$row = $timetable[$i];
+													$day = $row['day'];
+													$periods = $row['periods'];
+										?>
+													<tr class="timetable-row">
+														<td class="day"><?= substr($day, 0, 3) ?></td>
+										<?php    
+													for ($j = 0; $j < count($periods); $j++) {
+														$period = $periods[$j];
+														$category = $period['category'];
+														$subject = $period['subject'];
+														$teacher = $period['teacher'];
+														$place = $period['place'];
+										?>
+														<td class="period">
+															<div class="subject text-secondary"><?= $subject ?></div>
+															<div class="teacher text-primary"><?= $teacher ?></div>
+															<div class="place text-sm"><?= $place ?></div>
+														</td>
+										<?php
+													}
+										?>
+													</tr>
+										<?php
+												}
+										?>
+												</table>
+											</div>
+										</div>
 								</div>
-
 							</div>
 						</div>
 					</div>

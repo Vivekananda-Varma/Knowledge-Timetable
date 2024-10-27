@@ -5,6 +5,7 @@
 	<?php include('templates/head.html'); ?>
 	<script>
 		var categories = <?= json_encode($categories) ?>;
+		var places = <?= json_encode($places) ?>;
 	</script>
 </head>
 
@@ -40,6 +41,7 @@
 								$category_id = $course['category_id'];
 								$subject_id = $course['subject_id'];
 								$teacher_id = $course['teacher_id'];
+								$place_id = $course['default_place_id'];
 								
 								$subject_name = $course['subject_name'];
 								$course_name = $course['course_name'];
@@ -48,7 +50,7 @@
 								$lastname = $course['lastname'];
 								$fullname = "$firstname $lastname";
 						?>
-							<tr data-bs-toggle="modal" data-bs-target="#modal-alert" onClick="ShowModal(<?= $course_id ?>, <?= $category_id ?>, <?= $subject_id ?>, <?= $teacher_id ?>, '<?= $course_name ?>')">
+							<tr data-bs-toggle="modal" data-bs-target="#modal-alert" onClick="ShowModal(<?= $course_id ?>, <?= $category_id ?>, <?= $subject_id ?>, <?= $teacher_id ?>, <?= $place_id ?>, '<?= $course_name ?>')">
 								<td><?= $course_name ?></td>
 								<td><?= $subject_name ?></td>
 								<td><?= $fullname ?></td>
@@ -91,7 +93,7 @@
 											</select>
 										</div>
 										<div class="mb-3 col-md-6">
-											<label class="form-label">Place</label>
+											<label class="form-label">Preferred Place</label>
 											<select id="inputPlace" class="form-select">
 												<option selected>Select Place...</option>
 											</select>
@@ -173,7 +175,27 @@
 
 	<?php include('templates/foot.html'); ?>	
 	<script>
-		function ShowModal(courseId, catId, subjectId, teacherId, courseName) {
+		function ShowModal(courseId, catId, subjectId, teacherId, placeId, courseName) {
+			LoadCategories(catId);
+			LoadPlaces(placeId);
+			
+			LoadSubjectsForCategory(catId, subjectId);
+			LoadTeachersForSubject(subjectId, teacherId);
+			
+			if (courseName == '') {
+				$("#modal-title").html("New Course");
+				$("#course-form").attr("action", "/admin/courses/create/");
+				
+				$('#modal-alert').modal('toggle');
+			} else {
+				$("#modal-title").html("Edit Course");
+				
+				$("#course-name").attr('value', courseName);
+				$("#course-form").attr("action", "/admin/courses/" + courseId + "/editpost/");
+			}
+		}
+		
+		function LoadCategories(catId) {
 			var select = $("#inputCategory");
 			
 			$('#inputCategory option:not(:first)').remove();
@@ -192,20 +214,26 @@
 				
 				select.append(option);
 			}
+		}
+		
+		function LoadPlaces(placeId) {
+			var select = $("#inputPlace");
 			
-			LoadSubjectsForCategory(catId, subjectId);
-			LoadTeachersForSubject(subjectId, teacherId);
+			$('#inputPlace option:not(:first)').remove();
 			
-			if (courseName == '') {
-				$("#modal-title").html("New Course");
-				$("#course-form").attr("action", "/admin/courses/create/");
+			for(var i = 0; i < places.length; i++) {
+				var id = places[i]['place_id'];
+				var name = places[i]['place_name'];
+				var option = document.createElement("option");
 				
-				$('#modal-alert').modal('toggle');
-			} else {
-				$("#modal-title").html("Edit Course");
+				option.textContent = name;
+				option.value = id;
 				
-				$("#course-name").attr('value', courseName);
-				$("#course-form").attr("action", "/admin/courses/" + courseId + "/editpost/");
+				if (id == placeId) {
+					option.selected = true;
+				}
+				
+				select.append(option);
 			}
 		}
 		
