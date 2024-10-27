@@ -81,7 +81,7 @@
 				
 				$('#modal-alert').modal('toggle');
 			} else {
-				$("#modal-title").innerHTML = "Edit Place";
+				$("#modal-title").htm("Edit Place");
 				
 				$("#place-name").attr('value', name);
 				$("#place-form").attr("action", "/admin/places/" + id + "/editpost/");

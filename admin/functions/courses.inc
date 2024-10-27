@@ -4,7 +4,7 @@
         global $mysqli;
         
         $courses = array();
-        
+         
         $query = "
             SELECT `courses`.*, `subjects`.*, `teachers`.*, `users`.*
             FROM `courses`
@@ -25,6 +25,38 @@
         }
         
         return $courses;
+    }
+    
+    function GetTeachersForSubject($subject_id) {
+        global $mysqli;
+        
+        $teachers = array();
+         
+        $query = "
+            SELECT `teachers`.*, `users`.*
+            FROM `courses`
+            LEFT JOIN `teachers`
+            ON `courses`.`teacher_id`=`teachers`.`teacher_id`
+            LEFT JOIN `users` 
+            ON `teachers`.`user_id`=`users`.`user_id`
+            WHERE `courses`.`subject_id`=$subject_id
+            ORDER BY `firstname`
+        ";
+        
+        $result = $mysqli->query($query);
+        $num_results = $result->num_rows;
+        
+        for ($i = 0; $i < $num_results; $i++) {
+            $row = $result->fetch_assoc();
+            
+            $teacher_id = $row['teacher_id'];
+            $firstname = $row['firstname'];
+            $salutation = $row['salutation'];
+            
+            $teachers[] = array('id' => $teacher_id, 'name' => "$firstname $salutation");
+        }
+        
+        return $teachers;
     }
     
     function GetCourseByID($course_id) {

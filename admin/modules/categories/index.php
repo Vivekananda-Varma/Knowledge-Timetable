@@ -95,7 +95,7 @@
 				
 				$('#modal-alert').modal('toggle');
 			} else {
-				$("#modal-title").innerHTML = "Edit Place";
+				$("#modal-title").html("Edit Place");
 				
 				$("#category-name").attr("value", name);
 				$("#category-form").attr("action", "/admin/categories/" + id + "/editpost/");

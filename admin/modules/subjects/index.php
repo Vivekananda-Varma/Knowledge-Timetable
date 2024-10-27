@@ -134,7 +134,7 @@
 				
 				$('#modal-alert').modal('toggle');
 			} else {
-				$("#modal-title").innerHTML = "Edit Subject";
+				$("#modal-title").html("Edit Subject");
 				
 				$("#subject-name").attr("value", subjectName);
 				$("#subject-form").attr("action", "/admin/subjects/" + subjectId + "/editpost/");

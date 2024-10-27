@@ -94,6 +94,26 @@
 			default:
 				// Redirect('/admin/dashboard/');    
 				
+			case 'complete':
+				$entities = $tokens[3];				// 	/admin/complete/subjects/cat/" + categoryId
+				$id =  $tokens[5];
+			
+				switch($entities) {
+					case 'subjects':
+						$subjects = GetSubjects($id);
+						print json_encode($subjects);
+						
+						break;
+						
+					case 'teachers':
+						$teachers = GetTeachersForSubject($id);
+						print json_encode($teachers);
+						
+						break;
+				}
+			
+				break;
+				
             case 'categories':
 				$action = $tokens[4] ?? '';
 				
@@ -159,6 +179,7 @@
 				$page_title = "Courses";
 				$courses_active = 'active';
 				$courses = GetCourses();
+				$categories = GetCategories();
 				
 				include('admin/modules/courses/index.php');
 				

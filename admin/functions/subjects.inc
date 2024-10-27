@@ -1,14 +1,20 @@
 <?php
 
-    function GetSubjects() {
+    function GetSubjects($category_id=NULL) {
         global $mysqli;
         
         $subjects = array();
+        $where_clause = '';
+        
+        if (isset($category_id)) {
+            $where_clause = "WHERE `subjects`.`category_id`=$category_id";
+        }
         
         $query = "
             SELECT `subjects`.*, `categories`.`category_name`
             FROM `subjects`
             LEFT JOIN `categories` ON `subjects`.`category_id`=`categories`.`category_id`
+            $where_clause
             ORDER BY `subject_name`
         ";
         
