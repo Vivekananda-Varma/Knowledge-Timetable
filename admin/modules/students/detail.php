@@ -202,7 +202,7 @@
 												$periods = $row['periods'];
 									?>
 												<tr class="timetable-row">
-													<td class="timetable-day"><?= substr($day, 0, 3) ?></td>
+													<td class="day"><?= substr($day, 0, 3) ?></td>
 									<?php    
 												for ($j = 0; $j < count($periods); $j++) {
 													$period = $periods[$j];
@@ -211,10 +211,10 @@
 													$teacher = $period['teacher'];
 													$place = $period['place'];
 									?>
-													<td class="timetable-period">
-														<span class="timetable-period-subject"><?= $subject ?></span><br>
-														<span class="timetable-period-teacher"><?= $teacher ?></span><br>
-														<span class="timetable-period-place"><?= $place ?></span>
+													<td class="period">
+														<div class="subject text-secondary"><?= $subject ?></div>
+														<div class="teacher text-primary"><?= $teacher ?></div>
+														<div class="place text-sm"><?= $place ?></div>
 													</td>
 									<?php
 												}

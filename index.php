@@ -20,8 +20,8 @@
 	include_once('admin/functions/subjects.inc');
 	include_once('admin/functions/courses.inc');
 	
-	// require_once('filepond/config.php');
-	// require_once("filepond/util/read_write_functions.php");
+	require_once('filepond/config.php');
+	require_once('filepond/util/read_write_functions.php');
 	
 	header('Cache-Control: must-revalidate');
 	
@@ -210,18 +210,66 @@
 							$students_all_active = 'active';
 							$students = GetStudents();
 							
+							include('admin/modules/students/index.php');
+							
 							break;
 							
 						case 'import':
+							$page_title = "Import Students";
+							$students_import_active = 'active';
+							
+							include('admin/modules/students/import.php');
 							
 							break;
-	
-						case 'export':
-					
+							
+						case 'importpost':
+							if (isset($_POST['filepond'])) {
+								$uniqueFileID = $_POST['filepond'][0];
+								$arrayDBStore = readJsonFile($TS_PARAMS['docroot'] . "filepond/database.json");
+								$fileInfoIndex = array_search($uniqueFileID, array_column($arrayDBStore, 'id'));
+								
+								if (isset($fileInfoIndex)) {
+									$fileInfo = $arrayDBStore[$fileInfoIndex];
+									$fileName = $fileInfo["name"];
+									$source_path = $TS_PARAMS['docroot'] . "filepond/uploads/$fileName";
+									
+									// print "id: $uniqueFileID, file: $source_path<br>logo path: $destination_path";					
+									// rename($source_path, $destination_path);
+									
+									$fileHandle = fopen($source_path, "r");
+									$firstline = true;
+									while (($row = fgetcsv($fileHandle, 0, ",", "\"")) !== FALSE) {
+										if ($firstline == true) {
+											$firstline = false;
+											
+											continue;
+										}
+										
+										$data = array();
+										
+										$firstname = $row[1];
+										
+										if (strpos(' ', $firstname) !== false) {
+											list($firstname, $lastname) = explode(' ', $row[1]);
+										} else {
+											$lastname = '';
+										}
+										 
+										$data['firstname'] = $firstname;
+										$data['lastname'] = $lastname;
+										
+										$data['email'] = $row[2];
+										$data['mobile'] = $row[3];
+										
+										// $student = CreateStudent($data);
+									}
+								}
+							}
+						
+							Redirect('/admin/students/all/');
+							
 							break;
 					}
-	
-					include('admin/modules/students/index.php');
 				}
 				
 				break;
@@ -267,9 +315,63 @@
 							$teachers_all_active = 'active';
 							$teachers = GetTeachers();
 							
+							include('admin/modules/teachers/index.php');
+							
 							break;
 							
 						case 'import':
+							$page_title = "Import Teachers";
+							$teachers_import_active = 'active';
+							
+							include('admin/modules/teachers/import.php');
+							
+							break;
+							
+						case 'importpost':
+							if (isset($_POST['filepond'])) {
+								$uniqueFileID = $_POST['filepond'][0];
+								$arrayDBStore = readJsonFile($TS_PARAMS['docroot'] . "filepond/database.json");
+								$fileInfoIndex = array_search($uniqueFileID, array_column($arrayDBStore, 'id'));
+								
+								if (isset($fileInfoIndex)) {
+									$fileInfo = $arrayDBStore[$fileInfoIndex];
+									$fileName = $fileInfo["name"];
+									$source_path = $TS_PARAMS['docroot'] . "filepond/uploads/$fileName";
+									
+									// print "id: $uniqueFileID, file: $source_path<br>logo path: $destination_path";					
+									// rename($source_path, $destination_path);
+									
+									$fileHandle = fopen($source_path, "r");
+									$firstline = true;
+									while (($row = fgetcsv($fileHandle, 0, ",", "\"")) !== FALSE) {
+										if ($firstline == true) {
+											$firstline = false;
+											
+											continue;
+										}
+										
+										$data = array();
+										
+										$firstname = $row[1];
+										
+										if (strpos(' ', $firstname) !== false) {
+											list($firstname, $lastname) = explode(' ', $row[1]);
+										} else {
+											$lastname = '';
+										}
+										 
+										$data['firstname'] = $firstname;
+										$data['lastname'] = $lastname;
+										
+										$data['email'] = $row[2];
+										$data['mobile'] = $row[3];
+										
+										$teacher = CreateTeacher($data);
+									}
+								}
+							}
+
+							Redirect('/admin/teachers/all/');
 							
 							break;
 				
@@ -277,15 +379,9 @@
 					
 							break;
 					}
-				
-					include('admin/modules/teachers/index.php');
 				}
 			
 				break;
-			
-			case 'tttest':
-				$page_title = "Timetable";
-				include('admin/modules/timetable/index.php');
         }
 		
 		break;

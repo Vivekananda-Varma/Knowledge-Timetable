@@ -205,12 +205,14 @@
         
         $firstname = $data['firstname'];
         $lastname = $data['lastname'];
+        $salutation = '';
+                
         $mobile = $data['mobile'];
         $email = $data['email'];
-        $dob = $data['dob'];
-        $address_line_1 = $data['address_line_1'];
-        $address_line_2 = $data['address_line_2'];
-        $postal_code  = $data['postal_code'];
+        $dob = $data['dob'] ?? '';
+        $address_line_1 = $data['address_line_1'] ?? '';
+        $address_line_2 = $data['address_line_2'] ?? '';
+        $postal_code  = $data['postal_code'] ?? '';
         
         $query = "
             INSERT INTO `users`
@@ -222,6 +224,15 @@
                 `address_line_1`='$address_line_1',
                 `address_line_2`='$address_line_2',
                 `postal_code`='$postal_code'
+        ";
+        
+        $result = $mysqli->query($query);
+        $user_id = $mysqli->insert_id;
+        
+        $query = "
+            INSERT INTO `teachers`
+            SET `user_id`='$user_id',
+                `salutation`='$salutation'
         ";
         
         $result = $mysqli->query($query);

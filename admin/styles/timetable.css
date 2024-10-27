@@ -43,16 +43,18 @@ tr:hover .table-action a {
     width: 100%;
 }
 
-.timetable-head, .timetable-day, .timetable-period {
-    border: 1px #000000 solid !important;
+.timetable-head, .timetable .day, .timetable .period {
+    border: 1px #ccc solid !important;
 }
 
-.timetable-period {
+.timetable .period {
+    position: relative;
     width: 13.5%;
-    height: 50px;
+    min-height: 50px;
+    text-align: center;
 }
 
-.timetable-day {
+.timetable .day {
     width: 5.5%;
     font-size: 9pt;
     font-weight: bold;    
@@ -66,4 +68,24 @@ tr:hover .table-action a {
 .timetable-period-place {
     text-transform: uppercase;
     font-size: 7pt;
+}
+
+.period .subject {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    text-align: center;
+    padding: 0 5px;
+}
+
+.period .teacher {
+    margin: 40px 0 30px;
+}
+
+.period .place {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    padding: 0 5px;
 }
