@@ -63,27 +63,27 @@
 											<table class="table table-sm my-2">
 												<tbody>
 													<tr>
-														<th>DOB</th>
+														<td class="text-muted text-end">DOB</td>
 														<td><?= $dob ?></td>
 													</tr>
 													<tr>
-														<th>Year</th>
+														<td class="text-muted text-end">Year</td>
 														<td>K<?= $year ?></td>
 													</tr>
 													<tr>
-														<th>Class of</th>
+														<td class="text-muted text-end">Class of</td>
 														<td><?= $class_of ?></td>
 													</tr>
 													<tr>
-														<th>Email</th>
+														<td class="text-muted text-end">Email</td>
 														<td><?= $email ?></td>
 													</tr>
 													<tr>
-														<th>Phone</th>
+														<td class="text-muted text-end">Phone</td>
 														<td><?= $mobile ?></td>
 													</tr>
 													<tr>
-														<th>Address</th> 
+														<td class="text-muted text-end">Address</td> 
 														<td><?= $address ?></td> 
 													</tr>
 												</tbody>
