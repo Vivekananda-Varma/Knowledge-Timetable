@@ -52,7 +52,7 @@
 				?>
 							 <tr data-href="/admin/students/<?= $student_id ?>/edit/">
 								<td>
-									<img src="/admin/dist/img/avatars/avatar-5.jpg" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
+									<img src="/admin/images/user-default-profile-pic.jpg" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
 									<div style="display: inline-block">
 										<?= $fullname ?><br>
 										<small class="text-muted">Class of <?= $class_of ?></small>
