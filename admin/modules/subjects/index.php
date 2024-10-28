@@ -78,7 +78,7 @@
 								</div>
 								<div class="modal-body">
 									<input id="subject-name" type="text" class="form-control" name="subject_name" value="" placeholder="Name"><br>
-									<select id="inputCategory" class="form-control" name="category_id">
+									<select id="inputCategory" class="form-select" name="category_id">
 										<option>Select Category...</option>
 									</select>
 									<!-- <div class="form-check">
