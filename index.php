@@ -49,13 +49,13 @@
         	$_SESSION['login_user']['is_admin'] = true;
 			
 			// print "Logged in as admin"; exit;
-        	Redirect('/admin/users/');
+        	Redirect('/admin/courses/');
     	} else if ($user_id = ValidateLogin($username, $password)) {
 			$_SESSION['login_user'] = GetUserById($user_id);
 			
 			Redirect('/');
 		} else {
-			Redirect('/login/');	
+			Redirect('/login/');
 		} 
 		
 		break;

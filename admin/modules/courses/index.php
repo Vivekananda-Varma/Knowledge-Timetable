@@ -74,13 +74,13 @@
 									<div class="row">
 										<div class="mb-3 col-md-6">
 											<label class="form-label">Category</label>
-											<select id="inputCategory" class="form-select">
+											<select id="inputCategory" class="form-select"  onchange="HandleCategoryChanged()">
 												<option selected>Select Category...</option>
 											</select>
 										</div>
 										<div class="mb-3 col-md-6">
 											<label class="form-label">Subject</label>
-											<select id="inputSubject" class="form-select">
+											<select id="inputSubject" class="form-select" onchange="HandleSubjectChanged()">
 												<option selected>Select Subject...</option>
 											</select>
 										</div>
@@ -201,14 +201,14 @@
 			$('#inputCategory option:not(:first)').remove();
 			
 			for(var i = 0; i < categories.length; i++) {
-				var category_id = categories[i]['category_id'];
+				var id = categories[i]['category_id'];
 				var name = categories[i]['category_name'];
 				var option = document.createElement("option");
 				
 				option.textContent = name;
-				option.value = category_id;
+				option.value = id;
 				
-				if (catId == category_id) {
+				if (catId == id) {
 					option.selected = true;
 				}
 				
@@ -293,6 +293,22 @@
 					}
 				}
 			});
+		}
+		
+		function HandleCategoryChanged() {
+			var categoryId = $("#inputCategory").val();
+			
+			LoadSubjectsForCategory(categoryId, '');
+			
+			$('#inputTeacher option:not(:first)').remove();
+			$('#inputPlace').val('');
+		}
+		
+		function HandleSubjectChanged() {
+			var subjectId = $("#inputSubject").val();
+			
+			LoadTeachersForSubject(subjectId, '');
+			$('#inputPlace').val('');
 		}
 	</script>
 </body>
