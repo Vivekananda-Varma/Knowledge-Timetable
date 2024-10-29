@@ -104,49 +104,42 @@
 											<fieldset class="mb-3">
 												<div class="row">
 													<label class="col-form-label col-sm-12 text-sm-right pt-sm-0">Duration of Course</label>
-													<div class="col-sm-10">
-														<label class="form-check">
-															<input name="radio-3" type="radio" class="form-check-input" checked />
-															<span class="form-check-label">1 Year</span>
-														</label>
-														<label class="form-check">
-															<input name="radio-3" type="radio" class="form-check-input" />
-															<span class="form-check-label">2 Years</span>
-														</label>
-														<label class="form-check">
-															<input name="radio-3" type="radio" class="form-check-input" />
-															<span class="form-check-label">3 Years</span>
-														</label>
+													<div class="col-md-10">
+														<select id="inputYear" class="form-select">
+															<option selected>Select...</option>
+															<option value="1">1 year</option>
+															<option value="2">2 years</option>
+															<option value="3">3 years</option>
+														</select>
 													</div>
 												</div>
 											</fieldset>
 										</div>
 										<div class="mb-3 col-md-4">
-											<label class="col-form-label col-sm-12 text-sm-right pt-sm-0">Nature of Course</label>
-											<div class="col-sm-10">
-												<label class="form-check m-0">
-													<input type="checkbox" class="form-check-input">
-													<span class="form-check-label">Academic</span>
-												</label>
-											</div>
+											<fieldset class="mb-3">
+												<div class="row">
+													<label class="col-form-label col-sm-12 text-sm-right pt-sm-0">Nature of Course</label>
+													<div class="col-md-10">
+														<select id="inputCourseNature" class="form-select">
+															<option selected>Select...</option>
+															<option>Academic</option>
+															<option>Non Academic</option>
+														</select>
+													</div>
+												</div>
+											</fieldset>
 										</div>
 										<div class="mb-3 col-md-4">
 											<fieldset class="mb-3">
 												<div class="row">
-													<label class="col-form-label col-sm-12 text-sm-right pt-sm-0">The course is offered as</label>
-													<div class="col-sm-10">
-														<label class="form-check">
-															<input name="radio-3" type="radio" class="form-check-input" />
-															<span class="form-check-label">A Major</span>
-														</label>
-														<label class="form-check">
-															<input name="radio-3" type="radio" class="form-check-input" />
-															<span class="form-check-label">A Minor</span>
-														</label>
-														<label class="form-check">
-															<input name="radio-3" type="radio" class="form-check-input" />
-															<span class="form-check-label">A Project</span>
-														</label>
+													<label class="col-form-label col-sm-12 text-sm-right pt-sm-0">The Course is Offered as</label>
+													<div class="col-md-10">
+														<select id="inputCourseTrack" class="form-select">
+															<option selected>Select...</option>
+															<option>A Major</option>
+															<option>A Minor</option>
+															<option>A Project</option>
+														</select>
 													</div>
 												</div>
 											</fieldset>
