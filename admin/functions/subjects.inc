@@ -1,20 +1,41 @@
 <?php
 
-    function GetSubjects($category_id=NULL) {
+    function GetSubjects() {
         global $mysqli;
         
         $subjects = array();
-        $where_clause = '';
         
-        if (isset($category_id)) {
-            $where_clause = "WHERE `subjects`.`category_id`=$category_id";
+        $query = "
+            SELECT `subjects`.*, `categories`.`category_name`, 
+            COUNT(courses.course_id) AS num_courses, 
+            COUNT(courses.teacher_id) AS num_teachers
+            FROM `subjects`
+            LEFT JOIN `categories` ON `subjects`.`category_id`=`categories`.`category_id`
+            LEFT JOIN courses ON courses.subject_id=subjects.subject_id
+            GROUP BY subjects.subject_id
+            ORDER BY `subject_name`
+        ";
+        
+        $result = $mysqli->query($query);
+        $num_results = $result->num_rows;
+        
+        for ($i = 0; $i < $num_results; $i++) {
+            $subjects[] = $result->fetch_assoc();
         }
+        
+        return $subjects;
+    }
+    
+    function GetSubjectsForCategory($category_id) {
+        global $mysqli;
+        
+        $subjects = array();
         
         $query = "
             SELECT `subjects`.*, `categories`.`category_name`
             FROM `subjects`
             LEFT JOIN `categories` ON `subjects`.`category_id`=`categories`.`category_id`
-            $where_clause
+            WHERE `subjects`.`category_id`=$category_id
             ORDER BY `subject_name`
         ";
         

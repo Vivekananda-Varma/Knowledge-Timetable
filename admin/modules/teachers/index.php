@@ -44,6 +44,10 @@
 						$email = $teacher['email'];
 						$otp = $teacher['otp'];
 						$last_login = $teacher['last_login'] ?? 'Today 7:51 pm';
+						
+						if ($email != '') {
+							$email = "<a href=\"mailto:$email\">$email</a>";
+						}
 				?>
 				
 							 <tr data-href="/admin/teachers/<?= $teacher_id ?>/edit/">

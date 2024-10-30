@@ -100,7 +100,7 @@
 			
 				switch($entities) {
 					case 'subjects':
-						$subjects = GetSubjects($id);
+						$subjects = GetSubjectsForCategory($id);
 						print json_encode($subjects);
 						
 						break;

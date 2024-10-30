@@ -6,9 +6,13 @@
         $categories = array();
         
         $query = "
-            SELECT categories.*
+            SELECT categories.*, 
+            COUNT(subjects.subject_id) as num_subjects, 
+            COUNT(courses.teacher_id) as num_teachers
             FROM `categories`
-            LEFT JOIN `subjects` ON categories.category_id=subjects.category_id
+            LEFT JOIN `subjects` ON subjects.category_id=categories.category_id
+            LEFT JOIN `courses` ON courses.subject_id=subjects.subject_id
+            GROUP BY category_id
             ORDER BY `category_name`
         ";
         

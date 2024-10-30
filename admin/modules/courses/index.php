@@ -231,6 +231,8 @@
 		}
 		
 		function LoadSubjectsForCategory(categoryId, subjectId) {
+			$('#inputSubject option:not(:first)').remove();
+								
 			$.ajax({
 				type: "POST",
 				url: "/admin/complete/subjects/cat/" + categoryId,
@@ -238,8 +240,6 @@
 				dataType: "json",
 				success: function(subjects) {
 					var select = $("#inputSubject");
-					
-					$('#inputSubject option:not(:first)').remove();
 					
 					for(var i = 0; i < subjects.length; i++) {
 						var id = subjects[i]['subject_id'];
@@ -260,6 +260,8 @@
 		}
 		
 		function LoadTeachersForSubject(subjectId, teacherId) {
+			$('#inputTeacher option:not(:first)').remove();
+								
 			$.ajax({
 				type: "POST",
 				url: "/admin/complete/teachers/subject/" + subjectId,
@@ -267,8 +269,6 @@
 				dataType: "json",
 				success: function(teachers) {
 					var select = $("#inputTeacher");
-					
-					$('#inputTeacher option:not(:first)').remove();
 					
 					for(var i = 0; i < teachers.length; i++) {
 						var id = teachers[i]['id'];

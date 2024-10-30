@@ -35,16 +35,16 @@
 							foreach($categories as $category) {
 								$category_id = $category['category_id'];
 								$category_name = $category['category_name'];
-								$num_subjects = ''; // $category['num_subjects']; 
-								$num_teachers = ''; // $category['num_teachers'];
+								$num_subjects = $category['num_subjects']; 
+								$num_teachers = $category['num_teachers'];
 								
 								if ($num_subjects == 0) {
-									$num_subjects = '';
+									$num_subjects = '-';
 								}
 								
-								// if ($num_teachers == 0) {
-								// 	$num_teachers = '';
-								// }
+								if ($num_teachers == 0) {
+									$num_teachers = '-';
+								}
 						?>
 						
 							<tr data-bs-toggle="modal" data-bs-target="#modal-alert" onClick="ShowModal(<?= $category_id ?>, '<?= $category_name ?>')">

@@ -45,15 +45,15 @@
 								$subject_id = $subject['subject_id'];
 								$subject_name = $subject['subject_name'];
 								
-								$num_courses = ''; // $subject['num_courses']; 
-								$num_teachers = ''; // $subject['num_teachers'];
+								$num_courses = $subject['num_courses']; 
+								$num_teachers = $subject['num_teachers'];
 								
 								if ($num_courses == 0) {
-									$num_courses = '';
+									$num_courses = '-';
 								}
 								
 								if ($num_teachers == 0) {
-									$num_teachers = '';
+									$num_teachers = '-';
 								}
 						?>
 						
