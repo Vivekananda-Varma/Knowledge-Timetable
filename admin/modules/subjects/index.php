@@ -78,15 +78,35 @@
 								</div>
 								<div class="modal-body">
 									<input id="subject-name" type="text" class="form-control" name="subject_name" value="" placeholder="Name"><br>
-									<select id="inputCategory" class="form-select" name="category_id">
+									<select id="inputCategory" class="form-select mb-3" name="category_id">
 										<option>Select Category...</option>
-									</select>
-									<!-- <div class="form-check">
-										<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-										<label class="form-check-label" for="flexCheckDefault">
-											Academic
-										</label>
-									</div> -->
+									</select>	
+									<div class="row">
+										<div class="mb-3 col-md-3">
+											<label class="form-check">
+												<input type="checkbox" class="form-check-input">
+												<span class="form-check-label">Teacher 1</span>
+											</label>
+										</div>
+										<div class="mb-3 col-md-3">
+											<label class="form-check">
+												<input type="checkbox" class="form-check-input">
+												<span class="form-check-label">Teacher 2</span>
+											</label>
+										</div>
+										<div class="mb-3 col-md-3">
+											<label class="form-check">
+												<input type="checkbox" class="form-check-input">
+												<span class="form-check-label">Teacher 3</span>
+											</label>
+										</div>
+										<div class="mb-3 col-md-3">
+											<label class="form-check">
+												<input type="checkbox" class="form-check-input">
+												<span class="form-check-label">Teacher 4</span>
+											</label>
+										</div>
+									</div>
 								</div>
 								<div class="modal-footer justify-content-between">
 									<button type="button" class="btn btn-danger mr-auto">Delete</button>
