@@ -21,7 +21,7 @@
 						<h1 class="h1">Courses</h1>
 						<div>
 							<a class="btn btn-outline-primary" href="">Export</a>
-							<a class="btn btn-outline-primary" href="">Import</a>
+							<a class="btn btn-outline-primary" href="/admin/categories/import/">Import</a>
 							<button class="btn btn-primary" onClick="ShowModal('', '', '')">New +</button>
 						</div>
 					</div>
@@ -51,7 +51,7 @@
 								$fullname = "$firstname $lastname";
 						?>
 							<tr data-bs-toggle="modal" data-bs-target="#modal-alert" onClick="ShowModal(<?= $course_id ?>, <?= $category_id ?>, <?= $subject_id ?>, <?= $teacher_id ?>, <?= $place_id ?>, '<?= $course_name ?>')">
-								<td><?= $course_name ?></td>
+								<td><?= $course_name ?> (<?= $course_id ?>)</td>
 								<td><?= $subject_name ?></td>
 								<td><?= $fullname ?></td>
 							</tr>

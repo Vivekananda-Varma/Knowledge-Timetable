@@ -1,11 +1,12 @@
 <?php
 
-	$name = $_GET['name'] ?? 'aadya';
-	$json_filename = "admin/modules/students/json/$name.json";
-
-	$json = file_get_contents($json_filename);
-	$timetable = json_decode($json, true);
-
+	// $name = $_GET['name'] ?? 'aadya';
+	// $json_filename = "admin/modules/students/json/$name.json";
+	// 
+	// $json = file_get_contents($json_filename);
+	// $timetable = json_decode($json, true);
+	
+	$timetable = GetTimetableForStudentId($student_id);
 
 	$firstname = $student['firstname'];
 	$lastname = $student['lastname'];
@@ -201,20 +202,22 @@
 													</tr>
 												</thead>
 										<?php    
-												for($i = 0; $i < count($timetable); $i++) {
-													$row = $timetable[$i];
-													$day = $row['day'];
-													$periods = $row['periods'];
+											$day_of_week = array('SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT');
+											
+												for($i = 1; $i < 7; $i++) {
+													$day = $day_of_week[$i];
 										?>
 													<tr class="timetable-row">
-														<td class="day"><?= substr($day, 0, 3) ?></td>
+														<td class="day"><?= $day ?></td>
 										<?php    
-													for ($j = 0; $j < count($periods); $j++) {
-														$period = $periods[$j];
-														$category = $period['category'];
-														$subject = $period['subject'];
-														$teacher = $period['teacher'];
-														$place = $period['place'];
+													for ($j = 1; $j < 8; $j++) {
+														$period = $timetable[$i][$j] ?? array();
+														
+														$place = $period['place_name'] ?? '';
+														// $category = $period['category'];
+														$subject = $period['course_name'] ?? '';
+														$teacher = $period['firstname'] ?? '';
+														$place = $period['place_name'] ?? '';
 										?>
 														<td class="period">
 															<div class="subject text-secondary"><?= $subject ?></div>

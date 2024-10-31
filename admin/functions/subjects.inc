@@ -66,6 +66,23 @@
         return false;
     }
     
+    function GetSubjectByName($subject_name) {
+        global $mysqli;
+        
+        $query = "
+            SELECT * 
+            FROM `subjects` 
+            WHERE `subject_name`='$subject_name'
+        ";
+        
+        $result = $mysqli->query($query);
+        if ($result->num_rows) {
+            return $result->fetch_assoc();
+        }
+        
+        return false;
+    }
+    
     function CreateSubject($data) {
         global $mysqli;
         
@@ -79,7 +96,7 @@
                 `subject_name`='$subject_name'
         ";
         
-        print $query; exit;
+        // print $query; exit;
         
         $result = $mysqli->query($query);
         $subject_id = $mysqli->insert_id;

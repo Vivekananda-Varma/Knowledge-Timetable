@@ -17,7 +17,7 @@
 						<h1 class="h1">Categories</h1>
 						<div>
 							<a class="btn btn-outline-primary" href="">Export</a>
-							<a class="btn btn-outline-primary" href="">Import</a>
+							<a class="btn btn-outline-primary" href="/admin/categories/import/">Import</a>
 							<button class="btn btn-primary" onClick="ShowModal('', '')">New +</button>
 						</div>
 					</div>

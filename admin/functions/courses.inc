@@ -78,26 +78,26 @@
         return false;
     }
     
-    // function CreateCourse($data) {
-    //     global $mysqli;
-    //     
-    //     $subject_name = $data['subject_name'];
-    //     $category_id = $data['category_id'];
-    //     $is_academic = $data['is_academic'];
-    //     
-    //     $query = "
-    //         INSERT INTO `subjects`
-    //         SET `category_id`='$category_id',
-    //             `subject_name`='$subject_name',
-    //             `is_academic`=$is_academic
-    //     ";
-    //     
-    //     $result = $mysqli->query($query);
-    //     $subject_id = $mysqli->insert_id;
-    //     $subject = GetSubjectByID($subject_id);
-    //     
-    //     return $subject;
-    // }
+    function CreateCourse($data) {
+        global $mysqli;
+        
+        $course_name = $data['course_name'];
+        $subject_id = $data['subject_id'];
+        $teacher_id = $data['teacher_id'];
+        
+        $query = "
+            INSERT INTO `courses`
+            SET `subject_id`=$subject_id,
+                `teacher_id`=$teacher_id,
+                `course_name`='$course_name'
+        ";
+        
+        $result = $mysqli->query($query);
+        $course_id = $mysqli->insert_id;
+        $course = GetCourseByID($course_id);
+        
+        return $course;
+    }
 
 
 ?>

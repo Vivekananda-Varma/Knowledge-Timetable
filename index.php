@@ -16,9 +16,11 @@
 	
 	include_once('admin/functions/categories.inc');
 	include_once('admin/functions/users.inc');
+	include_once('admin/functions/teachers.inc');
 	include_once('admin/functions/places.inc');
 	include_once('admin/functions/subjects.inc');
 	include_once('admin/functions/courses.inc');
+	include_once('admin/functions/timetable.inc');
 	
 	require_once('filepond/config.php');
 	require_once('filepond/util/read_write_functions.php');
@@ -133,11 +135,102 @@
 							break;
 					}
 				} else {
+					$action = $tokens[3];
+					
 					$page_title = "Categories";
 					$categories_active = 'active';
-					$categories = GetCategories();
 					
-                	include('admin/modules/categories/index.php');
+					switch($action) {
+						case 'import':
+							$page_title = "Import Categories &amp; Subjects";
+							
+							include('admin/modules/categories/import.php');
+							
+							break;
+						 	
+						case 'importpost':
+							if (isset($_POST['filepond'])) {
+								$uniqueFileID = $_POST['filepond'][0];
+								$arrayDBStore = readJsonFile($TS_PARAMS['docroot'] . "filepond/database.json");
+								$fileInfoIndex = array_search($uniqueFileID, array_column($arrayDBStore, 'id'));
+								
+								if (isset($fileInfoIndex)) {
+									$fileInfo = $arrayDBStore[$fileInfoIndex];
+									$fileName = $fileInfo["name"];
+									$source_path = $TS_PARAMS['docroot'] . "filepond/uploads/$fileName";
+									
+									// print "id: $uniqueFileID, file: $source_path<br>logo path: $destination_path";					
+									// rename($source_path, $destination_path);
+									
+									$previous_category = '';
+									$previous_subject = '';
+									
+									$fileHandle = fopen($source_path, "r");
+									$firstline = true;
+									while (($row = fgetcsv($fileHandle, 0, ",", "\"")) !== FALSE) {
+										if ($firstline == true) {
+											$firstline = false;
+											
+											continue;
+										}
+										
+										$data = array();
+										
+										$category_name = SanitiseUserInput($row[0]);
+										$subject_name = SanitiseUserInput($row[1]);
+										$teacher_name = SanitiseUserInput($row[2]);
+										
+										if ($category_name == '') {
+											$category_name = $previous_category;
+										} else {
+											$previous_category = $category_name;
+										}
+										
+										if ($subject_name == '') {
+											$subject_name = $previous_subject;
+										} else {
+											$previous_subject = $subject_name;
+										}
+										
+										list($firstname, $salutation) = explode(' ', $teacher_name);
+										
+										print "$category_name, $subject_name, $firstname, $salutation<br>";
+										
+										$category = GetCategoryByName($category_name);
+										$subject = GetSubjectByName($subject_name);
+										$teacher = GetTeacherByFirstname($firstname);
+										
+										if ($category === false) {
+											$category = CreateCategory(array('category_name' => $category_name));
+										}
+										
+										if ($subject === false) {
+											$subject = CreateSubject(array('subject_name' => $subject_name, 'category_id' => $category['category_id']));
+										}
+										
+										if ($teacher !== false) {
+											$data = array();
+											
+											$data['category_id'] = $category['category_id'];
+											$data['subject_id'] = $subject['subject_id'];
+											$data['teacher_id'] = $teacher['teacher_id'];
+											$data['course_name'] = $subject_name;
+											
+											CreateCourse($data);
+										}
+									}
+								}
+							}
+						
+							// Redirect('/admin/categories/');
+							
+							break;
+							
+						default:						
+							$categories = GetCategories();
+							
+                			include('admin/modules/categories/index.php');
+					}
 				}
 				
                 break;

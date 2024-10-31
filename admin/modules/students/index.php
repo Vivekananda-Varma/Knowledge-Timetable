@@ -46,22 +46,28 @@
 						$email = $student['email'];
 						$last_login = $student['last_login'];
 						
+						$num_periods = $student['num_periods'];
+						
 						if ($class_of == '') {
 							$class_of = date('Y') - $year + 3;
+						}
+						
+						if ($num_periods == 0) {
+							$num_periods = '';
 						}
 				?>
 							 <tr data-href="/admin/students/<?= $student_id ?>/edit/">
 								<td>
 									<img src="/admin/images/user-default-profile-pic.jpg" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
 									<div style="display: inline-block">
-										<?= $fullname ?><br>
+										<?= $fullname ?> (<?= $student_id ?>)<br>
 										<small class="text-muted">Class of <?= $class_of ?></small>
 									</div>
 								</td>
 								<td width="50" class="text-center">K<?= $year ?></td>
 								<td><?= $mobile ?></td>
 								<td><?= $email ?></td>
-								<td width="50" class="text-center"></td>
+								<td width="50" class="text-center"><?= $num_periods ?></td>
 							 </tr>
 				<?php
 					}

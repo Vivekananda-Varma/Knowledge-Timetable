@@ -28,6 +28,7 @@
 								<th>Name</th>
 								<th>Mobile</th>
 								<th>Email</th>
+								<th>Subjects</th>
 								<th>Students</th>
 								<th>Periods</th>
 							</tr>
@@ -45,8 +46,14 @@
 						$otp = $teacher['otp'];
 						$last_login = $teacher['last_login'] ?? 'Today 7:51 pm';
 						
+						$num_subjects = $teacher['num_subjects'];
+						
 						if ($email != '') {
 							$email = "<a href=\"mailto:$email\">$email</a>";
+						}
+						
+						if ($num_subjects == 0) {
+							$num_subjects = '';
 						}
 				?>
 				
@@ -60,6 +67,7 @@
 								</td>
 								<td><?= $mobile ?></td>
 								<td><?= $email ?></td>
+								<td width="50" class="text-center"><?= $num_subjects ?></td>
 								<td width="50" class="text-center"></td>
 								<td width="50" class="text-center"></td>
 							 </tr>

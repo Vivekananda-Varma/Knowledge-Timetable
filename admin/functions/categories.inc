@@ -43,6 +43,23 @@
         return false;
     }
     
+    function GetCategoryByName($category_name) {
+        global $mysqli;
+        
+        $query = "
+            SELECT * 
+            FROM `categories` 
+            WHERE `category_name`='$category_name'
+        ";
+        
+        $result = $mysqli->query($query);
+        if ($result->num_rows) {
+            return $result->fetch_assoc();
+        }
+        
+        return false;
+    }
+    
     function CreateCategory($data) {
         global $mysqli;
         
