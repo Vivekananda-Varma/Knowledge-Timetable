@@ -26,9 +26,10 @@
 						<thead>
 							<tr>
 								<th>Name</th>
+								<th>AKA</th>
 								<th>Mobile</th>
 								<th>Email</th>
-								<th>Subjects</th>
+								<th>Courses</th>
 								<th>Students</th>
 								<th>Periods</th>
 							</tr>
@@ -40,36 +41,45 @@
 						$firstname = $teacher['firstname'];
 						$lastname = $teacher['lastname'];
 						$fullname = "<b>$firstname</b> $lastname";
+						$display_name = $teacher['display_name'];
 						
 						$mobile = $teacher['mobile'];
 						$email = $teacher['email'];
 						$otp = $teacher['otp'];
 						$last_login = $teacher['last_login'] ?? 'Today 7:51 pm';
 						
-						$num_subjects = $teacher['num_subjects'];
+						$num_courses = $teacher['num_courses'];
+						$num_students = $teacher['num_students'];
+						$num_periods = $teacher['num_periods'];
 						
 						if ($email != '') {
 							$email = "<a href=\"mailto:$email\">$email</a>";
 						}
 						
-						if ($num_subjects == 0) {
-							$num_subjects = '';
+						if ($num_courses == 0) {
+							$num_courses = '';
+						}
+						
+						if ($num_students == 0) {
+							$num_students = '';
+						}
+						
+						if ($num_periods == 0) {
+							$num_periods = '';
 						}
 				?>
 				
 							 <tr data-href="/admin/teachers/<?= $teacher_id ?>/edit/">
 								<td>
 									<img src="/admin/images/user-default-profile-pic.jpg" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
-									<div style="display: inline-block">
-										<?= $fullname ?><br>
-										<small class="text-muted"><?= $last_login ?></small>
-									</div>
+									<?= $fullname ?>
 								</td>
+								<td><?= $display_name ?></td>
 								<td><?= $mobile ?></td>
 								<td><?= $email ?></td>
-								<td width="50" class="text-center"><?= $num_subjects ?></td>
-								<td width="50" class="text-center"></td>
-								<td width="50" class="text-center"></td>
+								<td width="50" class="text-center"><?= $num_courses ?></td>
+								<td width="50" class="text-center"><?= $num_students ?></td>
+								<td width="50" class="text-center"><?= $num_periods ?></td>
 							 </tr>
 				<?php
 					}

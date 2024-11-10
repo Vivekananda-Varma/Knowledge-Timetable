@@ -1,11 +1,19 @@
 <?php
+	$timetable = GetTimetableForTeacherId($teacher_id);
+	
 	$firstname = $teacher['firstname'];
 	$lastname = $teacher['lastname'];
 	$fullname = "$firstname $lastname";
 	
+	$display_name = $teacher['display_name'];
+	
+	if ($display_name == '' ) {
+		$display_name = $fullname;
+	}
+	
 	$mobile = $teacher['mobile'];
 	$email = $teacher['email'];
-	$dob = $teacher['dob'] ?? '01/01/2000';
+	$dob = MySQLDateToDate($teacher['dob']);
 	$last_login = $teacher['last_login'];
 	
 	$address_1 = $teacher['address_line_1'] ?? 'No. 15, Rue Suffren Street';
@@ -70,8 +78,9 @@
                                         </div>
                                     </div>
 
-								    <!-- Profile Card Popup -->
-								    <div class="col-md-4 col-xl-9 collapse" id="editProfileCard">
+								    <div class="col-md-8 col-xl-9">
+									<!-- Profile Card Popup -->
+									<div class="collapse" id="editProfileCard">
 									    <div class="card">
 										    <div class="card-header">
 											    <h5 class="card-title">Edit Profile</h5>
@@ -130,6 +139,61 @@
 										    </div>
 									    </div>
 								    </div>
+									
+									<!-- Timetable -->
+									<div id="timetableCard">
+										<div class="card">
+											<div class="card-header">
+												<h5 class="card-title mb-0"><?= $display_name ?>'s Timetable</h5>
+											</div>
+											<div class="card-body">	
+											<table class="timetable">
+												<thead>
+													<tr>
+														<th class="timetable-head">&nbsp;</div>
+														<th class="timetable-head">1</th>
+														<th class="timetable-head">2</th>
+														<th class="timetable-head">3</th>
+														<th class="timetable-head">4</th>
+														<th class="timetable-head">5</th>
+														<th class="timetable-head">6</th>
+														<th class="timetable-head">7</th>
+													</tr>
+												</thead>
+												<tbody>
+										<?php    
+											$day_of_week = array('SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT');
+											
+												for($i = 1; $i < 7; $i++) {
+													$day = $day_of_week[$i];
+										?>
+													<tr class="timetable-row">
+														<td class="day"><?= $day ?></td>
+										<?php    
+													for ($j = 1; $j < 8; $j++) {
+														$period = $timetable[$i][$j] ?? array();
+														
+														$place = $period['place_name'] ?? '';
+														// $category = $period['category'];
+														$subject = $period['course_name'] ?? '';
+														$place = $period['place_name'] ?? '';
+										?>
+														<td class="period">
+															<div class="subject text-secondary"><?= $subject ?></div>
+															<div class="teacher text-primary">&nbsp;</div>
+															<div class="place text-sm"><?= $place ?></div>
+														</td>
+										<?php
+													}
+										?>
+													</tr>
+										<?php
+												}
+										?>
+												</tbody>
+											</table>
+										</div>
+									</div>
                                 </div>
                             </div>
                         </div>

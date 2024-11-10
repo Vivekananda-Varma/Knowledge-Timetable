@@ -45,13 +45,18 @@
 								
 								$subject_name = $course['subject_name'];
 								$course_name = $course['course_name'];
+								$display_name = $course['display_name'];
 								
 								$firstname = $course['firstname'];
 								$lastname = $course['lastname'];
 								$fullname = "$firstname $lastname";
+								
+								if ($display_name != '') {
+									$course_name = $display_name;
+								}
 						?>
 							<tr data-bs-toggle="modal" data-bs-target="#modal-alert" onClick="ShowModal(<?= $course_id ?>, <?= $category_id ?>, <?= $subject_id ?>, <?= $teacher_id ?>, <?= $place_id ?>, '<?= $course_name ?>')">
-								<td><?= $course_name ?> (<?= $course_id ?>)</td>
+								<td><?= $course_name ?></td>
 								<td><?= $subject_name ?></td>
 								<td><?= $fullname ?></td>
 							</tr>

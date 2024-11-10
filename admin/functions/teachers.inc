@@ -1,27 +1,72 @@
 <?php
 
+    function GetNumPeriodsForTeacherId($teacher_id) {
+        global $mysqli;
+        
+        $query = "
+            SELECT COUNT(periods.course_id) AS num_periods
+            FROM `courses`
+            LEFT JOIN `periods` ON `periods`.`course_id`=`courses`.`course_id`
+            WHERE `courses`.`teacher_id`=$teacher_id
+        ";
+        
+        $result = $mysqli->query($query);
+        if ($result->num_rows) {
+            $row = $result->fetch_assoc();
+            
+            return $row['num_periods'];
+        }
+        
+        return 0;
+    }
+    
+    function GetNumStudentsForTeacherId($teacher_id) {
+        global $mysqli;
+        
+        $query = "
+            SELECT COUNT(DISTINCT attendees.student_id) AS num_students
+            FROM `periods`
+            LEFT JOIN courses ON courses.course_id=periods.course_id
+            LEFT JOIN `attendees` ON `attendees`.`period_id`=`periods`.`period_id`
+            WHERE courses.teacher_id=$teacher_id
+        ";
+        
+        $result = $mysqli->query($query);
+        if ($result->num_rows) {
+            $row = $result->fetch_assoc();
+            
+            return $row['num_students'];
+        }
+        
+        return 0;
+    }
+
     function GetTeachers() {
         global $mysqli;
         
-        $sudents = array();
+        $teachers = array();
         
         $query = "
-            SELECT `users`.*, `teachers`.*, 
-            COUNT(courses.course_id) AS num_subjects
+            SELECT `teachers`.*, `users`.*,
+            COUNT(courses.teacher_id) AS num_courses
             FROM `teachers` 
-            LEFT JOIN `users` 
-            ON `teachers`.`user_id`=`users`.`user_id`
-            LEFT JOIN courses
-            ON courses.teacher_id=teachers.teacher_id
-            GROUP BY teachers.teacher_id
-            ORDER BY `firstname`
+            LEFT JOIN `users` ON `users`.`user_id`=`teachers`.`user_id`
+            LEFT JOIN `courses` ON `courses`.`teacher_id`=`teachers`.`teacher_id`
+            GROUP BY `teachers`.`teacher_id`
+            ORDER BY firstname
         ";
         
         $result = $mysqli->query($query);
         $num_results = $result->num_rows;
         
         for ($i = 0; $i < $num_results; $i++) {
-            $teachers[] = $result->fetch_assoc();
+            $row = $result->fetch_assoc();
+            $teacher_id = $row['teacher_id'];
+            
+            $row['num_periods'] = GetNumPeriodsForTeacherId($teacher_id);
+            $row['num_students'] = GetNumStudentsForTeacherId($teacher_id);
+            
+            $teachers[] = $row;            
         }
         
         return $teachers;
@@ -68,16 +113,16 @@
     function CreateTeacher($data) {
         global $mysqli;
         
-        $firstname = $data['firstname'];
-        $lastname = $data['lastname'];
-        $salutation = '';
-                
-        $mobile = $data['mobile'];
-        $email = $data['email'];
-        $dob = $data['dob'] ?? '';
-        $address_line_1 = $data['address_line_1'] ?? '';
-        $address_line_2 = $data['address_line_2'] ?? '';
-        $postal_code  = $data['postal_code'] ?? '';
+        $firstname = SanitiseUserInput($data['firstname']);
+        $lastname = SanitiseUserInput($data['lastname']);
+        $mobile = SanitiseUserInput($data['mobile']);
+        $email = SanitiseUserInput($data['email']);
+        $dob = SanitiseUserInput($data['dob']);
+        $address_line_1 = SanitiseUserInput($data['address_line_1']);
+        $address_line_2 = SanitiseUserInput($data['address_line_2']);
+        $postal_code  = SanitiseUserInput($data['postal_code']);
+        
+        $dob = DateToMySQLDate($dob);
         
         $query = "
             INSERT INTO `users`
@@ -89,15 +134,6 @@
                 `address_line_1`='$address_line_1',
                 `address_line_2`='$address_line_2',
                 `postal_code`='$postal_code'
-        ";
-        
-        $result = $mysqli->query($query);
-        $user_id = $mysqli->insert_id;
-        
-        $query = "
-            INSERT INTO `teachers`
-            SET `user_id`='$user_id',
-                `salutation`='$salutation'
         ";
         
         $result = $mysqli->query($query);
@@ -113,14 +149,16 @@
         $teacher = GetTeacherByID($teacher_id);
         $user_id = $teacher['user_id'];
         
-        $firstname = $data['firstname'];
-        $lastname = $data['lastname'];
-        $mobile = $data['mobile'];
-        $email = $data['email'];
-        $dob = $data['dob'];
-        $address_line_1 = $data['address_line_1'];
-        $address_line_2 = $data['address_line_2'];
-        $postal_code  = $data['postal_code'];
+        $firstname = SanitiseUserInput($data['firstname']);
+        $lastname = SanitiseUserInput($data['lastname']);
+        $mobile = SanitiseUserInput($data['mobile']);
+        $email = SanitiseUserInput($data['email']);
+        $dob = SanitiseUserInput($data['dob']);
+        $address_line_1 = SanitiseUserInput($data['address_line_1']);
+        $address_line_2 = SanitiseUserInput($data['address_line_2']);
+        $postal_code  = SanitiseUserInput($data['postal_code']);
+        
+        $dob = DateToMySQLDate($dob);
         
         $query = "
             UPDATE `users`

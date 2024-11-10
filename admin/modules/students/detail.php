@@ -97,95 +97,95 @@
 									<!-- Profile Card Popup -->
 									<div class="collapse" id="editProfileCard">
 										<div class="card">
-										<div class="card-header">
-											<h5 class="card-title">Edit Profile</h5>
-										</div>
-										<div class="card-body">	
-											<div class="card-body text-center">
-												<img src="/admin/images/user-default-profile-pic.jpg" alt="User Default Profile Pic" class="img-fluid rounded-circle mb-2" width="128" height="128">
+											<div class="card-header">
+												<h5 class="card-title">Edit Profile</h5>
 											</div>
-											<form name="student-form" method="post" action="/admin/students/<?= $student_id ?>/editpost/">
-											<div class="row">
-													<div class="mb-3 col-md-6">
-														<label class="form-label" for="inputFirstName">First Name</label>
-														<input type="text" class="form-control" id="inputFirstName" name="firstname" value="<?= $firstname ?>" placeholder="First Name" />
-													</div>
-													<div class="mb-3 col-md-6">
-														<label class="form-label" for="inputLastName">Last Name</label>
-														<input type="text" class="form-control" id="inputLastName" name="lastname" value="<?= $lastname ?>" placeholder="Last Name" />
-													</div>
+											<div class="card-body">	
+												<div class="card-body text-center">
+													<img src="/admin/images/user-default-profile-pic.jpg" alt="User Default Profile Pic" class="img-fluid rounded-circle mb-2" width="128" height="128">
 												</div>
+												<form name="student-form" method="post" action="/admin/students/<?= $student_id ?>/editpost/">
 												<div class="row">
-													<div class="mb-3 col-md-4">
-														<label class="form-label" for="inputDateOfBirst">Date of Birth</label>
-														<input type="text" class="form-control" id="inputDateOfBirth" name="dob" placeholder="DD/MM/YYYY" value="<?= $dob ?>" />
+														<div class="mb-3 col-md-6">
+															<label class="form-label" for="inputFirstName">First Name</label>
+															<input type="text" class="form-control" id="inputFirstName" name="firstname" value="<?= $firstname ?>" placeholder="First Name" />
+														</div>
+														<div class="mb-3 col-md-6">
+															<label class="form-label" for="inputLastName">Last Name</label>
+															<input type="text" class="form-control" id="inputLastName" name="lastname" value="<?= $lastname ?>" placeholder="Last Name" />
+														</div>
 													</div>
-													<div class="mb-3 col-md-4">
-														<label class="form-label" for="inputYear">Year</label>
-														<select id="inputYear" class="form-control" name="year">
-															<option>Select...</option>
-														<?php
-															for($i = 1; $i < 5; $i++) {
-																$display = "K$i";
-
-																if ($i == $year) {
-																	$selected = 'selected';
-																} else {
-																	$selected = '';
+													<div class="row">
+														<div class="mb-3 col-md-4">
+															<label class="form-label" for="inputDateOfBirst">Date of Birth</label>
+															<input type="text" class="form-control" id="inputDateOfBirth" name="dob" placeholder="DD/MM/YYYY" value="<?= $dob ?>" />
+														</div>
+														<div class="mb-3 col-md-4">
+															<label class="form-label" for="inputYear">Year</label>
+															<select id="inputYear" class="form-control" name="year">
+																<option>Select...</option>
+															<?php
+																for($i = 1; $i < 5; $i++) {
+																	$display = "K$i";
+	
+																	if ($i == $year) {
+																		$selected = 'selected';
+																	} else {
+																		$selected = '';
+																	}
+															?>
+																<option value="<?= $i ?>" <?= $selected ?>><?= $display ?></option>
+															<?php
 																}
-														?>
-															<option value="<?= $i ?>" <?= $selected ?>><?= $display ?></option>
-														<?php
-															}
-														?>
-														</select>
+															?>
+															</select>
+														</div>
+														<div class="mb-3 col-md-4">
+															<label class="form-label" for="inputDateOfBirst">Class of</label>
+															<input type="text" class="form-control" id="inputDateOfBirth" name="class_of" value="<?= $class_of ?>" placeholder="Year of graduation" />
+														</div>
 													</div>
-													<div class="mb-3 col-md-4">
-														<label class="form-label" for="inputDateOfBirst">Class of</label>
-														<input type="text" class="form-control" id="inputDateOfBirth" name="class_of" value="<?= $class_of ?>" placeholder="Year of graduation" />
+													<div class="row">
+														<div class="mb-3 col-md-8">
+															<label class="form-label" for="inputEmail">Email</label>
+															<input type="email" class="form-control" id="inputEmail" name="email" value="<?= $email ?>" placeholder="Email" />
+														</div>
+														<div class="mb-3 col-md-4">
+															<label class="form-label" for="inputMobile">Mobile</label>
+															<input type="text" class="form-control" id="inputMobile" name="mobile" value="<?= $mobile ?>" placeholder="Mobile" />
+														</div>
 													</div>
-												</div>
-												<div class="row">
-													<div class="mb-3 col-md-8">
-														<label class="form-label" for="inputEmail">Email</label>
-														<input type="email" class="form-control" id="inputEmail" name="email" value="<?= $email ?>" placeholder="Email" />
+													<div class="row">
+														<div class="mb-3 col-md-8">
+															<label class="form-label" for="inputAddressLine1">Address Line 1</label>
+															<input type="text" class="form-control" id="inputAddressLine1" name="address_line_1" value="<?= $address_1 ?>" placeholder="Apartment, studio, or floor" />
+														</div>
+														<div class="mb-3 col-md-8">
+															<label class="form-label" for="inputAddressLine2">Address Line 2</label>
+															<input type="text" class="form-control" id="inputAddressLine2" name="address_line_2" value="<?= $address_2 ?>" placeholder="Street Name" />
+														</div>
+														<div class="mb-3 col-md-4">
+															<label class="form-label" for="inputPincode">Postal Code</label>
+															<input type="text" class="form-control" id="inputPincode" name="postal_code" value="<?= $postal_code ?>" placeholder="Pincode" />
+														</div>
 													</div>
-													<div class="mb-3 col-md-4">
-														<label class="form-label" for="inputMobile">Mobile</label>
-														<input type="text" class="form-control" id="inputMobile" name="mobile" value="<?= $mobile ?>" placeholder="Mobile" />
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger">Delete</button>
+														<div class="ms-auto">
+															<a class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#editProfileCard" style="margin-right: 10px;">Close</a>
+															<input type="submit" class="btn btn-primary" name="submit" value="Save">
+														</div>
 													</div>
-												</div>
-												<div class="row">
-													<div class="mb-3 col-md-8">
-														<label class="form-label" for="inputAddressLine1">Address Line 1</label>
-														<input type="text" class="form-control" id="inputAddressLine1" name="address_line_1" value="<?= $address_1 ?>" placeholder="Apartment, studio, or floor" />
-													</div>
-													<div class="mb-3 col-md-8">
-														<label class="form-label" for="inputAddressLine2">Address Line 2</label>
-														<input type="text" class="form-control" id="inputAddressLine2" name="address_line_2" value="<?= $address_2 ?>" placeholder="Street Name" />
-													</div>
-													<div class="mb-3 col-md-4">
-														<label class="form-label" for="inputPincode">Postal Code</label>
-														<input type="text" class="form-control" id="inputPincode" name="postal_code" value="<?= $postal_code ?>" placeholder="Pincode" />
-													</div>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-danger">Delete</button>
-													<div class="ms-auto">
-														<a class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#editProfileCard" style="margin-right: 10px;">Close</a>
-														<input type="submit" class="btn btn-primary" name="submit" value="Save">
-													</div>
-												</div>
-											</form>
+												</form>
+											</div>
 										</div>
-									</div>
 									</div>
 									
 									<!-- Timetable -->
 									<div id="timetableCard">
 										<div class="card">
 											<div class="card-header">
-												<h5 class="card-title mb-0">Timetable</h5>
+												<h5 class="card-title mb-0"><?= $firstname ?>'s Timetable</h5>
 											</div>
 											<div class="card-body">	
 											<table class="timetable">
@@ -201,6 +201,7 @@
 														<th class="timetable-head">7</th>
 													</tr>
 												</thead>
+												<tbody>
 										<?php    
 											$day_of_week = array('SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT');
 											
@@ -210,30 +211,46 @@
 													<tr class="timetable-row">
 														<td class="day"><?= $day ?></td>
 										<?php    
-													for ($j = 1; $j < 8; $j++) {
-														$period = $timetable[$i][$j] ?? array();
+												for ($j = 1; $j < 8; $j++) {
+													$period = $timetable[$i][$j] ?? array();
+													
+													if (empty($period)) {
+										?>
+														<td class="period" data-href="" >
+															<i class="align-middle me-2 fas fa-2x fa-plus-circle"></i>
+														</td>
+										<?php				
+													} else {
 														
 														$place = $period['place_name'] ?? '';
 														// $category = $period['category'];
-														$subject = $period['course_name'] ?? '';
-														$teacher = $period['firstname'] ?? '';
-														$place = $period['place_name'] ?? '';
+														$subject = $period['course_name'] ?? '&nbsp;';
+														$teacher_id = $period['teacher_id'] ?? '';
+														$teacher = $period['firstname'] ?? '&nbsp;';
+														$place = $period['place_name'] ?? '&nbsp;';
+														
+														if ($teacher_id != '') {
+															$teacher = "<a href=\"/admin/teachers/$teacher_id/edit/\">$teacher</a>";
+														}
 										?>
-														<td class="period">
-															<div class="subject text-secondary"><?= $subject ?></div>
-															<div class="teacher text-primary"><?= $teacher ?></div>
-															<div class="place text-sm"><?= $place ?></div>
+														<td class="period" data-href="">
+															<div class="subject"><?= $subject ?></div>
+															<div class="teacher"><?= $teacher ?></div>
+															<div class="place"><?= $place ?></div>
+															<i class="fas fa-edit"></i>
 														</td>
 										<?php
 													}
+												}
 										?>
 													</tr>
 										<?php
-												}
+											}
 										?>
-												</table>
-											</div>
+												</tbody>
+											</table>
 										</div>
+									</div>
 								</div>
 							</div>
 						</div>

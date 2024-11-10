@@ -16,6 +16,7 @@
 	
 	include_once('admin/functions/categories.inc');
 	include_once('admin/functions/users.inc');
+	include_once('admin/functions/students.inc');
 	include_once('admin/functions/teachers.inc');
 	include_once('admin/functions/places.inc');
 	include_once('admin/functions/subjects.inc');

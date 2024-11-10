@@ -1,5 +1,11 @@
-#datatables-reponsive tr[data-href], #datatables-reponsive tr[onClick] {
+#datatables-reponsive tr[data-href],
+#datatables-reponsive tr[onClick],
+td[data-href] {
     cursor: pointer;
+}
+
+td[data-href]:hover {
+    background-color: #cef;
 }
 
 #datatables-reponsive td {
@@ -50,8 +56,7 @@ tr:hover .table-action a {
 .timetable .period {
     position: relative;
     width: 13.5%;
-    min-height: 50px;
-    text-align: center;
+    height: 90px;
 }
 
 .timetable .day {
@@ -73,19 +78,35 @@ tr:hover .table-action a {
 .period .subject {
     position: absolute;
     width: 100%;
-    top: 0;
+    top: 5px;
     text-align: center;
     padding: 0 5px;
 }
 
 .period .teacher {
     margin: 40px 0 30px;
+    text-align: center;
 }
 
 .period .place {
     position: absolute;
-    width: 100%;
-    bottom: 0;
-    text-align: center;
-    padding: 0 5px;
+    bottom: 3px;
+    left: 5px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+.period i {
+    display: none;
+    opacity: 0.5;
+}
+
+.period:hover i {
+    display: block;
+}
+
+.period .fa-edit {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }

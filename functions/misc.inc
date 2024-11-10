@@ -615,10 +615,13 @@ function FormatDateAsMonthYear($monthnum, $year)
 // Takes a date formatted as 21/2/2005 and returns '2005-02-21' or NULL
 function DateToMySQLDate($date)
 {
-    if ($date == '')
-        return 'NULL';
-    
-    return date("Y-m-d", strtotime($date));
+   if ($date == '') {
+      return NULL;
+   }
+   
+   list($d, $m, $y) = explode('/', $date);
+   $date = join('/', array($m, $d, $y));
+   return date("Y-m-d", strtotime($date));
 }
 
 function MySQLDateToDate($date)
@@ -626,19 +629,20 @@ function MySQLDateToDate($date)
     if ($date == '')
         return '';
 
-    return date("m/d/Y", strtotime($date));
+    return date("d/m/Y", strtotime($date));
 }
 
 
 // Takes a date formatted as 21/2/2005 and returns 2005-02-21
 function FormatMySQLDate($date)
 {
-    if ($date == '')
-        return '';
+   if ($date == '') {
+      return NULL;
+   }
 
-    list($d, $m, $y) = explode('/', $date);
-    $date = join('/', array($m, $d, $y));
-    return date("Y-m-d", strtotime($date));
+   list($d, $m, $y) = explode('/', $date);
+   $date = join('/', array($m, $d, $y));
+   return date("Y-m-d", strtotime($date));
 }
 
 function FormatMySQLDateTime($date)

@@ -56,11 +56,11 @@
 							$num_periods = '';
 						}
 				?>
-							 <tr data-href="/admin/students/<?= $student_id ?>/edit/">
+							<tr data-href="/admin/students/<?= $student_id ?>/edit/">
 								<td>
 									<img src="/admin/images/user-default-profile-pic.jpg" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
 									<div style="display: inline-block">
-										<?= $fullname ?> (<?= $student_id ?>)<br>
+										<?= $fullname ?><br>
 										<small class="text-muted">Class of <?= $class_of ?></small>
 									</div>
 								</td>
@@ -68,7 +68,7 @@
 								<td><?= $mobile ?></td>
 								<td><?= $email ?></td>
 								<td width="50" class="text-center"><?= $num_periods ?></td>
-							 </tr>
+							</tr>
 				<?php
 					}
 				?>			 

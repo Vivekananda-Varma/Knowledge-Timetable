@@ -203,14 +203,16 @@
     function CreateTeacher($data) {
         global $mysqli;
         
-        $firstname = $data['firstname'];
-        $lastname = $data['lastname'];
-        $mobile = $data['mobile'];
-        $email = $data['email'];
-        $dob = $data['dob'];
-        $address_line_1 = $data['address_line_1'];
-        $address_line_2 = $data['address_line_2'];
-        $postal_code  = $data['postal_code'];
+        $firstname = SanitiseUserInput($data['firstname']);
+        $lastname = SanitiseUserInput($data['lastname']);
+        $mobile = SanitiseUserInput($data['mobile']);
+        $email = SanitiseUserInput($data['email']);
+        $dob = SanitiseUserInput($data['dob']);
+        $address_line_1 = SanitiseUserInput($data['address_line_1']);
+        $address_line_2 = SanitiseUserInput($data['address_line_2']);
+        $postal_code  = SanitiseUserInput($data['postal_code']);
+        
+        $dob = DateToMySQLDate($dob);
         
         $query = "
             INSERT INTO `users`
@@ -237,14 +239,16 @@
         $teacher = GetTeacherByID($teacher_id);
         $user_id = $teacher['user_id'];
         
-        $firstname = $data['firstname'];
-        $lastname = $data['lastname'];
-        $mobile = $data['mobile'];
-        $email = $data['email'];
-        $dob = $data['dob'];
-        $address_line_1 = $data['address_line_1'];
-        $address_line_2 = $data['address_line_2'];
-        $postal_code  = $data['postal_code'];
+        $firstname = SanitiseUserInput($data['firstname']);
+        $lastname = SanitiseUserInput($data['lastname']);
+        $mobile = SanitiseUserInput($data['mobile']);
+        $email = SanitiseUserInput($data['email']);
+        $dob = SanitiseUserInput($data['dob']);
+        $address_line_1 = SanitiseUserInput($data['address_line_1']);
+        $address_line_2 = SanitiseUserInput($data['address_line_2']);
+        $postal_code  = SanitiseUserInput($data['postal_code']);
+        
+        $dob = DateToMySQLDate($dob);
         
         $query = "
             UPDATE `users`
@@ -258,6 +262,8 @@
                 `postal_code`='$postal_code'
             WHERE `user_id`='$user_id'
         ";
+        
+        print $query; exit;
         
         $result = $mysqli->query($query);
         $teacher = GetTeacherByID($teacher_id);
