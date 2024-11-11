@@ -1,5 +1,6 @@
 <?php
 	$js_categories = json_encode($categories);
+	$js_teachers = json_encode($teachers);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +9,7 @@
 	<?php include('templates/head.html'); ?>
 	<script>
 		var categories = <?= $js_categories ?>;
+		var teachers = <?= $js_teachers ?>;
 	</script>
 </head>
 
@@ -81,8 +83,8 @@
 									<select id="inputCategory" class="form-select mb-3" name="category_id">
 										<option>Select Category...</option>
 									</select>	
-									<div class="row">
-										<div class="mb-3 col-md-3">
+									<div id="teachers-list" class="row">
+										<!-- <div class="mb-3 col-md-3">
 											<label class="form-check">
 												<input type="checkbox" class="form-check-input">
 												<span class="form-check-label">Teacher 1</span>
@@ -105,7 +107,7 @@
 												<input type="checkbox" class="form-check-input">
 												<span class="form-check-label">Teacher 4</span>
 											</label>
-										</div>
+										</div> -->
 									</div>
 								</div>
 								<div class="modal-footer justify-content-between">
@@ -158,6 +160,42 @@
 				
 				$("#subject-name").attr("value", subjectName);
 				$("#subject-form").attr("action", "/admin/subjects/" + subjectId + "/editpost/");
+			}
+			
+			var teachersListContainer = $("#teachers-list");
+			
+			teachersListContainer.empty();
+			
+			for(var i = 0; i < teachers.length; i++) {
+				var teacher_id = teachers[i]['teacher_id'];
+				var name = teachers[i]['firstname'];
+				
+				var div = $("<div class='mb-3 col-md-3'></div>");
+				var label = $("<label class='form-check'></label>");
+				var checkbox = $("<input type='checkbox' class='form-check-input' />");
+				var checkboxLabel = $("<span class='form-check-label'></span>");
+				
+				// div.addClass("mb-3 col-md-3");
+				// label.addClass("form-check");
+				// checkbox.addClass("form-check-input");
+				// checkboxLabel.addClass("form-check-label");
+				
+				checkboxLabel.html(name);
+				
+				label.append(checkbox);
+				label.append(checkboxLabel);
+				
+				div.append(label);
+				
+				teachersListContainer.append(div);
+				
+				// <div class="mb-3 col-md-3">
+				// 	<label class="form-check">
+				// 		<input type="checkbox" class="form-check-input">
+				// 		<span class="form-check-label">Teacher 1</span>
+				// 	</label>
+				// </div>
+				
 			}
 		}
 	</script>

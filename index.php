@@ -263,6 +263,7 @@
 					$subjects_active = 'active';
 					$subjects = GetSubjects();
 					$categories = GetCategories();
+					$teachers = GetTeachers();
 					
 					include('admin/modules/subjects/index.php');
 				}

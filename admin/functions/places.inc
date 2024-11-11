@@ -6,8 +6,10 @@
         $places = array();
         
         $query = "
-            SELECT * 
-            FROM `places` 
+            SELECT places.*, COUNT(periods.period_id) as num_periods
+            FROM `places`
+            LEFT JOIN `periods` ON periods.place_id=places.place_id
+            GROUP BY places.place_id
             ORDER BY `place_name`
         ";
         

@@ -24,6 +24,8 @@
 								<th>Name</th>
 								<th>Subjects</th>
 								<th>Teachers</th>
+								<th>Students</th>
+								<th>Periods</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -31,12 +33,19 @@
 							foreach($places as $place) {
 								$place_id = $place['place_id'];
 								$place_name = $place['place_name']; 
+								$num_periods = $place['num_periods'];
+								
+								if ($num_periods == 0) {
+									$num_periods = '';
+								}
 						?>
 						
 							<tr data-bs-toggle="modal" data-bs-target="#modal-alert" onClick="ShowModal(<?= $place_id ?>, '<?= $place_name ?>')">
 								<td><?= $place_name ?></td>
 								<td width="50" class="text-center"></td>
 								<td width="50" class="text-center"></td>
+								<td width="50" class="text-center"></td>
+								<td width="50" class="text-center"><?= $num_periods ?></td>
 							</tr>
 						<?php
 							}

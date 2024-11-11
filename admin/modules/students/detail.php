@@ -225,16 +225,21 @@
 														$place = $period['place_name'] ?? '';
 														// $category = $period['category'];
 														$subject = $period['course_name'] ?? '&nbsp;';
+														$display_name = $period['display_name'] ?? '';
 														$teacher_id = $period['teacher_id'] ?? '';
 														$teacher = $period['firstname'] ?? '&nbsp;';
 														$place = $period['place_name'] ?? '&nbsp;';
+														
+														if ($display_name == '') {
+															$display_name = $subject;
+														}
 														
 														if ($teacher_id != '') {
 															$teacher = "<a href=\"/admin/teachers/$teacher_id/edit/\">$teacher</a>";
 														}
 										?>
 														<td class="period" data-href="">
-															<div class="subject"><?= $subject ?></div>
+															<div class="subject"><?= $display_name ?></div>
 															<div class="teacher"><?= $teacher ?></div>
 															<div class="place"><?= $place ?></div>
 															<i class="fas fa-edit"></i>
