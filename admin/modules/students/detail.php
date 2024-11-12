@@ -216,7 +216,7 @@
 													
 													if (empty($period)) {
 										?>
-														<td class="period" data-href="" >
+														<td class="period" data-bs-toggle="modal" data-bs-target="#modal-alert">
 															<i class="align-middle me-2 fas fa-2x fa-plus-circle"></i>
 														</td>
 										<?php				
@@ -255,6 +255,74 @@
 												</tbody>
 											</table>
 										</div>
+									</div>
+
+									<!-- Edit Period Modal -->
+									<div class="modal fade" id="modal-alert" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+										<form class="modal-dialog" id="course-form" name="course-form" method="post" action="">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title fs-5" id="modal-title">Edit Period</h1>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<label class="form-label">Course Name</label>
+													<input id="course-name" type="text" class="form-control" name="course_name" value="" placeholder="Course name"><br>
+													<div class="row">
+														<div class="mb-3 col-md-6">
+															<label class="form-label">Category</label>
+															<select id="inputCategory" class="form-select"  onchange="HandleCategoryChanged()">
+																<option selected>Select Category...</option>
+															</select>
+														</div>
+														<div class="mb-3 col-md-6">
+															<label class="form-label">Subject</label>
+															<select id="inputSubject" class="form-select" onchange="HandleSubjectChanged()">
+																<option selected>Select Subject...</option>
+															</select>
+														</div>
+													</div>
+													<div class="row">
+														<div class="mb-3 col-md-6">
+															<label class="form-label">Teacher</label>
+															<select id="inputTeacher" class="form-select">
+																<option selected>Select Teacher...</option>
+															</select>
+														</div>
+														<div class="mb-3 col-md-6">
+															<label class="form-label">Place</label>
+															<select id="inputPlace" class="form-select">
+																<option selected>Select Place...</option>
+															</select>
+														</div>
+													</div>
+													<div class="row">
+														<div class="mb-3 col-md-6">
+															<label class="form-label">Students</label>
+															<div class="d-flex align-items-center">
+																<a href="#" class="me-2">
+																	<img src="/admin/images/user-default-profile-pic.jpg" alt="Student 1" class="img-fluid rounded-circle" width="40" height="40" />
+																</a>
+																<a href="#" class="me-2">
+																	<img src="/admin/images/user-default-profile-pic.jpg" alt="Student 2" class="img-fluid rounded-circle" width="40" height="40" />
+																</a>
+																<a href="#" class="me-2">
+																	<img src="/admin/images/user-default-profile-pic.jpg" alt="Student 3" class="img-fluid rounded-circle" width="40" height="40" />
+																</a>
+															</div>
+														</div>
+													</div>
+																					
+												</div>
+												<div class="modal-footer justify-content-between">
+													<button type="button" class="btn btn-danger mr-auto">Delete</button>
+													<div>
+														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+														<input type="submit" class="btn btn-primary" value="Save">
+													</div>
+												</div>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
