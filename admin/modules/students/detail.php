@@ -102,7 +102,12 @@
 											</div>
 											<div class="card-body">	
 												<div class="card-body text-center">
-													<img src="/admin/images/user-default-profile-pic.jpg" alt="User Default Profile Pic" class="img-fluid rounded-circle mb-2" width="128" height="128">
+													<div class="profile-container">
+														<img src="/admin/images/user-default-profile-pic.jpg" alt="User Default Profile Pic" class="profile-pic img-fluid mb-2">
+														<a href="#" class="profile-pic-edit-icon">
+															<i data-feather="edit-2"></i>
+														</a>
+													</div>
 												</div>
 												<form name="student-form" method="post" action="/admin/students/<?= $student_id ?>/editpost/">
 												<div class="row">
