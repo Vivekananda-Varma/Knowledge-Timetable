@@ -102,12 +102,12 @@
 											</div>
 											<div class="card-body">	
 												<div class="card-body text-center">
-													<div class="profile-container">
+													<a href="#" class="profile-container">
 														<img src="/admin/images/user-default-profile-pic.jpg" alt="User Default Profile Pic" class="profile-pic img-fluid mb-2">
-														<a href="#" class="profile-pic-edit-icon">
+														<div class="profile-pic-edit-icon">
 															<i data-feather="edit-2"></i>
-														</a>
-													</div>
+														</div>
+													</a>
 												</div>
 												<form name="student-form" method="post" action="/admin/students/<?= $student_id ?>/editpost/">
 												<div class="row">
@@ -324,6 +324,51 @@
 													<div>
 														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 														<input type="submit" class="btn btn-primary" value="Save">
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+
+									<!-- Edit Period Modal 2 -->
+									<div class="modal fade" id="modal-alert" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+									<form class="modal-dialog modal-sm" id="course-form" name="course-form" method="post" action="">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title fs-5" id="modal-title">Edit Period</h1>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<table class="table table-sm my-2">
+														<tbody>
+															<tr>
+																<td class="text-muted text-end">Course Name</td>
+																<td>Biology and Related Subjects</td>
+															</tr>
+															<tr>
+																<td class="text-muted text-end">Category</td>
+																<td>Science Subjects</td>
+															</tr>
+															<tr>
+																<td class="text-muted text-end">Subject</td>
+																<td>Biology and Related Subjects</td>
+															</tr>
+															<tr>
+																<td class="text-muted text-end">Teacher</td>
+																<td>Madhumita Di</td>
+															</tr>
+															<tr>
+																<td class="text-muted text-end">Place</td> 
+																<td>Knowledge</td> 
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="modal-footer justify-content-between">
+													<button type="button" class="btn btn-danger mr-auto">Delete</button>
+													<div>
+														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+														<input type="submit" class="btn btn-primary" value="Save" />
 													</div>
 												</div>
 											</div>
