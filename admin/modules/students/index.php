@@ -64,7 +64,7 @@
 										<small class="text-muted">Class of <?= $class_of ?></small>
 									</div>
 								</td>
-								<td width="50" class="text-center">K<?= $year ?></td>
+								<td width="50" class="text-center">HC-<?= $year ?></td>
 								<td><?= $mobile ?></td>
 								<td><?= $email ?></td>
 								<td width="50" class="text-center"><?= $num_periods ?></td>

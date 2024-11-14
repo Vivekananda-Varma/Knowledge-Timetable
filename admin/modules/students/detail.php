@@ -131,7 +131,7 @@
 																<option>Select...</option>
 															<?php
 																for($i = 1; $i < 5; $i++) {
-																	$display = "K$i";
+																	$display = "HC-$i";
 	
 																	if ($i == $year) {
 																		$selected = 'selected';

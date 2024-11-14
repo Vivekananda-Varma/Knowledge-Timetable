@@ -31,10 +31,6 @@ td[data-href] {
     cursor: pointer;
 }
 
-td[data-href]:hover {
-    background-color: #cef;
-}
-
 #datatables-reponsive td {
     vertical-align: top;
 }
@@ -100,6 +96,10 @@ tr:hover .table-action a {
 .timetable-period-place {
     text-transform: uppercase;
     font-size: 7pt;
+}
+
+.period:hover {
+    background-color: #cef;
 }
 
 .period .subject {

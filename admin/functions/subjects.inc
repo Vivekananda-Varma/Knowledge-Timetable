@@ -105,22 +105,23 @@
         return $subject;
     }
     
-    function UpdateSubject($data) {
+    function UpdateSubject($subject_id, $data) {
         global $mysqli;
         
-        $subject_name = $data['subject_name'];
+        $subject_name = SanitiseUserInput($data['subject_name']);
+        $display_name = SanitiseUserInput($data['display_name']);
         $category_id = $data['category_id'];
-        $is_academic = $data['is_academic'];
         
         $query = "
             UPDATE `subjects`
             SET `category_id`='$category_id',
                 `subject_name`='$subject_name',
-                `is_academic`=$is_academic
+                `display_name`='$display_name'
+            WHERE `subject_id`=$subject_id
         ";
         
         $result = $mysqli->query($query);
-        $category = GetSubjectByID($subject_id);
+        $subject = GetSubjectByID($subject_id);
         
         return $subject;
     }
