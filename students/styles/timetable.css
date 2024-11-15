@@ -1,0 +1,13 @@
+.navbar-nav .nav-link i {
+    font-size: 1.6em;
+    vertical-align: middle;
+    margin-right: 5px;
+    line-height: 1;
+}
+
+.text-body {
+    font-size: 1em;
+}
+.me-2 {
+    margin-right: 0.5rem; 
+}
