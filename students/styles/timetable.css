@@ -16,3 +16,10 @@
 .ms-auto {
     margin-left: auto;
 }
+
+.form-check-input {
+    border-radius: 50% !important;
+    width: 22px;  
+    height: 22px; 
+    border: 2px solid rgb(168, 168, 168);  
+}
