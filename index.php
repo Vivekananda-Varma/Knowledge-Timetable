@@ -14,15 +14,6 @@
 	include_once('functions/users.inc');
 	include_once('functions/misc.inc');
 	
-	include_once('admin/functions/categories.inc');
-	include_once('admin/functions/users.inc');
-	include_once('admin/functions/students.inc');
-	include_once('admin/functions/teachers.inc');
-	include_once('admin/functions/places.inc');
-	include_once('admin/functions/subjects.inc');
-	include_once('admin/functions/courses.inc');
-	include_once('admin/functions/timetable.inc');
-	
 	require_once('filepond/config.php');
 	require_once('filepond/util/read_write_functions.php');
 	
@@ -40,6 +31,15 @@
 	
 	switch ($tokens[1]) {
 	case 'admin':
+		include_once('admin/functions/categories.inc');
+		include_once('admin/functions/users.inc');
+		include_once('admin/functions/students.inc');
+		include_once('admin/functions/teachers.inc');
+		include_once('admin/functions/places.inc');
+		include_once('admin/functions/subjects.inc');
+		include_once('admin/functions/courses.inc');
+		include_once('admin/functions/timetable.inc');
+		
 		$module = $tokens[2];
 		
 		$categories_active = '';
@@ -73,7 +73,7 @@
 					
 					// print "Logged in as admin"; exit;
 					Redirect('/admin/courses/');
-				} else if ($user_id = ValidateLogin($username, $password)) {
+				} else if ($user_id = ValidateAdminLogin($username, $password)) {
 					$_SESSION['login_user'] = GetUserById($user_id);
 					
 					Redirect('/');
@@ -546,26 +546,24 @@
 			exit;
 			
 		case 'verify':
-			$page_title = 'Verify OTP';
+			$email = $_POST['email'];
+			$otp = GenerateOTPForUser($email);
+			$page_title = "Verify OTP ($otp)";
 			include('login/verifyotp.php');
 			exit;
-		
-		case 'loginpost':
-			$username = $_POST['email'];
-			$password = $_POST['password'];
-		
-			if ($username == $admin_username && $password == $admin_password) {
-				$_SESSION['login_user']['is_admin'] = true;
+			
+		case 'verifypost':
+			$email = $_POST['email'];
+			$otp = $_POST['otp'];
+			
+			$user = ValidateUserLogin($email, $otp);
 				
-				// print "Logged in as admin"; exit;
-				Redirect('/admin/courses/');
-			} else if ($user_id = ValidateLogin($username, $password)) {
-				$_SESSION['login_user'] = GetUserById($user_id);
-				
-				Redirect('/');
+			if ($user !== false) {
+				$_SESSION['login_user'] = $user;
+				Redirect('/students/courses/');
 			} else {
 				Redirect('/login/');
-			} 
+			}
 			
 			break;
 			
@@ -573,9 +571,22 @@
 			unset($_SESSION['login_user']);
 		
 			Redirect('/login/');
+			
+		case 'students':
+			RequiresLogin();
+			
+			$module = $tokens[2];
+			
+			switch ($module) {
+				case 'courses':
+					include('students/modules/courses/emptyview.php');
+					
+					exit;
+			}
+			
 		}
 		
-		RequiresLogin();
+		
 		
 		if ($_SESSION['login_user']['is_admin'] == true) {
 			Redirect('/admin/teachers/');

@@ -27,7 +27,7 @@
                             <div class="card-body p-11 text-center">
                                 <h2 class="mb-3 text-center">Welcome</h2>
                                 <p class="lead text-center">Enter your email to receive an OTP</p>
-                                <form name="login-form" method="post" action="/loginpost/" class="text-start mb-3 mt-6">
+                                <form name="login-form" method="post" action="/verify/" class="text-start mb-3 mt-6">
                                     <div class="form-floating mb-4">
                                         <input type="email" name="email" class="form-control" />
                                         <label for="loginEmail">Email address</label>

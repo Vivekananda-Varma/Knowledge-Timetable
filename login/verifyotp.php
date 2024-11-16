@@ -27,12 +27,13 @@
                             <div class="card-body p-11 text-center">
                                 <h2 class="mb-3 text-center">Step 2</h2>
                                 <p class="lead text-center">Enter the 6-digit verification code that was sent to your email</p>
-                                <form name="login-form" method="post" action="/verifyotp/" class="text-start mb-3 mt-6">
+                                <form name="login-form" method="post" action="/verifypost/" class="text-start mb-3 mt-6">
                                     <div class="form-floating mb-4">
                                         <input type="password" name="otp" class="form-control" />
                                         <label for="loginEmail">Enter OTP</label>
                                     </div>
                                     <input class="btn btn-primary rounded-pill btn-login w-100 mb-2" type="submit" name="send-otp-button" value="Verify">
+                                    <input type="hidden" name="email" value="<?= $email ?>">
                                 </form>
                                 <p class="mb-0">Didn't receive the code? <a href="/resendotp/" class="hover">Resend</a></p>
                             </div>
