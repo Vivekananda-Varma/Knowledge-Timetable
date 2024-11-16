@@ -1,0 +1,45 @@
+<!-- Load FilePond library -->
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
+<!-- Turn all file input elements into ponds -->
+<script>
+    // Get a reference to the file input element
+    const inputElement = document.querySelector('input[type="file"]');
+    
+    // Create a FilePond instance
+    const pond = FilePond.create(
+        inputElement, {
+            labelIdle: 'Drag & Drop CSV file or <span class="filepond--label-action"> Browse </span>',
+            acceptedFileTypes: ['application/csv','text/csv'],
+            allowImagePreview: false,
+            dropValidation: true,
+            server: {
+              url: '/filepond/',
+              process: {
+                url: 'process.php',
+                method: 'POST',
+                headers: {
+                  'x-customheader': 'Processing File'
+                },
+                onload: (response) => {
+                  console.log("raw", response)
+                  response = JSON.parse(response);
+                  console.log(response);
+                  return response.key;
+                },
+                onerror: (response) => {
+                  console.log("raw", response)
+                  response = JSON.parse(response);
+                  console.log(response);
+                  return response.msg
+                },
+                ondata: (formData) => {
+                  window.h = formData;
+                  console.log(formData)
+                  return formData;
+                }
+              }
+            }
+        }
+    );
+</script>

@@ -18,12 +18,12 @@
 
     function RequiresAdminLogin() {
         if (!isset($_SESSION['login_user'])) {
-            Redirect('/login/');
+            Redirect('/admin/login/');
             exit;
         }
         
-        if (!$_SESSION['login_user']['is_admin']) {
-            Redirect('/login/');
+        if (!isset($_SESSION['login_user']['is_admin'])) {
+            Redirect('/admin/login/');
             exit;
         }
         

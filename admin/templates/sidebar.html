@@ -16,49 +16,10 @@
             <span class="align-middle me-3">K Timetable</span>
         </a>
         <ul class="sidebar-nav">
-            <li class="sidebar-item <?= $students_active ?>">
-                <a data-bs-target="#students" data-bs-toggle="collapse" class="sidebar-link collapsed">
-                    <i class="align-middle" data-feather="users"></i> <span class="align-middle">Students</span>
+            <li class="sidebar-item <?= $places_active ?>">
+                <a class="sidebar-link" href="/admin/places/">
+                    <i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">Places</span>
                 </a>
-                <ul id="students" class="sidebar-dropdown list-unstyled collapse <?= $students_show ?>" data-bs-parent="#sidebar">
-                    <li class="sidebar-item <?= $students_all_active ?>">
-                        <a class="sidebar-link" href="/admin/students/all">
-                            <i class="align-middle" data-feather="users"></i> <span class="align-middle">All</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item <?= $students_import_active ?>">
-                        <a class="sidebar-link" href="/admin/students/import">
-                            <i class="align-middle" data-feather="download"></i> <span class="align-middle">Import</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item <?= $students_export_active ?>">
-                        <a class="sidebar-link" href="/admin/students/export">
-                            <i class="align-middle" data-feather="upload"></i> <span class="align-middle">Export</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="sidebar-item <?= $teachers_active ?>">
-                <a data-bs-target="#teachers" data-bs-toggle="collapse" class="sidebar-link collapsed">
-                    <i class="align-middle" data-feather="users"></i> <span class="align-middle">Teachers</span>
-                </a>
-                <ul id="teachers" class="sidebar-dropdown list-unstyled collapse <?= $teachers_show ?>" data-bs-parent="#sidebar">
-                    <li class="sidebar-item <?= $teachers_all_active ?>">
-                        <a class="sidebar-link" href="/admin/teachers/all">
-                            <i class="align-middle" data-feather="users"></i> <span class="align-middle">All</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item <?= $teachers_import_active ?>">
-                        <a class="sidebar-link" href="/admin/teachers/import">
-                            <i class="align-middle" data-feather="download"></i> <span class="align-middle">Import</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item <?= $teachers_export_active ?>">
-                        <a class="sidebar-link" href="/admin/teachers/export">
-                            <i class="align-middle" data-feather="upload"></i> <span class="align-middle">Export</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="sidebar-item <?= $categories_active ?>">
                 <a class="sidebar-link" href="/admin/categories/">
@@ -75,11 +36,18 @@
                     <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Courses</span>
                 </a>
             </li>
-            <li class="sidebar-item <?= $places_active ?>">
-                <a class="sidebar-link" href="/admin/places/">
-                    <i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">Places</span>
+            <li class="sidebar-item <?= $students_active ?>">
+                <a class="sidebar-link" href="/admin/students/">
+                    <i class="align-middle" data-feather="users"></i> <span class="align-middle">Students</span>
                 </a>
             </li>
+            
+            <li class="sidebar-item <?= $teachers_active ?>">
+                <a class="sidebar-link" href="/admin/teachers/">
+                    <i class="align-middle" data-feather="users"></i> <span class="align-middle">Teachers</span>
+                </a>
+            </li>
+            
             <!-- <li class="sidebar-item <?= $settings_active ?>">
                 <a class="sidebar-link" href="#">
                     <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
