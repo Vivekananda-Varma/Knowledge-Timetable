@@ -579,14 +579,18 @@
 			
 			switch ($module) {
 				case 'courses':
-					include('students/modules/courses/emptyview.php');
-					
+					if ($tokens[3] == 'select') {
+						$page_title = "Select Courses";
+						
+						include('students/modules/courses/select.php');
+					} else {
+						$page_title = "Courses";
+						
+						include('students/modules/courses/emptyview.php');
+					}
 					exit;
 			}
-			
 		}
-		
-		
 		
 		if ($_SESSION['login_user']['is_admin'] == true) {
 			Redirect('/admin/teachers/');
