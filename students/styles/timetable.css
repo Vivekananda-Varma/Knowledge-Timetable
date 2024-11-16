@@ -29,25 +29,12 @@
     color: #767676;
 }
 
-.table, .table td {
-    border: 0;
-    padding-left: 0 !important;
-}
-
 .table td.left-align {
     text-align: left;
 }
 
 .table td.right-align {
     text-align: right;
-}
-
-.table td:first-child {
-    padding-left: 1em !important;
-}
-
-.table td:nth-child(2) {
-    border-bottom: 1px solid #bdbdbd !important;
 }
 
 .remove-btn {
