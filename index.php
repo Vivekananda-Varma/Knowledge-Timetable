@@ -544,6 +544,11 @@
 			$page_title = 'Sign In';
 			include('login/login.php');
 			exit;
+			
+		case 'verify':
+			$page_title = 'Verify OTP';
+			include('login/verifyotp.php');
+			exit;
 		
 		case 'loginpost':
 			$username = $_POST['email'];
