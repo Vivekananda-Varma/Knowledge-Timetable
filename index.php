@@ -14,15 +14,6 @@
 	include_once('functions/users.inc');
 	include_once('functions/misc.inc');
 	
-	include_once('admin/functions/categories.inc');
-	include_once('admin/functions/users.inc');
-	include_once('admin/functions/students.inc');
-	include_once('admin/functions/teachers.inc');
-	include_once('admin/functions/places.inc');
-	include_once('admin/functions/subjects.inc');
-	include_once('admin/functions/courses.inc');
-	include_once('admin/functions/timetable.inc');
-	
 	require_once('filepond/config.php');
 	require_once('filepond/util/read_write_functions.php');
 	
@@ -39,43 +30,17 @@
 	// print_r($tokens);
 	
 	switch ($tokens[1]) {
-	case 'login':
-		$page_title = 'Sign In';
-		include('login/login.php');
-		exit;
-
-	case 'loginpost':
-		$username = $_POST['email'];
-		$password = $_POST['password'];
-	
-    	if ($username == $admin_username && $password == $admin_password) {
-        	$_SESSION['login_user']['is_admin'] = true;
-			
-			// print "Logged in as admin"; exit;
-        	Redirect('/admin/courses/');
-    	} else if ($user_id = ValidateLogin($username, $password)) {
-			$_SESSION['login_user'] = GetUserById($user_id);
-			
-			Redirect('/');
-		} else {
-			Redirect('/login/');
-		} 
-		
-		break;
-		
-	case 'logout':
-		unset($_SESSION['login_user']);
-
-		Redirect('/login/');
-	}
-	
-	RequiresLogin();
-	
-	switch ($tokens[1]) {
 	case 'admin':
-		// RequiresAdminLogin();
+		include_once('admin/functions/categories.inc');
+		include_once('admin/functions/users.inc');
+		include_once('admin/functions/students.inc');
+		include_once('admin/functions/teachers.inc');
+		include_once('admin/functions/places.inc');
+		include_once('admin/functions/subjects.inc');
+		include_once('admin/functions/courses.inc');
+		include_once('admin/functions/timetable.inc');
 		
-        $module = $tokens[2];
+		$module = $tokens[2];
 		
 		$categories_active = '';
 		$subjects_active = '';
@@ -94,10 +59,38 @@
 		$teachers_import_active = '';
 		
         switch ($module) {
-			default:
-				// Redirect('/admin/dashboard/');    
+			case 'login':
+				$page_title = 'Admin Sign In';
+				include('admin/login.php');
+				exit;
+			
+			case 'loginpost':
+				$username = $_POST['email'];
+				$password = $_POST['password'];
+			
+				if ($username == $admin_username && $password == $admin_password) {
+					$_SESSION['login_user']['is_admin'] = true;
+					
+					// print "Logged in as admin"; exit;
+					Redirect('/admin/courses/');
+				} else if ($user_id = ValidateAdminLogin($username, $password)) {
+					$_SESSION['login_user'] = GetUserById($user_id);
+					
+					Redirect('/');
+				} else {
+					Redirect('/admin/login/');
+				} 
 				
+				break;
+				
+			case 'logout':
+				unset($_SESSION['login_user']);
+			
+				Redirect('/admin/login/');
+			
 			case 'complete':
+				RequiresAdminLogin();
+						
 				$entities = $tokens[3];				// 	/admin/complete/subjects/cat/" + categoryId
 				$id =  $tokens[5];
 			
@@ -116,8 +109,13 @@
 				}
 			
 				break;
+			
+			default:
+			// Redirect('/admin/dashboard/');    
 				
             case 'categories':
+				RequiresAdminLogin();
+						
 				$action = $tokens[4] ?? '';
 				
 				if ($action != '') {
@@ -237,6 +235,8 @@
                 break;
 
 			case 'subjects':
+				RequiresAdminLogin();
+						
 				if ( $tokens[3] == 'create') {
 					CreateSubject($_POST);
 					Redirect("/admin/subjects/");
@@ -271,6 +271,8 @@
 				break;
 
 			case 'courses':
+				RequiresAdminLogin();
+						
 				$page_title = "Courses";
 				$courses_active = 'active';
 				$courses = GetCourses();
@@ -282,6 +284,8 @@
 				break;
 
 			case 'places':
+				RequiresAdminLogin();
+						
 				if ( $tokens[3] == 'create') {
 					CreatePlace($_POST);
 					Redirect("/admin/places/");
@@ -314,6 +318,8 @@
                 break;
 
 			case 'students':
+				RequiresAdminLogin();
+						
 				$students_show = 'show';
 				$students_active = 'active';
 				
@@ -421,6 +427,8 @@
 				break;
 				
 			case 'teachers':
+				RequiresAdminLogin();
+						
 				$teachers_show = 'show';
 				$teachers_active = 'active';
 				
@@ -530,7 +538,56 @@
 		
 		break;
 
-	default: 
+	default:
+		switch ($tokens[1]) {
+		case 'login':
+			$page_title = 'Sign In';
+			include('login/login.php');
+			exit;
+			
+		case 'verify':
+			$email = $_POST['email'];
+			$otp = GenerateOTPForUser($email);
+			$page_title = "Verify OTP ($otp)";
+			include('login/verifyotp.php');
+			exit;
+			
+		case 'verifypost':
+			$email = $_POST['email'];
+			$otp = $_POST['otp'];
+			
+			$user = ValidateUserLogin($email, $otp);
+				
+			if ($user !== false) {
+				$_SESSION['login_user'] = $user;
+				Redirect('/students/courses/');
+			} else {
+				Redirect('/login/');
+			}
+			
+			break;
+			
+		case 'logout':
+			unset($_SESSION['login_user']);
+		
+			Redirect('/login/');
+			
+		case 'students':
+			RequiresLogin();
+			
+			$module = $tokens[2];
+			
+			switch ($module) {
+				case 'courses':
+					include('students/modules/courses/emptyview.php');
+					
+					exit;
+			}
+			
+		}
+		
+		
+		
 		if ($_SESSION['login_user']['is_admin'] == true) {
 			Redirect('/admin/teachers/');
 		} else {
