@@ -11,8 +11,12 @@
         global $mysqli;
         
         $query = "
-            SELECT * 
+            SELECT users.*, students.student_id, teachers.teacher_id
             FROM `users` 
+            LEFT JOIN `students`
+            ON `students`.user_id=users.user_id
+            LEFT JOIN `teachers`
+            ON `teachers`.user_id=users.user_id
             WHERE `email`='$email' AND `otp`='$otp'
         ";
         
@@ -20,7 +24,19 @@
         $num_results = $result->num_rows > 0;
         
         if ($num_results > 0) {
-            return $result->fetch_assoc();
+            $user = $result->fetch_assoc();
+            $user_id = $user['user_id'];
+            
+            $query = "
+                UPDATE `users`
+                SET `otp`=NULL,
+                    `last_login`=NOW()
+                WHERE `user_id`=$user_id
+            ";
+            
+            $result = $mysqli->query($query);
+            
+            return $user;
         }
         
         return false;
