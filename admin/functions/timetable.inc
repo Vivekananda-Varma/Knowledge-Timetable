@@ -6,11 +6,12 @@
         $timetable = array();
         
         $query = "
-            SELECT periods.*, places.place_name, courses.course_name, courses.display_name, teachers.teacher_id, users.firstname, users.lastname
+            SELECT periods.*, places.place_name, courses.course_name, courses.display_name, subjects.category_id, teachers.teacher_id, users.firstname, users.lastname
             FROM `attendees`
             LEFT JOIN `periods` ON periods.period_id=attendees.period_id
             LEFT JOIN places ON places.place_id=periods.place_id
             LEFT JOIN courses ON courses.course_id=periods.course_id
+            LEFT JOIN subjects ON subjects.subject_id=courses.subject_id
             LEFT JOIN teachers ON teachers.teacher_id=courses.teacher_id
             LEFT JOIN users ON users.user_id=teachers.user_id
             WHERE student_id=$student_id
@@ -32,6 +33,7 @@
                 $course_id = $row['course_id'];
                 $course_name = $row['course_name'];
                 $display_name = $row['display_name'];
+                $category_id = $row['category_id'];
                 $place_id = $row['place_id'];
                 $place_name = $row['place_name'];
                 $teacher_id = $row['teacher_id'];
@@ -42,6 +44,7 @@
                     'course_id' => $course_id,
                     'course_name' => $course_name,
                     'display_name' => $display_name,
+                    'category_id' => $category_id,
                     'place_id' => $place_id,
                     'place_name' => $place_name,
                     'teacher_id' => $teacher_id,

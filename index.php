@@ -608,7 +608,7 @@
 			case 'timetable':
 				$page_title = "Timetable";
 				
-				Redirect('/students/modules/timetable/timetable.html');
+				include('students/modules/timetable/index.php');
 			}
 		}
 		
