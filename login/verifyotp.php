@@ -43,6 +43,7 @@
             </div>
         </section>
     </div>
+    <?php include('templates/footer.html'); ?>
     <?php include('templates/foot.html'); ?>
 </body>
 

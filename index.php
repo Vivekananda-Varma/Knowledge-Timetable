@@ -593,7 +593,7 @@
 					exit;
 					
 				default:
-					$page_title = "Courses";
+					$page_title = "My Courses";
 					
 					include('students/modules/courses/emptyview.php');
 					exit;		
@@ -602,11 +602,13 @@
 				break;
 				
 			case 'teachers':
+				$page_title = "My Teachers";
 				
+				include('students/modules/teachers/index.php');
 				break;
 				
 			case 'timetable':
-				$page_title = "Timetable";
+				$page_title = "My Timetable";
 				
 				include('students/modules/timetable/index.php');
 			}
