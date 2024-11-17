@@ -13,8 +13,8 @@
     $place_id = $course['default_place_id'] ?? '';
     $place_name = $course['place_name'] ?? '';
     
-    $requirements = str_replace("\r\n", "<br>", $course['requirements'] ?? '');
-    $blurb = str_replace("\r\n", "<br>", $course['blurb'] ?? '');
+    $requirements = str_replace("\r\n", "<br>", $course['requirements'] ?? 'N/A');
+    $blurb = str_replace("\r\n", "<br>", $course['blurb'] ?? 'N/A');
     
     $category_name = $course['category_name'];
     $subject_name = $course['subject_name'];
@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-xl-10 mx-auto">
                             <div class="d-flex justify-content-between align-items-center mb-4">
-                                <a href="/students/courses/select/" class="d-flex align-items-center text-primary" style="font-weight: bold; text-decoration: none; cursor: pointer;">
+                                <a href="javascript:history.back()" class="d-flex align-items-center text-primary" style="font-weight: bold; text-decoration: none; cursor: pointer;">
                                     <i class="uil uil-angle-left" style="font-size: 1.5rem; margin-right: -2px;"></i>Back
                                 </a>                               
                             </div>
