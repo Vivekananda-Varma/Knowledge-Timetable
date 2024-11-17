@@ -58,7 +58,8 @@
                                     $teacher = $period['firstname'] ?? '&nbsp;';
                                     $place = $period['place_name'] ?? '&nbsp;';
                                     
-                                    $color = $colors[$category_id % 14];
+                                    $color_index = ($category_id - 11) % 14;
+                                    $color = $colors[$color_index];
                                     
                                     if ($display_name == '') {
                                         $display_name = $subject;
