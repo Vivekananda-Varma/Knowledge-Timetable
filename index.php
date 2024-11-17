@@ -25,6 +25,8 @@
 	$gUri  = $_SERVER['REQUEST_URI'];
 	$gMethod = $_SERVER['REQUEST_METHOD'];
 	
+	$colors = array('yellow', 'orange', 'red', 'pink', 'violet', 'purple', 'blue', 'aqua', 'green', 'leaf', 'navy', 'fuchsia', 'sky', 'grape');
+	
 	$tokens = explode("/", $gUri);					// tokenize url
 	
 	// print_r($tokens);
@@ -273,13 +275,31 @@
 			case 'courses':
 				RequiresAdminLogin();
 						
-				$page_title = "Courses";
-				$courses_active = 'active';
-				$courses = GetCourses();
-				$categories = GetCategories();
-				$places = GetPlaces();
+				$action = $tokens[4] ?? '';
 				
-				include('admin/modules/courses/index.php');
+				if ($action != '') {
+					$course_id = $tokens[3] ?? '';																
+					
+					switch($action) {
+						case 'editpost':
+							UpdateCourse($course_id, $_POST);
+							Redirect("/admin/courses/");
+							
+							break;
+				
+						case 'delete':
+							
+							break;
+					}
+				} else {
+					$page_title = "Courses";
+					$courses_active = 'active';
+					$courses = GetCourses();
+					$categories = GetCategories();
+					$places = GetPlaces();
+					
+					include('admin/modules/courses/index.php');
+				}
 				
 				break;
 
@@ -599,6 +619,12 @@
 					$page_title = "Select Courses";
 					
 					include('students/modules/courses/select.php');
+					exit;
+					
+				case 'id':
+					$course_id = $tokens[4];
+					
+					include('students/modules/courses/detail.php');
 					exit;
 					
 				default:

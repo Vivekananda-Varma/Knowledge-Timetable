@@ -4,5 +4,16 @@
     </svg>
 </div>
 
+<script>
+    $(document).ready(function() {
+      var responsiveDiv = $('div[data-href]');
+
+      responsiveDiv.on('click', this, function() {
+        document.location = $(this).attr('data-href');
+      });
+    });
+  </script>
+
+
 <script src="/frontend/assets/js/plugins.js"></script>
 <script src="/frontend/assets/js/theme.js"></script>
