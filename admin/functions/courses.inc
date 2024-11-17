@@ -1,10 +1,16 @@
 <?php
 
-    function GetCourses() {
+    function GetCourses($filter='') {
         global $mysqli;
         
         $courses = array();
          
+        if ($filter != '') {
+            $where_clause = "WHERE `course_name` LIKE '%$filter%' OR `users`.`firstname` LIKE '%$filter%'";
+        } else {
+            $where_clause = '';
+        }
+        
         $query = "
             SELECT `courses`.*, `subjects`.*, `teachers`.*, `users`.*
             FROM `courses`
@@ -14,7 +20,8 @@
             ON `courses`.`teacher_id`=`teachers`.`teacher_id`
             LEFT JOIN `users` 
             ON `teachers`.`user_id`=`users`.`user_id`
-            ORDER BY `course_name`
+            $where_clause
+            ORDER BY `subjects`.`category_id`, `course_name`
         ";
         
         $result = $mysqli->query($query);

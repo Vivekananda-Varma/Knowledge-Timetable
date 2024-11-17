@@ -52,3 +52,35 @@
 .table td {
     vertical-align: middle; 
 }
+
+.period {
+    position: relative;
+    height: 90px;
+    box-sizing: border-box;
+}
+
+.period .subject {
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 5px;
+    text-align: center;
+    padding: 0 5px;
+    font-size: 0.9em;
+}
+
+.period .teacher {
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 35px;
+    text-align: center;
+}
+
+.period .place {
+    position: absolute;
+    bottom: 3px;
+    left: 5px;
+    text-align: left;
+    font-size: 11px;
+}

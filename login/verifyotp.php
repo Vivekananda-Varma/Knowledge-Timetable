@@ -26,7 +26,7 @@
                         <div class="card">
                             <div class="card-body p-11 text-center">
                                 <h2 class="mb-3 text-center">Step 2</h2>
-                                <p class="lead text-center">Enter the 6-digit verification code that was sent to your email</p>
+                                <p class="lead text-center">Enter the 6-digit verification code that was sent to your email (<?= $otp ?>)</p>
                                 <form name="login-form" method="post" action="/verifypost/" class="text-start mb-3 mt-6">
                                     <div class="form-floating mb-4">
                                         <input type="password" name="otp" class="form-control" />

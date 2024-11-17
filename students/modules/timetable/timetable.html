@@ -11,9 +11,9 @@
         <meta name="author" content="elemis" />
         <title>Sandbox - Modern & Multipurpose Bootstrap 5 Template</title>
         <link rel="shortcut icon" href="assets/img/favicon.png" />
-        <link rel="stylesheet" href="assets/css/plugins.css" />
-        <link rel="stylesheet" href="assets/css/style.css" />
-        <link rel="stylesheet" href="styles/timetable.css">
+        <link rel="stylesheet" href="/frontend/assets/css/plugins.css" />
+        <link rel="stylesheet" href="/frontend/assets/css/style.css" />
+        <link rel="stylesheet" href="/styles/timetable.css">
     </head>
 
     <body>
@@ -94,7 +94,7 @@
                 <div class="container pt-10 pt-md-17 pb-13 pb-md-15">
                     <h2 class="display-4 mb-3 text-center">Timetable</h2>
                     <div class="row justify-content-center">
-                        <div class="col-lg-6 col-md-8 col-sm-10 mb-0 mx-auto">
+                        <div class="col-lg-12 col-md-8 col-sm-10 mb-0 mx-auto">
                             <div id="accordion-1" class="accordion-wrapper">
                                 <div class="card accordion-item">
                                     <div class="card-header" id="accordion-heading-1-1">
@@ -102,40 +102,58 @@
                                     </div>
                                     <div id="accordion-collapse-1-1" class="collapse" aria-labelledby="accordion-heading-1-1" data-bs-target="#accordion-1">
                                         <div class="card-body">
-                                            <div class="row mb-1 period border rounded text-center">
-                                                <div class="col-12"><span class="subject">English</span></div>
-                                                <div class="col-12"><span class="teacher">Avani</span></div>
-                                                <div class="col-12"><span class="place">Knowledge</span></div>
-                                            </div>
-                                            <div class="row mb-1 period border rounded text-center">
-                                                <div class="col-12"><span class="subject">Sanskrit</span></div>
-                                                <div class="col-12"><span class="teacher">Bharat Aarya</span></div>
-                                                <div class="col-12"><span class="place">School</span></div>
-                                            </div>
-                                            <div class="row mb-1 period border rounded text-center">
-                                                <div class="col-12"><span class="subject">Carpentry</span></div>
-                                                <div class="col-12"><span class="teacher">Rajen Bhai</span></div>
-                                                <div class="col-12"><span class="place">Ambabhikshu</span></div>
-                                            </div>
-                                            <div class="row mb-1 period border rounded text-center">
-                                               <div class="col-12"><span class="subject">&nbsp;</span></div>
-                                               <div class="col-12"><span class="teacher">&nbsp;</span></div>
-                                               <div class="col-12"><span class="place">&nbsp;</span></div>
-                                            </div>
-                                            <div class="row mb-1 period border rounded text-center">
-                                                <div class="col-12"><span class="subject">Web Design</span></div>
-                                                <div class="col-12"><span class="teacher">Shashwat Da</span></div>
-                                                <div class="col-12"><span class="place">School</span></div>
-                                            </div>
-                                            <div class="row mb-1 period border rounded text-center">
-                                                <div class="col-12"><span class="subject">Chemistry Practicals</span></div>
-                                                <div class="col-12"><span class="teacher">Amit Bhai</span></div>
-                                                <div class="col-12"><span class="place">Lab</span></div>
-                                            </div>
-                                            <div class="row mb-1 period border rounded text-center">
-                                                <div class="col-12"><span class="subject">Savitri</span></div>
-                                                <div class="col-12"><span class="teacher">Jhumur Di</span></div>
-                                                <div class="col-12"><span class="place">Teacher's Residence</span></div>
+                                            <div class="container overflow-hidden">
+                                                <div class="row row-cols-1 row-cols-lg-7 mb-lg-1 mx-lg-n2 gx-1">
+                                                    <div class="col mb-1">
+                                                        <div class="period p-1 border bg-light text-center">
+                                                            <span class="subject">English</span>
+                                                            <span class="teacher">Avani</span>
+                                                            <span class="place">Knowledge</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col mb-1">
+                                                        <div class="period p-1 border bg-light text-center">
+                                                            <div class=""><span class="subject">Sanskrit</span></div>
+                                                            <div class=""><span class="teacher">Bharat Aarya</span></div>
+                                                            <div class=""><span class="place">School</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col mb-1">
+                                                        <div class="period p-1 border bg-light text-center">
+                                                            <div class=""><span class="subject">Carpentry</span></div>
+                                                            <div class=""><span class="teacher">Rajen Bhai</span></div>
+                                                            <div class=""><span class="place">Ambabhikshu</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col mb-1">
+                                                        <div class="period p-1 border bg-light text-center">
+                                                            <div class=""><span class="subject">&nbsp;</span></div>
+                                                            <div class=""><span class="teacher">&nbsp;</span></div>
+                                                            <div class=""><span class="place">&nbsp;</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col mb-1">
+                                                        <div class="period p-1 border bg-light text-center">
+                                                            <div class=""><span class="subject">Web Design</span></div>
+                                                            <div class=""><span class="teacher">Shashwat Da</span></div>
+                                                            <div class=""><span class="place">School</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col mb-1">
+                                                        <div class="period p-1 border bg-light text-center">
+                                                            <div class=""><span class="subject">Chemistry Practicals</span></div>
+                                                            <div class=""><span class="teacher">Amit Bhai</span></div>
+                                                            <div class=""><span class="place">Lab</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col mb-1">
+                                                        <div class="period p-1 border bg-light text-center">
+                                                            <div class=""><span class="subject">Savitri</span></div>
+                                                            <div class=""><span class="teacher">Jhumur Di</span></div>
+                                                            <div class=""><span class="place">Teacher's Residence</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -202,7 +220,7 @@
                 <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
             </svg>
         </div>
-        <script src="assets/js/plugins.js"></script>
-        <script src="assets/js/theme.js"></script>
+        <script src="/frontend/assets/js/plugins.js"></script>
+        <script src="/frontend/assets/js/theme.js"></script>
     </body>
 </html>

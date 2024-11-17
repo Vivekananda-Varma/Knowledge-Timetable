@@ -548,7 +548,7 @@
 		case 'verify':
 			$email = $_POST['email'];
 			$otp = GenerateOTPForUser($email);
-			$page_title = "Verify OTP ($otp)";
+			$page_title = "Verify OTP";
 			include('login/verifyotp.php');
 			exit;
 			
@@ -578,25 +578,46 @@
 			$module = $tokens[2];
 			
 			switch ($module) {
-				case 'courses':
-					if ($tokens[3] == 'select') {
-						$page_title = "Select Courses";
-						
-						include('students/modules/courses/select.php');
-					} else {
-						$page_title = "Courses";
-						
-						include('students/modules/courses/emptyview.php');
-					}
+			case 'courses':
+				$action = $tokens[3];
+				$filter = '';
+				
+				switch ($action) {
+				case 'search':
+					$filter = $_GET['q'];
+					
+				case 'select':
+					$page_title = "Select Courses";
+					
+					include('students/modules/courses/select.php');
 					exit;
+					
+				default:
+					$page_title = "Courses";
+					
+					include('students/modules/courses/emptyview.php');
+					exit;		
+				}
+				
+				break;
+				
+			case 'teachers':
+				
+				break;
+				
+			case 'timetable':
+				$page_title = "Timetable";
+				
+				Redirect('/students/modules/timetable/timetable.html');
 			}
 		}
 		
-		if ($_SESSION['login_user']['is_admin'] == true) {
-			Redirect('/admin/teachers/');
-		} else {
-			print '404';
-		}
+		// if ($_SESSION['login_user']['is_admin'] == true) {
+		// 	Redirect('/admin/teachers/');
+		// } else {
+		// 	print '404';
+		// }
 	}
 	
+	RequiresLogin();
 ?>

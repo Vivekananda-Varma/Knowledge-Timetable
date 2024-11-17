@@ -1,8 +1,9 @@
 <?php
 
+    include_once('admin/functions/categories.inc');
     include_once('admin/functions/courses.inc');
     
-    $courses = GetCourses();
+    $courses = GetCourses($filter);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,16 +27,27 @@
                             <h3 class="mb-0 text-center w-100">Courses</h3>
                             <a href="#" class="text-primary ms-3" style="white-space: nowrap; font-weight: bold; text-decoration: none;">Done</a>
                         </div>
-                        <form class="filter-form mb-4">
+                        <form name="search-form" method="get" action="/students/courses/search/" class="filter-form mb-4">
                             <div class="input-group">
                                 <span class="input-group-text bg-white border-end-0">
                                     <i class="uil uil-search" style="font-size: 1.2rem;"></i>
                                 </span>
-                                <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Search for courses or teachers...">
+                                <input type="text" id="searchInput" name="q" value="<?= $filter ?>" class="form-control border-start-0" placeholder="Search for courses or teachers...">
                             </div>
                         </form>
+                    <?php
+                        if ($filter != '') {
+                            $num_courses = count($courses);
+                            $display_string = $num_courses ? "Showing $num_courses result(s) containing <i>$filter</i>" : "No courses found containing <i>$filter</i>";
+                    ?>
+                        <h3 class="mt-2"><?= $display_string ?></h3>
+                    <?php
+                        }
+                    ?>
                         <div class="job-list mb-10">
                     <?php
+                    
+                        $previous_cat_id = '';
                     
                         foreach($courses as $course) {
                             $course_id = $course['course_id'];
@@ -52,8 +64,16 @@
                             $lastname = $course['lastname'];
                             $fullname = "$firstname $lastname";
                             
-                            if ($display_name != '') {
-                                $course_name = $display_name;
+                            // if ($display_name != '') {
+                            //     $course_name = $display_name;
+                            // }
+                            
+                            if ($category_id != $previous_cat_id) {
+                                $previous_cat_id = $category_id;
+                                $category = GetCategoryByID($category_id);
+                                $category_name = $category['category_name'];
+                                
+                                print "<br><h5>$category_name</h5>";
                             }
                     ?>    
                             <div class="card mb-3 lift" data-href="">
