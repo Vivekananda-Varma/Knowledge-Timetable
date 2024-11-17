@@ -1,3 +1,4 @@
+/* navbar */
 .navbar-nav .nav-link i {
     font-size: 1.6em;
     vertical-align: middle;
@@ -17,6 +18,7 @@
     margin-left: auto;
 }
 
+/* Corses */
 .form-check-input {
     border-radius: 50% !important;
     width: 1.3rem;  
@@ -53,6 +55,8 @@
     vertical-align: middle; 
 }
 
+
+/* Timetable */
 .period {
     position: relative;
     height: 90px;
@@ -83,4 +87,13 @@
     left: 5px;
     text-align: left;
     font-size: 11px;
+}
+
+
+/* Teachers */
+.profile-pic img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
