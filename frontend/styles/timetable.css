@@ -93,3 +93,19 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+
+/* Edit Profile */
+.input-with-icon {
+    position: relative;
+}
+.input-with-icon .icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
+}
+.form-control:disabled {
+    padding-right: 30px; 
+}
