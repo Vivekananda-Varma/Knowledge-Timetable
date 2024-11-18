@@ -17,7 +17,7 @@
                             </div>
                             <div class="job-list mb-10">
                                 <!-- Card 1 -->
-                                <a href="#" class="card mb-3 lift text-decoration-none">
+                                <a href="/students/modules/teachers/teacher-profile.html" class="card mb-3 lift text-decoration-none">
                                     <div class="card-body p-5">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center">
@@ -34,7 +34,7 @@
                                     </div>
                                 </a>
                                 <!-- Card 2 -->
-                                <a href="#" class="card mb-3 lift text-decoration-none">
+                                <a href="/students/modules/teachers/teacher-profile.html" class="card mb-3 lift text-decoration-none">
                                     <div class="card-body p-5">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center">
@@ -52,7 +52,7 @@
                                     </div>
                                 </a>
                                 <!-- Card 3 -->
-                                <a href="#" class="card mb-3 lift text-decoration-none">
+                                <a href="/students/modules/teachers/teacher-profile.html" class="card mb-3 lift text-decoration-none">
                                     <div class="card-body p-5">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center">
@@ -71,7 +71,7 @@
                                     </div>
                                 </a>
                                 <!-- Card 4 -->
-                                <a href="#" class="card mb-3 lift text-decoration-none">
+                                <a href="/students/modules/teachers/teacher-profile.html" class="card mb-3 lift text-decoration-none">
                                     <div class="card-body p-5">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center">
@@ -88,7 +88,7 @@
                                     </div>
                                 </a>
                                 <!-- Card 5 -->
-                                <a href="#" class="card mb-3 lift text-decoration-none">
+                                <a href="/students/modules/teachers/teacher-profile.html" class="card mb-3 lift text-decoration-none">
                                     <div class="card-body p-5">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center">
