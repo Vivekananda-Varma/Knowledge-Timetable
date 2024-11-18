@@ -82,12 +82,12 @@
                                                     <td class="align-text-top">3 years</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="align-text-top">Requirements</td>
-                                                    <td class="align-text-top"><?= $requirements ?></td>
-                                                </tr>
-                                                <tr>
                                                     <td class="align-text-top">Course Details</td>
                                                     <td class="align-text-top"><?= $blurb ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-text-top">Requirements</td>
+                                                    <td class="align-text-top"><?= $requirements ?></td>
                                                 </tr>
                                             </tbody>
                                         </table>
