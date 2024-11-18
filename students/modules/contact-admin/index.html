@@ -9,7 +9,7 @@
         />
         <meta name="keywords" content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template" />
         <meta name="author" content="elemis" />
-        <title>Profile</title>
+        <title>Contact Admin</title>
         <link rel="shortcut icon" href="/frontend/assets/img/favicon.png" />
         <link rel="stylesheet" href="/frontend/assets/css/plugins.css" />
         <link rel="stylesheet" href="/frontend/assets/css/style.css" />
@@ -78,90 +78,64 @@
                 <!-- /.navbar -->
             </header>
 
-            <section id="snippet-2" class="wrapper bg-light wrapper-border">
-                <div class="container pt-2 pt-md-17 pb-md-14">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-4 col-xl-3 mx-auto">
-                            <div class="d-flex justify-content-between align-items-center mt-5 mb-3">
-                                <h3 class="card-title mb-0">Profile</h3>
-                            </div>
-                            <div class="card mb-3">
-                                <div class="card-body text-center position-relative">
-                                    <a href="/students/modules/profile/edit-profile.html" 
-                                       class="btn btn-circle btn-primary position-absolute top-0 end-0 m-2">
-                                        <i class="uil uil-pen"></i>
-                                    </a>
-                                    <img src="/admin/images/user-default-profile-pic.jpg" 
-                                         alt="User Profile" class="img-fluid rounded-circle mb-2" 
-                                         width="128" height="128" />
-                                    <h5 class="card-title mb-0">Aadya Ramswaroop</h5>
-                                </div>
-                                <div class="card-body">
-                                    <table class="table table-sm my-2">
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-muted text-end">DOB</td>
-                                                <td>01/05/2025</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-muted text-end">Year</td>
-                                                <td>K3</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-muted text-end">Class of</td>
-                                                <td>2025</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-muted text-end">Email</td>
-                                                <td>aadyaramswaroop.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-muted text-end">Phone</td>
-                                                <td>+123456789</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-muted text-end">Address</td>
-                                                <td>123 Main St, City, Country</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+            <section class="wrapper bg-light">
+                <div class="container py-14 py-md-16">
+                  <div class="card bg-soft-primary">
+                    <div class="card-body p-12">
+                      <div class="row gx-md-8 gx-xl-12 gy-10">
+                        <div class="col-lg-6">	
+                          <img src="./assets/img/icons/lineal/email.svg" class="svg-inject icon-svg icon-svg-sm text-primary" alt="" />
+                          <h2 class="display-4 mb-3 pe-lg-10">Contact Admin</h2>
+                          <p class="lead pe-lg-12 mb-0">The Admin can be a bitch some times. Please proceed with caution!</p>
                         </div>
-                    </div>
-                </div>
-                <div class="container py-4">
-                    <div class="row">
-                        <div class="col-12 mx-auto">
-                            <div class="row align-items-center justify-content-center">
-                                <div class="col-6">
-                                    <div class="card p-2 text-center">
-                                        <div class="card-body p-3">
-                                            <div class="icon btn btn-circle btn-lg btn-soft-red mx-auto mb-3">
-                                                <i class="uil uil-server"></i>
-                                            </div>
-                                            <h4 class="counter mb-1">24</h4>
-                                            <p class="mb-0 small">Periods</p>
-                                        </div>
-                                    </div>
+                        <div class="col-lg-6">
+                          <form class="contact-form needs-validation" method="post" action="/frontend/assets/php/contact.php" novalidate>
+                            <div class="messages"></div>
+                            <div class="row gx-4">
+                              <div class="col-md-6">
+                                <div class="form-floating mb-4">
+                                  <input id="frm_name" type="text" name="name" class="form-control border-0" placeholder="Jane" required="required" data-error="First Name is required.">
+                                  <label for="frm_name">Name *</label>
+                                  <div class="invalid-feedback">
+                                    Please enter your name.
+                                  </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="card p-2 text-center">
-                                        <div class="card-body p-3">
-                                            <div class="icon btn btn-circle btn-lg btn-soft-leaf mx-auto mb-3">
-                                                <i class="uil uil-books"></i>
-                                            </div>
-                                            <h4 class="counter mb-1">11</h4>
-                                            <p class="mb-0 small">Courses</p>
-                                        </div>
-                                    </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-floating mb-4">
+                                  <input id="frm_email" type="email" name="email" class="form-control border-0" placeholder="jane.doe@example.com" required="required" data-error="Valid email is required.">
+                                  <label for="frm_email">Email *</label>
+                                  <div class="valid-feedback">
+                                    Looks good!
+                                  </div>
+                                  <div class="invalid-feedback">
+                                    Please provide a valid email address.
+                                  </div>
                                 </div>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-floating mb-4">
+                                  <textarea id="frm_message" name="message" class="form-control border-0" placeholder="Your message" style="height: 150px" required></textarea>
+                                  <label for="frm_message">Message *</label>
+                                  <div class="valid-feedback">
+                                    Looks good!
+                                  </div>
+                                  <div class="invalid-feedback">
+                                    Please enter your messsage.
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <input type="submit" class="btn btn-outline-primary rounded-pill btn-send mb-3" value="Send message">
+                              </div>
                             </div>
+                          </form>
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </section>
-            
+            </section>   
         </div>
 
         <div class="progress-wrap">
