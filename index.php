@@ -581,7 +581,7 @@
 			if ($user !== false) {
 				$_SESSION['login_user'] = $user;
 				
-				if ($user['teacher_id'] !== false) {
+				if (!empty($user['teacher_id'])) {
 					$_SESSION['login_user']['is_teacher'] = true;
 					
 					Redirect('/teachers/courses/');
@@ -604,7 +604,14 @@
 		case 'students':
 			RequiresLogin();
 			
-			$student_id = 7;								// hard coded 
+			$loggedin_user = $_SESSION['login_user'];
+			
+			if (!$loggedin_user['is_student']) {
+				$student_id = 7;								// hard coded to Aadya
+			} else {
+				$student_id = $loggedin_user['student_id'];
+			}
+			
 			$module = $tokens[2];
 			
 			switch ($module) {
@@ -614,8 +621,6 @@
 				$id = $tokens[5];
 				
 				if ($entity == 'courses' && $action == 'toggle') {
-					$student_id = 7;
-					
 					$state = ToggleCourseForStudent($student_id, $id);
 					
 					print $state;
@@ -683,7 +688,10 @@
 					Redirect('/admin/teachers/');
 				} else {
 					if (isset($_SESSION['login_user']['is_teacher'])) {
-						Redirect('/teachers/courses/');
+						print "Teachers coming soon.";
+						
+						exit;
+						// Redirect('/teachers/courses/');
 					} else if (isset($_SESSION['login_user']['is_student'])) {
 						Redirect('/students/courses/');
 					} else {

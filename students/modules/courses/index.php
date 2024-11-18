@@ -22,6 +22,7 @@
                     <div class="col-xl-10 mx-auto">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h3 class="mb-0 text-center w-100">My Courses</h3>
+                            <a href="/students/courses/select/" class="btn btn-soft-primary btn-sm px-3 py-1">Edit</a>
                         </div>
                         <div class="job-list mb-10">
                     <?php

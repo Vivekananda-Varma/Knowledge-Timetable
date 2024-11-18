@@ -25,14 +25,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?php include 'templates/head.html'; ?>
+        <?php include('admin/templates/head.html'); ?>
     </head>
 
     <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
         <div class="wrapper">
-            <?php include 'templates/sidebar.html'; ?>
+            <?php include('admin/templates/sidebar.html'); ?>
             <div class="main">
-                <?php include 'templates/navbar.html'; ?>
+                <?php include('admin/templates/navbar.html'); ?>
 
                 <main class="content">
                     <div class="container-fluid p-0">
@@ -200,10 +200,10 @@
                     </div>
                 </main>
 
-                <?php include 'templates/footer.html'; ?>
+                <?php include('admin/templates/footer.html'); ?>
             </div>
         </div>
 
-        <?php include 'templates/foot.html'; ?>
+        <?php include('admin/templates/foot.html'); ?>
     </body>
 </html>
