@@ -630,6 +630,27 @@
 				
 				break;
 				
+			case 'profile':
+				$action = $tokens[3];
+				
+				switch ($action) {
+				case 'edit':
+					$page_title = "Edit Profile";
+					
+					include('students/modules/profile/edit.php');
+					exit;
+					
+				case 'editpost':
+					
+				default:
+					$page_title = "My Profile";
+					
+					include('students/modules/profile/index.php');
+					exit;
+				}
+				
+				break;
+				
 			case 'courses':
 				$action = $tokens[3];
 				$filter = '';
