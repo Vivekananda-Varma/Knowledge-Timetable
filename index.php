@@ -25,6 +25,8 @@
 	$gUri  = $_SERVER['REQUEST_URI'];
 	$gMethod = $_SERVER['REQUEST_METHOD'];
 	
+	$colors = array('yellow', 'orange', 'red', 'pink', 'violet', 'purple', 'blue', 'aqua', 'green', 'leaf', 'navy', 'fuchsia', 'sky', 'grape');
+	
 	$tokens = explode("/", $gUri);					// tokenize url
 	
 	// print_r($tokens);
@@ -273,13 +275,31 @@
 			case 'courses':
 				RequiresAdminLogin();
 						
-				$page_title = "Courses";
-				$courses_active = 'active';
-				$courses = GetCourses();
-				$categories = GetCategories();
-				$places = GetPlaces();
+				$action = $tokens[4] ?? '';
 				
-				include('admin/modules/courses/index.php');
+				if ($action != '') {
+					$course_id = $tokens[3] ?? '';																
+					
+					switch($action) {
+						case 'editpost':
+							UpdateCourse($course_id, $_POST);
+							Redirect("/admin/courses/");
+							
+							break;
+				
+						case 'delete':
+							
+							break;
+					}
+				} else {
+					$page_title = "Courses";
+					$courses_active = 'active';
+					$courses = GetCourses();
+					$categories = GetCategories();
+					$places = GetPlaces();
+					
+					include('admin/modules/courses/index.php');
+				}
 				
 				break;
 
@@ -560,7 +580,16 @@
 				
 			if ($user !== false) {
 				$_SESSION['login_user'] = $user;
-				Redirect('/students/courses/');
+				
+				if ($user['teacher_id'] !== false) {
+					$_SESSION['login_user']['is_teacher'] = true;
+					
+					Redirect('/teachers/courses/');
+				} else {
+					$_SESSION['login_user']['is_student'] = true;
+					
+					Redirect('/students/courses/');
+				}
 			} else {
 				Redirect('/login/');
 			}
@@ -592,6 +621,12 @@
 					include('students/modules/courses/select.php');
 					exit;
 					
+				case 'id':
+					$course_id = $tokens[4];
+					
+					include('students/modules/courses/detail.php');
+					exit;
+					
 				default:
 					$page_title = "My Courses";
 					
@@ -605,20 +640,33 @@
 				$page_title = "My Teachers";
 				
 				include('students/modules/teachers/index.php');
-				break;
+				exit;
 				
 			case 'timetable':
 				$page_title = "My Timetable";
 				
 				include('students/modules/timetable/index.php');
+				exit;
+			}
+			
+		case 'teachers':
+			Redirect('/students/courses/');
+			
+		default:
+			if (isset($_SESSION['login_user'])) {
+				if (isset($_SESSION['login_user']['is_admin'])) {
+					Redirect('/admin/teachers/');
+				} else {
+					if (isset($_SESSION['login_user']['is_teacher'])) {
+						Redirect('/teachers/courses/');
+					} else if (isset($_SESSION['login_user']['is_student'])) {
+						Redirect('/students/courses/');
+					} else {
+						print '404';
+					}
+				}
 			}
 		}
-		
-		// if ($_SESSION['login_user']['is_admin'] == true) {
-		// 	Redirect('/admin/teachers/');
-		// } else {
-		// 	print '404';
-		// }
 	}
 	
 	RequiresLogin();

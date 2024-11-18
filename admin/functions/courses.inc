@@ -12,14 +12,18 @@
         }
         
         $query = "
-            SELECT `courses`.*, `subjects`.*, `teachers`.*, `users`.*
+            SELECT `courses`.*, `subjects`.*, `categories`.*, `teachers`.*, `users`.*, `places`.`place_name`
             FROM `courses`
             LEFT JOIN `subjects` 
             ON `courses`.`subject_id`=`subjects`.`subject_id`
+            LEFT JOIN `categories`
+            ON categories.category_id=subjects.category_id
             LEFT JOIN `teachers` 
             ON `courses`.`teacher_id`=`teachers`.`teacher_id`
             LEFT JOIN `users` 
             ON `teachers`.`user_id`=`users`.`user_id`
+            LEFT JOIN `places`
+            ON `places`.`place_id`=`courses`.`default_place_id`
             $where_clause
             ORDER BY `subjects`.`category_id`, `course_name`
         ";
@@ -70,10 +74,18 @@
         global $mysqli;
         
         $query = "
-            SELECT `courses`.*, `subjects`.* 
+            SELECT `courses`.*, `subjects`.*, `categories`.*, `teachers`.*, `users`.*, `places`.`place_name`
             FROM `courses`
             LEFT JOIN `subjects` 
             ON `courses`.`subject_id`=`subjects`.`subject_id`
+            LEFT JOIN `categories`
+            ON categories.category_id=subjects.category_id
+            LEFT JOIN `teachers` 
+            ON `courses`.`teacher_id`=`teachers`.`teacher_id`
+            LEFT JOIN `users` 
+            ON `teachers`.`user_id`=`users`.`user_id`
+            LEFT JOIN `places`
+            ON `places`.`place_id`=`courses`.`default_place_id`
             WHERE `course_id`=$course_id
         ";
         
@@ -101,6 +113,27 @@
         
         $result = $mysqli->query($query);
         $course_id = $mysqli->insert_id;
+        $course = GetCourseByID($course_id);
+        
+        return $course;
+    }
+    
+    function UpdateCourse($course_id, $data) {
+        global $mysqli;
+        
+        $course_name = SanitiseUserInput($data['course_name']);
+        $blurb = SanitiseUserInput($data['blurb']);
+        $default_place_id = $data['default_place_id'];
+        
+        $query = "
+            UPDATE `courses`
+            SET `course_name`='$course_name',
+                `blurb`='$blurb',
+                `default_place_id`=$default_place_id
+            WHERE `course_id`=$course_id
+        ";
+        
+        $result = $mysqli->query($query);
         $course = GetCourseByID($course_id);
         
         return $course;

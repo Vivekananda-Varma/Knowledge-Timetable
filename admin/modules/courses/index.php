@@ -31,6 +31,7 @@
 							<tr>
 								<th>Course</th>
 								<th>Subject</th>
+								<th>Preferred Place</th>
 								<th>Teacher</th>
 							</tr>
 						</thead>
@@ -42,6 +43,8 @@
 								$subject_id = $course['subject_id'];
 								$teacher_id = $course['teacher_id'];
 								$place_id = $course['default_place_id'] ?? '';
+								$place_name = $course['place_name'] ?? '';
+								$blurb = str_replace("\r\n", "<br><br>", $course['blurb'] ?? '');
 								
 								$subject_name = $course['subject_name'];
 								$course_name = $course['course_name'];
@@ -58,6 +61,7 @@
 							<tr data-bs-toggle="modal" data-bs-target="#modal-alert" onClick="ShowModal(<?= $course_id ?>, <?= $category_id ?>, <?= $subject_id ?>, <?= $teacher_id ?>, '<?= $place_id ?>', '<?= $course_name ?>')">
 								<td><?= $course_name ?></td>
 								<td><?= $subject_name ?></td>
+								<td><?= $place_name ?></td>
 								<td><?= $fullname ?></td>
 							</tr>
 						<?php
@@ -99,7 +103,7 @@
 										</div>
 										<div class="mb-3 col-md-6">
 											<label class="form-label">Preferred Place</label>
-											<select id="inputPlace" class="form-select">
+											<select id="inputPlace" name="default_place_id" class="form-select">
 												<option selected>Select Place...</option>
 											</select>
 										</div>
@@ -150,7 +154,7 @@
 											</fieldset>
 										</div>
 									</div>
-									<textarea id="message" type="text"  class="form-control" placeholder="Blurb"></textarea>
+									<textarea id="message" type="text" name="blurb" class="form-control" placeholder="Blurb"></textarea>
 									
 									
 								</div>

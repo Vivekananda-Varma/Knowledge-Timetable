@@ -55,6 +55,7 @@
                             $subject_id = $course['subject_id'];
                             $teacher_id = $course['teacher_id'];
                             $place_id = $course['default_place_id'] ?? '';
+                            $place_name = $course['place_name'] ?? '';
                             
                             $subject_name = $course['subject_name'];
                             $course_name = $course['course_name'];
@@ -68,15 +69,22 @@
                             //     $course_name = $display_name;
                             // }
                             
+                            if ($place_name !== '') {
+                                $fullname = "$fullname, $place_name";
+                            }
+                            
+                            $color_index = ($category_id - 11) % 14;
+                            $color = $colors[$color_index];
+                            
                             if ($category_id != $previous_cat_id) {
                                 $previous_cat_id = $category_id;
                                 $category = GetCategoryByID($category_id);
                                 $category_name = $category['category_name'];
                                 
-                                print "<br><h5>$category_name</h5>";
+                                print "<br><h5 class=\"text-$color\">$category_name</h5>";
                             }
                     ?>    
-                            <div class="card mb-3 lift" data-href="">
+                            <div class="card mb-3 lift bg-soft-<?= $color ?>" data-href="/students/courses/id/<?= $course_id ?>/">
                                 <div class="card-body p-5">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex align-items-center">
@@ -84,7 +92,7 @@
                                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                             </div>
                                             <div class="d-flex flex-column">
-                                                <span class="text-body fw-bold text-start"><?= $course_name ?></span>
+                                                <span class="text-<?= $color ?> fw-bold text-start"><?= $course_name ?></span>
                                                 <span class="text-muted text-start"><?= $fullname ?></span>
                                             </div>
                                         </div>
