@@ -1,4 +1,4 @@
-*[data-href] {
+*[data-href], .form-check-input {
     cursor: pointer;
 }
 

@@ -604,12 +604,32 @@
 		case 'students':
 			RequiresLogin();
 			
+			$student_id = 7;								// hard coded 
 			$module = $tokens[2];
 			
 			switch ($module) {
+			case 'complete':								// 	/students/complete/courses/toggle/<id>
+				$entity = $tokens[3];
+				$action = $tokens[4];
+				$id = $tokens[5];
+				
+				if ($entity == 'courses' && $action == 'toggle') {
+					$student_id = 7;
+					
+					$state = ToggleCourseForStudent($student_id, $id);
+					
+					print $state;
+					
+					exit;
+				}
+				
+				break;
+				
 			case 'courses':
 				$action = $tokens[3];
 				$filter = '';
+				
+				$selected_courses = GetCoursesForStudent($student_id);
 				
 				switch ($action) {
 				case 'search':
@@ -630,7 +650,12 @@
 				default:
 					$page_title = "My Courses";
 					
-					include('students/modules/courses/emptyview.php');
+					if (count($selected_courses) > 0) {
+						include('students/modules/courses/index.php');
+					} else {
+						include('students/modules/courses/emptyview.php');
+					}
+					
 					exit;		
 				}
 				

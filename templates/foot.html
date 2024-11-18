@@ -5,13 +5,17 @@
 </div>
 
 <script>
+    var shouldFollowDataRef = true;
+        
     $(document).ready(function() {
         var responsiveDiv = $('div[data-href]');
         
         responsiveDiv.on('click', this, function() {
-        document.location = $(this).attr('data-href');
+            if (shouldFollowDataRef == true) {
+                document.location = $(this).attr('data-href');
+            }
+        });
     });
-});
 </script>
 
 

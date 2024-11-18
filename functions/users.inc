@@ -21,7 +21,7 @@
         ";
         
         $result = $mysqli->query($query);
-        $num_results = $result->num_rows > 0;
+        $num_results = $result->num_rows;
         
         if ($num_results > 0) {
             $user = $result->fetch_assoc();
@@ -79,5 +79,61 @@
         $result = $mysqli->query($query);
         
         return $otp;
+    }
+    
+    function GetCoursesForStudent($student_id) {
+        global $mysqli;
+        
+        $query = "
+            SELECT *
+            FROM xref_students_courses
+            WHERE `student_id`='$student_id'
+        ";
+        
+        $result = $mysqli->query($query);
+        $num_results = $result->num_rows;
+        
+        $courses = array();
+        
+        for ($i = 0; $i < $num_results; $i++) {
+            $row = $result->fetch_assoc();
+            $courses[] = $row['course_id'];
+        }
+        
+        return $courses;
+    }
+    
+    function ToggleCourseForStudent($student_id, $course_id) {
+        global $mysqli;
+        
+        $query = "
+            SELECT *
+            FROM xref_students_courses
+            WHERE `student_id`='$student_id' AND `course_id`='$course_id'
+        ";
+        
+        $result = $mysqli->query($query);
+        $num_results = $result->num_rows;
+        
+        if ($num_results > 0) {
+            $query = "
+                DELETE FROM xref_students_courses
+                WHERE `student_id`='$student_id' AND `course_id`='$course_id'
+            ";
+            
+            $result = $mysqli->query($query);
+            
+            return 0;
+        } else {
+            $query = "
+                INSERT INTO xref_students_courses
+                SET `student_id`='$student_id',
+                    `course_id`='$course_id'
+            ";
+            
+            $result = $mysqli->query($query);
+        }
+        
+        return 1;
     }
 ?>

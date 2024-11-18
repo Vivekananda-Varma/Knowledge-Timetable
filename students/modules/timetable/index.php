@@ -2,7 +2,7 @@
     
     include('admin/functions/timetable.inc');
     
-    $timetable = GetTimetableForStudentId(7);
+    $timetable = GetTimetableForStudentId($student_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
