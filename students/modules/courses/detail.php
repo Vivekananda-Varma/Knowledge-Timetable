@@ -50,49 +50,42 @@
                                 </a>                               
                             </div>
                             <div class="card shadow-none bg-soft-<?= $color ?>">
-                                <div class="card-body">
-                                    <h4 class="mb-3  text-<?= $color ?>" style="text-align: left; font-weight: bold;">Course Details</h4>
-                                    <div class="card-body text-<?= $color ?>">
-                                        <table class="table table-sm my-2 text-<?= $color ?>">
-                                            <tbody>
-                                                <tr>
-                                                    <td width="25%" class="align-text-top"><?= $course_name_label ?></td>
-                                                    <td class="align-text-top"><?= $course_name ?></td>
-                                                </tr>
-                                            <?php
-                                                if ($course_name != $subject_name) {
-                                            ?>
-                                                <tr>
-                                                    <td class="align-text-top">Subject</td>
-                                                    <td class="align-text-top"><?= $subject_name ?></td>
-                                                </tr>
-                                            <?php
-                                                }
-                                            ?>
-                                                <tr>
-                                                    <td class="align-text-top">Category</td>
-                                                    <td class="align-text-top"><?= $category_name ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="align-text-top">Teacher</td>
-                                                    <td class="align-text-top"><?= $fullname ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="align-text-top">Duration of Course</td>
-                                                    <td class="align-text-top">3 years</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="align-text-top">Course Details</td>
-                                                    <td class="align-text-top"><?= $blurb ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="align-text-top">Requirements</td>
-                                                    <td class="align-text-top"><?= $requirements ?></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="card-body text-<?= $color ?>">
+                                    <h4 class="mb-3 text-<?= $color ?>" style="text-align: left; font-weight: bold;">Course Details</h4>
+                                    <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
+                                        <div class="col-12 col-md-4 col-lg-3"><?= $course_name_label ?></div>
+                                        <div class="col-12 col-md-8 col-lg-9"><?= $course_name ?></div>
                                     </div>
-                                    
+                                <?php
+                                    if ($course_name != $subject_name) {
+                                ?>
+                                    <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
+                                        <div class="col-12 col-md-4 col-lg-3">Subject</div>
+                                        <div class="col-12 col-md-8 col-lg-9"><?= $subject_name ?></div>
+                                    </div>   
+                                <?php
+                                    }
+                                ?>
+                                    <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
+                                        <div class="col-12 col-md-4 col-lg-3">Category</div>
+                                        <div class="col-12 col-md-8 col-lg-9"><?= $category_name ?></div>
+                                    </div> 
+                                    <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
+                                        <div class="col-12 col-md-4 col-lg-3">Teacher</div>
+                                        <div class="col-12 col-md-8 col-lg-9"><?= $fullname ?></div>
+                                    </div> 
+                                    <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
+                                        <div class="col-12 col-md-4 col-lg-3">Duration of Course</div>
+                                        <div class="col-12 col-md-8 col-lg-9">3 years</div>
+                                    </div> 
+                                    <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
+                                        <div class="col-12 col-md-4 col-lg-3">Description</div>
+                                        <div class="col-12 col-md-8 col-lg-9"><?= $blurb ?></div>
+                                    </div> 
+                                    <div class="row pt-1 pb-2">
+                                        <div class="col-12 col-md-4 col-lg-3">Requirements</div>
+                                        <div class="col-12 col-md-8 col-lg-9 "><?= $requirements ?></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -568,6 +568,12 @@
 		case 'verify':
 			$email = $_POST['email'];
 			$otp = GenerateOTPForUser($email);
+			$from_name = 'K Timetable App';
+			$from_email = 'noreply@slaice.in';
+			$subject = 'Your One time password';
+			$message = "$otp is your one time password to access the K Timetable App";
+			
+			email($from_name, $from_email, $email, $from_email, $subject, $message);
 			$page_title = "Verify OTP";
 			include('login/verifyotp.php');
 			exit;
@@ -605,8 +611,9 @@
 			RequiresLogin();
 			
 			$loggedin_user = $_SESSION['login_user'];
+			$is_student = $loggedin_user['is_student'] ?? false;
 			
-			if (!$loggedin_user['is_student']) {
+			if (!$is_student) {
 				$student_id = 7;								// hard coded to Aadya
 			} else {
 				$student_id = $loggedin_user['student_id'];
