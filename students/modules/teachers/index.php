@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -15,95 +18,73 @@
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h3 class="mb-0 text-center w-100">Teachers</h3>
                             </div>
-                            <div class="job-list mb-10">
-                                <!-- Card 1 -->
-                                <a href="/students/modules/teachers/teacher-profile.html" class="card mb-3 lift text-decoration-none">
-                                    <div class="card-body p-5">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center">
-                                                <div class="profile-pic me-4">
-                                                    <img src="../../../frontend/images/user-default-profile-pic.jpg" alt="Profile" />
-                                                </div>
-                                                <div class="d-flex flex-column">
-                                                    <span class="text-body fw-bold text-start">Bittu Da</span>
-                                                    <span class="text-muted text-start mt-2">Principles of Economics</span>
-                                                </div>
-                                            </div>
-                                            <i class="uil uil-angle-right-b"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <!-- Card 2 -->
-                                <a href="/students/modules/teachers/teacher-profile.html" class="card mb-3 lift text-decoration-none">
-                                    <div class="card-body p-5">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center">
-                                                <div class="profile-pic me-4">
-                                                    <img src="../../../frontend/images/user-default-profile-pic.jpg" alt="Profile" />
-                                                </div>
-                                                <div class="d-flex flex-column">
-                                                    <span class="text-body fw-bold text-start">Jay</span>
-                                                    <span class="text-muted text-start mt-2">Global and International Studies</span>
-                                                    <span class="text-muted text-start">Governance and Politics</span>
-                                                </div>
-                                            </div>
-                                            <i class="uil uil-angle-right-b"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <!-- Card 3 -->
-                                <a href="/students/modules/teachers/teacher-profile.html" class="card mb-3 lift text-decoration-none">
-                                    <div class="card-body p-5">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center">
-                                                <div class="profile-pic me-4">
-                                                    <img src="../../../frontend/images/user-default-profile-pic.jpg" alt="Profile" />
-                                                </div>
-                                                <div class="d-flex flex-column">
-                                                    <span class="text-body fw-bold text-start">Shashwat Da</span>
-                                                    <span class="text-muted text-start mt-2">Web Design</span>
-                                                    <span class="text-muted text-start">Graphic Design</span>
-                                                    <span class="text-muted text-start">Tabla</span>
+                            <div class="teachers-list mb-10">
+                    <?php
+                        $previous_teacher_id = '';
+                        
+                        foreach($teachers as $teacher) {
+                            $teacher_id = $teacher['teacher_id'];
+                            $firstname = $teacher['firstname'];
+                            $lastname = $teacher['lastname'];
+                            $fullname = "<b>$firstname</b> $lastname";
+                            $display_name = $teacher['display_name'];
+                            
+                            $category_id = $teacher['category_id'];
+                            $course_id = $teacher['course_id'];
+                            $course_name = $teacher['course_name'];
+                            
+                            $mobile = $teacher['mobile'];
+                            $email = $teacher['email'];
+                            $otp = $teacher['otp'];
+                            $last_login = $teacher['last_login'] ?? 'Today 7:51 pm';
+                            
+                            // $num_courses = $teacher['num_courses'];
+                            // $num_students = $teacher['num_students'];
+                            // $num_periods = $teacher['num_periods'];
+                            
+                            if ($email != '') {
+                                $email = "<a href=\"mailto:$email\">$email</a>";
+                            }
+                            
+                            $color_index = ($category_id - 11) % 14;
+                            $color = $colors[$color_index];
+                            
+                            if ($teacher_id != $previous_teacher_id) {
+                                if ($previous_teacher_id != '') {               // only close card html if we are in the middle of the loop 
+                    ?>
                                                 </div>
                                             </div>
                                             <i class="uil uil-angle-right-b"></i>
                                         </div>
                                     </div>
-                                </a>
-                                <!-- Card 4 -->
-                                <a href="/students/modules/teachers/teacher-profile.html" class="card mb-3 lift text-decoration-none">
+                                </div>
+                    <?php
+                                }
+                                
+                                $previous_teacher_id = $teacher_id;             // begin new card
+                    ?> 
+                                <div class="card mb-3 lift" data-href="/students/teachers/id/<?= $teacher_id ?>/">
                                     <div class="card-body p-5">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center">
                                                 <div class="profile-pic me-4">
-                                                    <img src="../../../frontend/images/user-default-profile-pic.jpg" alt="Profile" />
+                                                    <img src="/frontend/images/user-default-profile-pic.jpg" alt="Profile" />
                                                 </div>
                                                 <div class="d-flex flex-column">
-                                                    <span class="text-body fw-bold text-start">Shoma Di</span>
-                                                    <span class="text-muted text-start mt-2">French</span>
+                                                    <span class="text-body fw-bold text-start"><?= $fullname ?></span>
+                    <?php
+                            }
+                    ?>
+                                                    <span class="text-<?= $color ?> text-start"><?= $course_name ?></span>
+                    <?php
+                        }
+                    ?>
                                                 </div>
                                             </div>
                                             <i class="uil uil-angle-right-b"></i>
                                         </div>
                                     </div>
-                                </a>
-                                <!-- Card 5 -->
-                                <a href="/students/modules/teachers/teacher-profile.html" class="card mb-3 lift text-decoration-none">
-                                    <div class="card-body p-5">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center">
-                                                <div class="profile-pic me-4">
-                                                    <img src="../../../frontend/images/user-default-profile-pic.jpg" alt="Profile" />
-                                                </div>
-                                                <div class="d-flex flex-column">
-                                                    <span class="text-body fw-bold text-start">Sudeep Bhai</span>
-                                                    <span class="text-muted text-start mt-2">Basic Managerial Competencies</span>
-                                                </div>
-                                            </div>
-                                            <i class="uil uil-angle-right-b"></i>
-                                        </div>
-                                    </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>

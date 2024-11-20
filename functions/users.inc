@@ -138,4 +138,30 @@
         
         return 1;
     }
+    
+    function GetTeachersForStudent($student_id) {
+        global $mysqli;
+        
+        $query = "
+            SELECT courses.*, users.*, subjects.category_id
+            FROM xref_students_courses AS map
+            LEFT JOIN courses ON courses.course_id=map.course_id
+            LEFT JOIN subjects ON subjects.subject_id=courses.subject_id
+            LEFT JOIN teachers ON teachers.teacher_id=courses.teacher_id
+            LEFT JOIN users ON users.user_id=teachers.user_id
+            WHERE `student_id`='$student_id'
+            ORDER  BY users.firstname, courses.course_name
+        ";
+        
+        $result = $mysqli->query($query);
+        $num_results = $result->num_rows;
+        
+        $teachers = array();
+        
+        for ($i = 0; $i < $num_results; $i++) {
+            $teachers[] = $result->fetch_assoc();
+        }
+        
+        return $teachers;
+    }
 ?>

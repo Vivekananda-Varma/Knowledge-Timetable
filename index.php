@@ -619,6 +619,8 @@
 				$student_id = $loggedin_user['student_id'];
 			}
 			
+			$selected_courses = GetCoursesForStudent($student_id);
+			
 			$module = $tokens[2];
 			
 			switch ($module) {
@@ -662,8 +664,6 @@
 				$action = $tokens[3];
 				$filter = '';
 				
-				$selected_courses = GetCoursesForStudent($student_id);
-				
 				switch ($action) {
 				case 'search':
 					$filter = $_GET['q'];
@@ -697,7 +697,18 @@
 			case 'teachers':
 				$page_title = "My Teachers";
 				
-				include('students/modules/teachers/index.php');
+				if (count($selected_courses) > 0) {
+					if ($tokens[3] == 'id') {
+						$teacher_id = $tokens[4];
+						include('students/modules/teachers/profile.php');
+						exit;
+					}
+					
+					$teachers = GetTeachersForStudent($student_id);
+					include('students/modules/teachers/index.php');
+				} else {
+					include('students/modules/courses/emptyview.php');
+				}
 				exit;
 				
 			case 'timetable':
