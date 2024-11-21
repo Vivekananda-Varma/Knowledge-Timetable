@@ -24,6 +24,10 @@
                         $day_of_week = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                         $colors = array('yellow', 'orange', 'red', 'pink', 'violet', 'purple', 'blue', 'aqua', 'green', 'leaf', 'navy', 'fuchsia', 'sky', 'grape');
                         
+                        $num_periods = 0;
+                        $num_courses_selected = count($selected_courses);
+                        $courses_assigned = array();
+                        
                         for($i = 1; $i < 7; $i++) {
                             $day = $day_of_week[$i];
                     ?>
@@ -42,7 +46,7 @@
                                 if (empty($period)) {
                     ?>
                                                     <div class="col mb-1">
-                                                        <div class="card shadow-none">
+                                                        <div class="card shadow-none" data-href="/students/timetable/period/<?= $i ?>/<?= $j ?>/">
                                                             <div class="card-header subject px-4 py-2 border-0 bg-ash text-white">&nbsp;</div>
                                                             <div class="card-body p-4 bg-pale-ash text-ash">&nbsp;</div>
                                                             <div class="card-footer place px-4 py-2 border-0 bg-soft-ash text-ash">&nbsp;</div>
@@ -52,6 +56,7 @@
                                 } else {
                                     $place = $period['place_name'] ?? '';
                                     $category_id = $period['category_id'];
+                                    $course_id = $period['course_id'];
                                     $subject = $period['course_name'] ?? '&nbsp;';
                                     $display_name = $period['display_name'] ?? '';
                                     $teacher_id = $period['teacher_id'] ?? '';
@@ -70,9 +75,15 @@
                                     // if ($teacher_id != '') {
                                     //     $teacher = "<a href=\"/admin/teachers/$teacher_id/edit/\">$teacher</a>";
                                     // }
+                                    
+                                    $num_periods++;
+                                    
+                                    if (!in_array($course_id, $courses_assigned)) {
+                                        $courses_assigned[] = $course_id;
+                                    }
                     ?>
                                                     <div class="col mb-1">
-                                                        <div class="card shadow-none">
+                                                        <div class="card shadow-none" data-href="/students/timetable/period/<?= $i ?>/<?= $j ?>/">
                                                             <div class="card-header subject px-4 py-2 border-0 bg-<?= $color ?> text-white"><?= $display_name ?></div>
                                                             <div class="card-body p-4 bg-pale-<?= $color ?> text-<?= $color ?>"><?= $teacher ?></div>
                                                             <div class="card-footer place px-4 py-2 border-0 bg-soft-<?= $color ?> text-<?= $color ?>"><?= $place ?></div>
@@ -93,14 +104,15 @@
                             </div>
                         </div>
                     </div>
+                    <h5 class="text-center"><?= $num_periods ?> periods, <?= count($courses_assigned) ?> / <?= $num_courses_selected ?> courses assigned.</h5>
                     
                     <div class="container py-14 py-md-16">
                         <div class="row">
                             <div class="col-xl-10 col-xxl-9 mx-auto">
                                 <div class="row align-items-center justify-content-center counter-wrapper gy-6">
                                     <!-- Full-width for Courses Selected -->
-                                    <div class="col-12">
-                                        <div class="card">
+                                    <div class="col-4">
+                                        <div class="card text-center">
                                             <div class="card-body">
                                                 <div class="d-flex flex-row align-items-center">
                                                     <div>
@@ -117,7 +129,7 @@
                                         </div>
                                     </div>
                                     <!-- Second and Third Stats in Same Row -->
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <div class="card text-center">
                                             <div class="card-body">
                                                 <div class="icon btn btn-circle btn-lg btn-soft-leaf mx-auto mb-2">
@@ -128,7 +140,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <div class="card text-center">
                                             <div class="card-body">
                                                 <div class="icon btn btn-circle btn-lg btn-soft-red mx-auto mb-2">

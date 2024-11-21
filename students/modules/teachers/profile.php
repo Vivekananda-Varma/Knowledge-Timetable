@@ -43,24 +43,24 @@
                 <div class="container pt-2 pt-md-17 pb-md-14">
                     <div class="row">
                         <div class="col-md-8 col-lg-6 col-xl-5 mx-auto">
-                            <div class="d-flex align-items-center mt-5 mb-3">
-                                <a href="/students/teachers/" class="d-flex align-items-center text-primary" style="font-weight: bold; text-decoration: none; cursor: pointer;">
+                            <div class="d-flex align-items-center mt-5 mb-3  position-relative">
+                                <a href="/students/teachers/" class="d-flex align-items-center text-primary position-absolute" style="font-weight: bold; text-decoration: none; cursor: pointer;">
                                     <i class="uil uil-angle-left" style="font-size: 1.5rem; margin-right: -2px;"></i>Back
                                 </a>
                                 <h3 class="card-title mb-0 w-100 text-center">Profile</h3>
                             </div>
                             <div class="card mb-3">
                                 <div class="card-body text-center position-relative">
-                                    <img src="/admin/images/user-default-profile-pic.jpg" alt="User Profile" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+                                    <img src="/admin/images/user-default-profile-pic.jpg" alt="User Profile" class="img-fluid rounded-circle mb-4" width="200" height="200" />
                                     <h5 class="card-title mb-0"><?= $fullname ?></h5>
                                 </div>
                                 <div class="card-body">
-                                    <table class="table table-sm my-2">
+                                    <table class="table table-sm">
                                         <tbody>
-                                            <tr>
+                                            <!-- <tr>
                                                 <th class="text-end">DOB</th>
                                                 <td><?= $dob ?></td>
-                                            </tr>
+                                            </tr> -->
                                             <tr>
                                                 <th class="text-end">Email</th>
                                                 <td><?= $email ?></td>
