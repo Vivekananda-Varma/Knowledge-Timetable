@@ -115,6 +115,8 @@
             function ToggleCourse(courseId) {
                 shouldFollowDataRef = false;
                 
+                // alert("/students/complete/courses/toggle/" + courseId);
+                
                 $.ajax({
                     type: "POST",
                     url: "/students/complete/courses/toggle/" + courseId,
@@ -123,6 +125,8 @@
                     success: function(state) {
                         var checkbox = $("#checkbox-" + courseId);
                         checkbox.prop('checked', state == 1);
+                        
+                        // alert(state);
                         
                         shouldFollowDataRef = true;
                     }

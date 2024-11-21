@@ -112,7 +112,7 @@
             WHERE `student_id`='$student_id' AND `course_id`='$course_id'
         ";
         
-        print $query;
+        // print $query;
         
         $result = $mysqli->query($query);
         $num_results = $result->num_rows;
