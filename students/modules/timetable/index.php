@@ -93,7 +93,58 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="container py-14 py-md-16">
+                        <div class="row">
+                            <div class="col-xl-10 col-xxl-9 mx-auto">
+                                <div class="row align-items-center justify-content-center counter-wrapper gy-6">
+                                    <!-- Full-width for Courses Selected -->
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row align-items-center">
+                                                    <div>
+                                                        <div class="icon btn btn-circle btn-lg btn-soft-primary pe-none mx-auto me-4">
+                                                            <i class="uil uil-books"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <h3 class="counter mb-1">12</h3>
+                                                        <p class="mb-0">Courses Selected</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Second and Third Stats in Same Row -->
+                                    <div class="col-6">
+                                        <div class="card text-center">
+                                            <div class="card-body">
+                                                <div class="icon btn btn-circle btn-lg btn-soft-leaf mx-auto mb-2">
+                                                    <i class="uil uil-file-check"></i>
+                                                </div>
+                                                <h5 class="counter mb-0">8</h5>
+                                                <p class="small text-muted mb-0">Assigned</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card text-center">
+                                            <div class="card-body">
+                                                <div class="icon btn btn-circle btn-lg btn-soft-red mx-auto mb-2">
+                                                    <i class="uil uil-file-exclamation"></i>
+                                                </div>
+                                                <h5 class="counter mb-0">4</h5>
+                                                <p class="small text-muted mb-0">Unused</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </section>
         </div>
         <?php include('templates/footer.html'); ?>
