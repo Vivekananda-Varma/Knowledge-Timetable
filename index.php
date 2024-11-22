@@ -25,6 +25,7 @@
 	$gUri  = $_SERVER['REQUEST_URI'];
 	$gMethod = $_SERVER['REQUEST_METHOD'];
 	
+	$day_of_week = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');							
 	$colors = array('yellow', 'orange', 'red', 'pink', 'violet', 'purple', 'blue', 'aqua', 'green', 'leaf', 'navy', 'fuchsia', 'sky', 'grape');
 	
 	$tokens = explode("/", $gUri);					// tokenize url
@@ -712,10 +713,25 @@
 				exit;
 				
 			case 'timetable':
-				$page_title = "My Timetable";
+				$action = $tokens[3];
 				
-				include('students/modules/timetable/index.php');
-				exit;
+				switch ($action) {
+				case 'period':
+					$day = $tokens[4];
+					$period_no = $tokens[5];
+					$day_name = $day_of_week[$day];
+					
+					$page_title = "$day_name $period_no Period";
+					
+					include('students/modules/timetable/period.php');
+					exit;
+				
+				default:
+					$page_title = "My Timetable";
+					
+					include('students/modules/timetable/index.php');
+					exit;
+				}
 			}
 			
 		case 'teachers':

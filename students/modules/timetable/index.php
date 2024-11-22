@@ -21,9 +21,6 @@
                         <div class="col-lg-12 col-md-8 col-sm-10 mb-0 mx-auto">
                             <div id="accordion-1" class="accordion-wrapper">
                     <?php    
-                        $day_of_week = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-                        $colors = array('yellow', 'orange', 'red', 'pink', 'violet', 'purple', 'blue', 'aqua', 'green', 'leaf', 'navy', 'fuchsia', 'sky', 'grape');
-                        
                         $num_periods = 0;
                         $num_courses_selected = count($selected_courses);
                         $courses_assigned = array();
