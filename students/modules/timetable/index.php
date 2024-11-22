@@ -43,11 +43,11 @@
                                 if (empty($period)) {
                     ?>
                                                     <div class="col mb-1">
-                                                        <a href="/students/modules/timetable/select.html" class="card shadow-none">
+                                                        <div class="card shadow-none" data-href="/students/timetable/period/<?= $i ?>/<?= $j ?>/">
                                                             <div class="card-header subject px-4 py-2 border-0 bg-ash text-white">&nbsp;</div>
                                                             <div class="card-body p-4 bg-pale-ash text-ash">&nbsp;</div>
                                                             <div class="card-footer place px-4 py-2 border-0 bg-soft-ash text-ash">&nbsp;</div>
-                                                        </a>
+                                                        </div>
                                                     </div>
 
                     <?php				

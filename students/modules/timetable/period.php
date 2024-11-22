@@ -6,8 +6,8 @@
     $period = GetPeriodDetailsForStudent($student_id, $day, $period_no);
     
     $place = $period['place_name'] ?? '';
-    $category_id = $period['category_id'];
-    $course_id = $period['course_id'];
+    $category_id = $period['category_id'] ?? '';
+    $course_id = $period['course_id'] ?? '';
     $subject = $period['course_name'] ?? '&nbsp;';
     $course_display_name = $period['display_name'] ?? '';
     $teacher_id = $period['teacher_id'] ?? '';
@@ -22,7 +22,6 @@
     }
     
     $course_display_name = str_replace(' and ', ' &amp; ', $course_display_name);
-    
     
     $course = GetCourseByID($course_id);
     

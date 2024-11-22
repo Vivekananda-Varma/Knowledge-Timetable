@@ -684,7 +684,7 @@
 				default:
 					$page_title = "My Courses";
 					
-					if (count($selected_courses) > 0) {
+					if (count($selected_courses)) {
 						include('students/modules/courses/index.php');
 					} else {
 						include('students/modules/courses/emptyview.php');
@@ -698,7 +698,7 @@
 			case 'teachers':
 				$page_title = "My Teachers";
 				
-				if (count($selected_courses) > 0) {
+				if (count($selected_courses)) {
 					if ($tokens[3] == 'id') {
 						$teacher_id = $tokens[4];
 						include('students/modules/teachers/profile.php');
@@ -729,7 +729,12 @@
 				default:
 					$page_title = "My Timetable";
 					
-					include('students/modules/timetable/index.php');
+					if (count($selected_courses)) {
+						include('students/modules/timetable/index.php');
+					} else {
+						include('students/modules/courses/emptyview.php');
+					}
+					
 					exit;
 				}
 			}

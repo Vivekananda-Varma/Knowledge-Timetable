@@ -79,7 +79,7 @@
         $result = $mysqli->query($query);
         $num_results = $result->num_rows;
         
-        $peroid = array();
+        $period = array();
         
         if ($num_results) {
             $row = $result->fetch_assoc();
