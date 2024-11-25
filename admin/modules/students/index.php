@@ -36,6 +36,8 @@
 				<?php
 					foreach($students as $student) {
 						$student_id = $student['student_id'];
+						
+						$uid = $student['uid'];
 						$firstname = $student['firstname'];
 						$lastname = $student['lastname'];
 						$fullname = "<b>$firstname</b> $lastname";
@@ -55,10 +57,12 @@
 						if ($num_periods == 0) {
 							$num_periods = '';
 						}
+						
+						$profile_image_url = GetProfileImagePathForUID($uid);
 				?>
 							<tr data-href="/admin/students/<?= $student_id ?>/edit/">
 								<td>
-									<img src="/admin/images/user-default-profile-pic.jpg" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
+									<img src="<?= $profile_image_url ?>" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
 									<div style="display: inline-block">
 										<?= $fullname ?><br>
 										<small class="text-muted">Class of <?= $class_of ?></small>

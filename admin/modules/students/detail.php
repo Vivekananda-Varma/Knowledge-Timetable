@@ -8,6 +8,7 @@
 	
 	$timetable = GetTimetableForStudentId($student_id);
 
+	$uid = $student['uid'];
 	$firstname = $student['firstname'];
 	$lastname = $student['lastname'];
 	$fullname = "$firstname $lastname";
@@ -19,21 +20,25 @@
 	$year = $student['year'] ?? '1';
 	$last_login = $student['last_login'];
 	
-	$address_1 = $student['address_line_1'] ?? 'No. 15, Rue Suffren Street';
-	$address_2 = $student['address_line_2'] ?? 'White Town';
-	$postal_code = $student['postal_code'] ?? '605001';
+	$address_1 = $student['address_line_1'] ?? '';
+	$address_2 = $student['address_line_2'] ?? '';
+	$postal_code = $student['postal_code'] ?? '';
 	
 	$address = "$address_1, $address_2, Pondicherry $postal_code";
 	
 	if ($class_of == '') {
 		$class_of = date('Y') - $year + 3;
 	}
+	
+	$profile_image_url = GetProfileImagePathForUID($uid);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<?php include 'admin/templates/head.html'; ?>
+	<link rel="stylesheet" href="/admin/styles/filepond.css">
+	<!-- <link rel="stylesheet" href="/admin/styles/imageuploader.css"> -->
 </head>
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
@@ -57,8 +62,8 @@
 											</button>
 										</div>
 										<div class="card-body text-center">
-											<img src="/admin/images/user-default-profile-pic.jpg" alt="Stacie Hall" class="img-fluid rounded-circle mb-2" width="128" height="128" />
-											<h5 class="card-title mb-0"><?= $fullname ?></h5>
+											<img src="<?= $profile_image_url ?>" alt="Stacie Hall" class="img-fluid rounded-circle mb-2" width="200" height="200" />
+											<h5 class="card-title mt-4 mb-0"><?= $fullname ?></h5>
 										</div>
 										<div class="card-body">
 											<table class="table table-sm my-2">
@@ -69,7 +74,7 @@
 													</tr>
 													<tr>
 														<td class="text-muted text-end">Year</td>
-														<td>K<?= $year ?></td>
+														<td>HC-<?= $year ?></td>
 													</tr>
 													<tr>
 														<td class="text-muted text-end">Class of</td>
@@ -96,21 +101,41 @@
 								<div class="col-md-8 col-xl-9">
 									<!-- Profile Card Popup -->
 									<div class="collapse" id="editProfileCard">
-										<div class="card">
-											<div class="card-header">
-												<h5 class="card-title">Edit Profile</h5>
-											</div>
-											<div class="card-body">	
-												<div class="card-body text-center">
-													<a href="#" class="profile-container">
-														<img src="/admin/images/user-default-profile-pic.jpg" alt="User Default Profile Pic" class="profile-pic img-fluid mb-2">
-														<div class="profile-pic-edit-icon">
-															<i data-feather="edit-2"></i>
-														</div>
-													</a>
+										<form name="student-form" method="post" action="/admin/students/<?= $student_id ?>/editpost/">
+											<div class="card">
+												<div class="card-header">
+													<h5 class="card-title">Edit Profile</h5>
 												</div>
-												<form name="student-form" method="post" action="/admin/students/<?= $student_id ?>/editpost/">
-												<div class="row">
+												<div class="card-body">	
+													<div class="card-body text-center">
+														<!-- <div class="profile-pic-wrapper">
+													    	<div class="pic-holder">
+																<img id="profilePic" class="pic" src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg">
+															
+																<input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+																<label for="newProfilePhoto" class="upload-file-block">
+														  			<div class="text-center">
+																		<div class="mb-2">
+															  				<i class="fa fa-camera fa-2x"></i>
+																		</div>
+																		<div class="text-uppercase">
+															    			Update <br /> Profile Photo
+																		</div>
+																	</div>
+																</label>
+													  		</div>
+														</div> -->
+														
+															<input type="file" class="filepond" name="filepond[]" data-max-file-size="3MB" data-max-files="1" accepted-file-types="image/*">
+															<!-- <input type="file" class="filepond" name="filepond[]" data-max-file-size="3MB" accept="image/png, image/jpeg, image/gif"/> -->
+														<!-- <a href="#" class="profile-container">
+															<img src="/admin/images/user-default-profile-pic.jpg" alt="User Default Profile Pic" class="profile-pic img-fluid mb-2">
+															<div class="profile-pic-edit-icon">
+																<i data-feather="edit-2"></i>
+															</div>
+														</a> -->
+													</div>
+													<div class="row">
 														<div class="mb-3 col-md-6">
 															<label class="form-label" for="inputFirstName">First Name</label>
 															<input type="text" class="form-control" id="inputFirstName" name="firstname" value="<?= $firstname ?>" placeholder="First Name" />
@@ -181,9 +206,9 @@
 															<input type="submit" class="btn btn-primary" name="submit" value="Save">
 														</div>
 													</div>
-												</form>
+												</div>
 											</div>
-										</div>
+										</form>
 									</div>
 									
 									<!-- Timetable -->
@@ -386,7 +411,7 @@
 	</div>
 
 	<?php include('admin/templates/foot.html'); ?>
-
+	<?php include('admin/templates/filepondprofileimageuploader.html'); ?>
 </body>
 
 </html>

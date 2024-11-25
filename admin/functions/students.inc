@@ -3,7 +3,7 @@
     function GetStudents() {
         global $mysqli;
         
-        $sudents = array();
+        $students = array();
         
         $query = "
             SELECT `users`.*, `students`.*, 
@@ -82,29 +82,44 @@
     function ImportStudent($data) {
         global $mysqli;
         
-        $firstname = SanitiseUserInput($data['firstname']);
-        $lastname = SanitiseUserInput($data['lastname']);
-        $legalname = SanitiseUserInput($data['legalname']);
-        $display_name = SanitiseUserInput($data['display_name']);
-        $mobile = SanitiseUserInput($data['mobile']);
-        $email = SanitiseUserInput($data['email']);
-        $dob = SanitiseUserInput($data['dob']);
-        $year = SanitiseUserInput($data['year']);
+        $uid = SanitiseUserInput($data[1]);
+        $legalname = SanitiseUserInput($data[2]);
+        $display_name = SanitiseUserInput($data[3]);
+        $firstname = SanitiseUserInput($data[4]);
+        $lastname = SanitiseUserInput($data[5]);
+        $dob = SanitiseUserInput($data[6]);
+        $gender = SanitiseUserInput($data[7]);
+        $mobile = SanitiseUserInput($data[8]);
+        $email = SanitiseUserInput($data[9]);
+        $year = SanitiseUserInput($data[10]);
         
+        $gender = strtoupper($gender);                   // M, F
         $dob = DateToMySQLDate($dob);
+        $year = substr($year, 3, 1);			         // HC-1, HC-2, HC-3
         
         $query = "
             INSERT INTO `users`
-            SET `firstname`='$firstname',
+            SET `uid`='$uid',
+                `firstname`='$firstname',
                 `lastname`='$lastname',
                 `legalname`='$legalname',
                 `display_name`='$display_name',
+                `gender`='$gender',
+                `mobile`='$mobile',
+                `email`='$email',
+                `dob`='$dob'
+            ON DUPLICATE KEY UPDATE
+                `firstname`='$firstname',
+                `lastname`='$lastname',
+                `legalname`='$legalname',
+                `display_name`='$display_name',
+                `gender`='$gender',
                 `mobile`='$mobile',
                 `email`='$email',
                 `dob`='$dob'
         ";
         
-        // print "$query<br><br>";
+        // print "$query<br><br>"; return;
         
         $result = $mysqli->query($query);
         $user_id = $mysqli->insert_id;
@@ -117,7 +132,7 @@
         
         $result = $mysqli->query($query);
         $student_id = $mysqli->insert_id;
-        $student = GetTeacherByID($student_id);
+        $student = GetStudentByID($student_id);
         
         return $student;
     }
@@ -129,8 +144,12 @@
         $user_id = $student['user_id'];
         $user = GetUserByID($user_id);
         
+        $uid = SanitiseUserInput($data['uid'] ?? '');
         $firstname = SanitiseUserInput($data['firstname']);
         $lastname = SanitiseUserInput($data['lastname']);
+        $legalname = SanitiseUserInput($data['legal_name'] ?? '');
+        $display_name = SanitiseUserInput($data['display_name'] ?? '');
+        $gender = SanitiseUserInput($data['gender'] ?? '');
         $mobile = SanitiseUserInput($data['mobile']);
         $email = SanitiseUserInput($data['email']);
         $dob = SanitiseUserInput($data['dob']);
@@ -141,12 +160,15 @@
         $dob = DateToMySQLDate($dob);
         
         $year = $data['year'];
-        $class_of = $data['class_of'];
+        $class_of = SanitiseUserInput($data['class_of']);
         
         $query1 = "
             UPDATE `users`
             SET `firstname`='$firstname',
                 `lastname`='$lastname',
+                `legalname`='$legalname',
+                `display_name`='$display_name',
+                `gender`='$gender',
                 `mobile`='$mobile',
                 `email`='$email',
                 `dob`='$dob',

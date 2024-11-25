@@ -54,9 +54,9 @@
 								$lastname = $course['lastname'];
 								$fullname = "$firstname $lastname";
 								
-								if ($display_name != '') {
-									$course_name = $display_name;
-								}
+								// if ($display_name != '') {
+								// 	$course_name = $display_name;
+								// }
 						?>
 							<tr data-bs-toggle="modal" data-bs-target="#modal-alert" onClick="ShowModal(<?= $course_id ?>, <?= $category_id ?>, <?= $subject_id ?>, <?= $teacher_id ?>, '<?= $place_id ?>', '<?= $course_name ?>')">
 								<td><?= $course_name ?></td>

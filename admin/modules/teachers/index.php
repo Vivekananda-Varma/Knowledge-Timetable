@@ -32,6 +32,7 @@
 								<th>Courses</th>
 								<th>Students</th>
 								<th>Periods</th>
+								<th>Active</th>
 							</tr>
 						</thead>
 					<tbody>
@@ -52,6 +53,9 @@
 						$num_students = $teacher['num_students'];
 						$num_periods = $teacher['num_periods'];
 						
+						$is_active = $teacher['is_active'];
+						$active_check = $is_active == 1 ? '<i class="fas fa-fw fa-check text-success"></i>' : '';
+						
 						if ($email != '') {
 							$email = "<a href=\"mailto:$email\">$email</a>";
 						}
@@ -71,8 +75,8 @@
 				
 							 <tr data-href="/admin/teachers/<?= $teacher_id ?>/edit/">
 								<td>
-									<img src="/admin/images/user-default-profile-pic.jpg" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
-									<?= $fullname ?>
+									<img src="/admin/images/user-default-profile-pic.jpg" width="36" height="36" class="rounded-circle me-2 align-top">
+									<span class="d-inline-block text-muted"><?= $fullname ?><br><?= $display_name ?></span>
 								</td>
 								<td><?= $display_name ?></td>
 								<td><?= $mobile ?></td>
@@ -80,6 +84,7 @@
 								<td width="50" class="text-center"><?= $num_courses ?></td>
 								<td width="50" class="text-center"><?= $num_students ?></td>
 								<td width="50" class="text-center"><?= $num_periods ?></td>
+								<td width="50" class="text-center"><?= $active_check ?></td>
 							 </tr>
 				<?php
 					}

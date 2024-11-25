@@ -164,4 +164,10 @@
         
         return $teachers;
     }
+    
+    function GetStudentsForTeacher($student_id) {
+    global $mysqli;
+    
+        return array();
+    }
 ?>

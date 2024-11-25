@@ -15,7 +15,7 @@
 							<div class="text-center mt-4">
 								<h1 class="h2">Admin Login</h1>
 								<p class="lead">
-									Enter your email address and password provided to you.
+									Enter your email address and password.
 								</p>
 							</div>
 

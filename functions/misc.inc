@@ -188,6 +188,18 @@ function SendMail($from_name, $from_email, $recipient, $return_path, $subject, $
     }
 }
 
+function GetProfileImagePathForUID($uid) {
+     $profilepic_path = "images/profilepics/$uid.jpg";
+     
+     if (file_exists($profilepic_path)) {
+         $profile_image_url = "/$profilepic_path";
+     } else {
+         $profile_image_url = '/admin/images/user-default-profile-pic.jpg';
+     }
+     
+     return $profile_image_url;
+ }
+
 function GetAvatarForEntity($entity, $id) {
 global $TS_PARAMS;
 

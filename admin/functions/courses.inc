@@ -38,6 +38,38 @@
         return $courses;
     }
     
+    function GetCoursesForTeacher($teacher_id) {
+        global $mysqli;
+        
+        $query = "
+            SELECT `courses`.*, `subjects`.*, `categories`.*, `teachers`.*, `users`.*, `places`.`place_name`
+            FROM `courses`
+            LEFT JOIN `subjects` 
+            ON `courses`.`subject_id`=`subjects`.`subject_id`
+            LEFT JOIN `categories`
+            ON categories.category_id=subjects.category_id
+            LEFT JOIN `teachers` 
+            ON `courses`.`teacher_id`=`teachers`.`teacher_id`
+            LEFT JOIN `users` 
+            ON `teachers`.`user_id`=`users`.`user_id`
+            LEFT JOIN `places`
+            ON `places`.`place_id`=`courses`.`default_place_id`
+            WHERE `courses`.`teacher_id`='$teacher_id'
+            ORDER BY `subjects`.`category_id`, `course_name`
+        ";
+        
+        $result = $mysqli->query($query);
+        $num_results = $result->num_rows;
+        
+        $courses = array();
+        
+        for ($i = 0; $i < $num_results; $i++) {
+            $courses[] = $result->fetch_assoc();
+        }
+        
+        return $courses;
+    }
+    
     function GetTeachersForSubject($subject_id) {
         global $mysqli;
         
@@ -110,6 +142,8 @@
                 `teacher_id`=$teacher_id,
                 `course_name`='$course_name'
         ";
+        
+        // print $query; return;
         
         $result = $mysqli->query($query);
         $course_id = $mysqli->insert_id;

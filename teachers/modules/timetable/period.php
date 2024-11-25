@@ -1,12 +1,11 @@
 <?php
 
-    include('admin/functions/courses.inc');        
     include('admin/functions/timetable.inc');        
 
     $period = GetPeriodDetailsForStudent($student_id, $day, $period_no);
     
     if (empty($period)) {
-        Redirect("/students/timetable/period/$day/$period_no/select/");
+        Redirect("/teachers/timetable/period/$day/$period_no/select/");
     }
     
     $place = $period['place_name'] ?? '';
@@ -58,7 +57,7 @@
     
     <body>
         <div class="content-wrapper">
-            <?php include('students/templates/header.html'); ?>
+            <?php include('teachers/templates/header.html'); ?>
 
             <section id="snippet-2" class="wrapper bg-light wrapper-border">
                 <div class="container pt-2 pt-md-17 pb-md-14">

@@ -161,11 +161,10 @@
 									$fileName = $fileInfo["name"];
 									$source_path = $TS_PARAMS['docroot'] . "filepond/uploads/$fileName";
 									
-									// print "id: $uniqueFileID, file: $source_path<br>logo path: $destination_path";					
-									// rename($source_path, $destination_path);
-									
 									$previous_category = '';
 									$previous_subject = '';
+									
+									$sl_no = 1;
 									
 									$fileHandle = fopen($source_path, "r");
 									$firstline = true;
@@ -194,21 +193,19 @@
 											$previous_subject = $subject_name;
 										}
 										
-										list($firstname, $salutation) = explode(' ', $teacher_name);
-										
-										print "$category_name, $subject_name, $firstname, $salutation<br>";
-										
 										$category = GetCategoryByName($category_name);
 										$subject = GetSubjectByName($subject_name);
-										$teacher = GetTeacherByFirstname($firstname);
+										$teacher = GetTeacherByDisplayName($teacher_name);
 										
-										if ($category === false) {
-											$category = CreateCategory(array('category_name' => $category_name));
-										}
+										// print "<br><br>$sl_no. $category_name, $subject_name, $teacher_name,"; $sl_no++;
 										
-										if ($subject === false) {
-											$subject = CreateSubject(array('subject_name' => $subject_name, 'category_id' => $category['category_id']));
-										}
+										// if ($category === false) {
+										// 	$category = CreateCategory(array('category_name' => $category_name));
+										// }
+										// 
+										// if ($subject === false) {
+										// 	$subject = CreateSubject(array('subject_name' => $subject_name, 'category_id' => $category['category_id']));
+										// }
 										
 										if ($teacher !== false) {
 											$data = array();
@@ -218,13 +215,15 @@
 											$data['teacher_id'] = $teacher['teacher_id'];
 											$data['course_name'] = $subject_name;
 											
-											CreateCourse($data);
+											$course = CreateCourse($data);
+											
+											// print $course['course_id'] . '<br>';
 										}
 									}
 								}
 							}
 						
-							// Redirect('/admin/categories/');
+							Redirect('/admin/courses/');
 							
 							break;
 							
@@ -361,6 +360,28 @@
 							break;
 							
 						case 'editpost':
+							$student = GetStudentByID($student_id);
+							$uid = $student['uid'];
+							$profilepic_path = "images/profilepics/$uid.jpg";								
+																
+							if (isset($_POST['filepond'])) {
+								$uniqueFileID = $_POST['filepond'][0];
+								$arrayDBStore = readJsonFile($TS_PARAMS['docroot'] . "filepond/database.json");
+								$imageInfoIndex = array_search($uniqueFileID, array_column($arrayDBStore, 'id'));
+								
+								if (isset($imageInfoIndex)) {
+									$imageInfo = $arrayDBStore[$imageInfoIndex];
+									$imageName = $imageInfo["name"];
+									$source_path = $TS_PARAMS['docroot'] . "filepond/uploads/$imageName";
+									$destination_path = $TS_PARAMS['docroot'] . $profilepic_path;
+							
+									// print "id: $uniqueFileID, file: $source_path<br>logo path: $destination_path";					
+									@rename($source_path, $destination_path);
+									
+									$_POST['profile_image_path'] = "/$profilepic_path";
+								}
+							}
+							
 							UpdateStudent($student_id, $_POST);
 							
 							Redirect("/admin/students/$student_id/edit/");
@@ -377,16 +398,20 @@
 					switch($filter) {
 						default:
 						case '':
-							$page_title = "Students";
 							$students = GetStudents();
 							
-							include('admin/modules/students/index.php');
+							if (count($students)) {
+								$page_title = "Students";
+								include('admin/modules/students/index.php');
+							} else {
+								$page_title = "Import Students";
+								include('admin/modules/students/import.php');
+							}
 							
 							break;
 							
 						case 'import':
 							$page_title = "Import Students";
-							
 							include('admin/modules/students/import.php');
 							
 							break;
@@ -402,9 +427,6 @@
 									$fileName = $fileInfo["name"];
 									$source_path = $TS_PARAMS['docroot'] . "filepond/uploads/$fileName";
 									
-									// print "id: $uniqueFileID, file: $source_path<br>logo path: $destination_path";					
-									// rename($source_path, $destination_path);
-									
 									$fileHandle = fopen($source_path, "r");
 									$firstline = true;
 									while (($row = fgetcsv($fileHandle, 0, ",", "\"")) !== FALSE) {
@@ -414,31 +436,10 @@
 											continue;
 										}
 										
-										$data = array();
-										
-										$legalname = $row[1];
-										$display_name = $row[2];
-										$firstname = $row[3];
-										$lastname = $row[4];
-										$year = substr($row[5], 0, 1);			// 1st, 2nd, 3rd
-										$mobile = $row[6];
-										$email = $row[7];
-										$dob = $row[8];										
-										 
-										$data['firstname'] = $firstname;
-										$data['lastname'] = $lastname;
-										$data['legalname'] = $legalname;
-										$data['display_name'] = $display_name;
-										$data['mobile'] = $mobile;
-										$data['email'] = $email;
-										$data['dob'] = DateToMySQLDate($dob);
-										$data['year'] = $year;
-										
-										$student = ImportStudent($data);
+										$student = ImportStudent($row);
 									}
 								}
 							}
-						
 							Redirect('/admin/students/');
 							
 							break;
@@ -523,27 +524,11 @@
 											continue;
 										}
 										
-										$data = array();
-										
-										$firstname = $row[1];
-										
-										if (strpos(' ', $firstname) !== false) {
-											list($firstname, $lastname) = explode(' ', $row[1]);
-										} else {
-											$lastname = '';
-										}
-										 
-										$data['firstname'] = $firstname;
-										$data['lastname'] = $lastname;
-										
-										$data['email'] = $row[2];
-										$data['mobile'] = $row[3];
-										
-										$teacher = CreateTeacher($data);
+										$teacher = ImportTeacher($row);
 									}
 								}
 							}
-
+							
 							Redirect('/admin/teachers/');
 							
 							break;
@@ -564,6 +549,9 @@
 		case 'login':
 			$page_title = 'Sign In';
 			include('login/login.php');
+			exit;
+			
+		case 'resendotp':
 			exit;
 			
 		case 'verify':
@@ -611,14 +599,19 @@
 		case 'students':
 			RequiresLogin();
 			
+			include('admin/functions/students.inc');
+			
 			$loggedin_user = $_SESSION['login_user'];
 			$is_student = $loggedin_user['is_student'] ?? false;
+			$student_id = $loggedin_user['student_id'];
 			
-			if (!$is_student) {
-				$student_id = 7;								// hard coded to Aadya
-			} else {
-				$student_id = $loggedin_user['student_id'];
-			}
+			$student = GetStudentByID($student_id);
+			$uid = $student['uid'];
+			$firstname = $student['firstname'];
+			$lastname = $student['lastname'];
+			$fullname = "$firstname $lastname";
+			
+			$profile_image_url = GetProfileImagePathForUID($uid);
 			
 			$selected_courses = GetCoursesForStudent($student_id);
 			
@@ -721,10 +714,27 @@
 					$period_no = $tokens[5];
 					$day_name = $day_of_week[$day];
 					
-					$page_title = "$day_name $period_no Period";
+					switch ($tokens[6]) {
+					case 'select':
+						$page_title = "Select Course";
+						
+						include('students/modules/timetable/assign.php');
+						exit;
+						
+					case 'assign':
+						$course_id = $tokens[7];
+						
+						print "course $course_id needs to be assigned";
+						break;
 					
-					include('students/modules/timetable/period.php');
-					exit;
+					default:
+					 	$page_title = "$day_name $period_no Period";
+						
+						include('students/modules/timetable/period.php');
+						exit;
+					}
+					
+					break;
 				
 				default:
 					$page_title = "My Timetable";
@@ -739,8 +749,136 @@
 				}
 			}
 			
+			break;
+			
 		case 'teachers':
-			Redirect('/students/courses/');
+			RequiresLogin();
+			
+			include('admin/functions/courses.inc');
+			include('admin/functions/teachers.inc');
+			
+			$loggedin_user = $_SESSION['login_user'];
+			$is_teacher = $loggedin_user['is_teacher'] ?? false;
+			
+			$teacher_id = $loggedin_user['teacher_id'];
+			
+			$teacher = GetTeacherByID($teacher_id);
+			$uid = $teacher['uid'];
+			$firstname = $teacher['firstname'];
+			$lastname = $teacher['lastname'];
+			$fullname = "$firstname $lastname";
+			
+			$profile_image_url = GetProfileImagePathForUID($uid);
+			
+			$module = $tokens[2];
+			
+			switch ($module) {
+			case 'profile':
+				$action = $tokens[3];
+				
+				switch ($action) {
+				case 'edit':
+					$page_title = "Edit Profile";
+					
+					include('teachers/modules/profile/edit.php');
+					exit;
+					
+				case 'editpost':
+					
+				default:
+					$page_title = "My Profile";
+					
+					include('teachers/modules/profile/index.php');
+					exit;
+				}
+				
+				break;
+				
+			case 'courses':
+				$action = $tokens[3];
+				$filter = '';
+				
+				switch ($action) {
+				case 'id':
+					$course_id = $tokens[4];
+					
+					include('teachers/modules/courses/detail.php');
+					exit;
+					
+				default:
+					$page_title = "My Courses";
+					
+					$courses = GetCoursesForTeacher($teacher_id);
+									
+					if (count($courses)) {
+						include('teachers/modules/courses/index.php');
+					} else {
+						include('teachers/modules/courses/emptyview.php');
+					}
+					
+					exit;		
+				}
+				
+				break;
+				
+			case 'students':
+				$page_title = "My Teachers";
+				
+				if (count($selected_courses)) {
+					if ($tokens[3] == 'id') {
+						$teacher_id = $tokens[4];
+						include('students/modules/teachers/profile.php');
+						exit;
+					}
+					
+					$teachers = GetTeachersForStudent($student_id);
+					include('teachers/modules/students/index.php');
+				} else {
+					include('students/modules/courses/emptyview.php');
+				}
+				exit;
+				
+			case 'timetable':
+				$action = $tokens[3];
+				
+				switch ($action) {
+				case 'period':
+					$day = $tokens[4];
+					$period_no = $tokens[5];
+					$day_name = $day_of_week[$day];
+					
+					switch ($tokens[6]) {
+					case 'select':
+						$page_title = "Select Course";
+						
+						include('teachers/modules/timetable/assign.php');
+						exit;
+						
+					case 'assign':
+						$course_id = $tokens[7];
+						
+						print "course $course_id needs to be assigned";
+						break;
+					
+					default:
+					 	$page_title = "$day_name $period_no Period";
+						
+						include('teachers/modules/timetable/period.php');
+						exit;
+					}
+					
+					break;
+				
+				default:
+					$page_title = "My Timetable";
+					
+					include('teachers/modules/timetable/index.php');
+					
+					exit;
+				}
+			}
+			
+			break;
 			
 		default:
 			if (isset($_SESSION['login_user'])) {

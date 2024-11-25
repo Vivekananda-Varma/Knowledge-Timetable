@@ -1,0 +1,101 @@
+*[data-href], .form-check-input {
+    cursor: pointer;
+}
+
+/* navbar */
+.navbar-nav .nav-link i {
+    font-size: 1.6em;
+    vertical-align: middle;
+    margin-right: 5px;
+    line-height: 1;
+}
+
+.text-body {
+    font-size: 1em;
+}
+.text-muted {
+    font-size: 0.9em;
+}
+.fw-bold {
+    font-weight: bold;
+}
+.ms-auto {
+    margin-left: auto;
+}
+
+#clear-search {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
+/* Courses */
+.form-check-input {
+    border-radius: 50% !important;
+    width: 1.3rem;  
+    height: 1.3rem; 
+    border: 2px solid rgb(168, 168, 168);  
+}
+
+.uil-angle-right-b {
+    font-size: 1.3rem;
+    color: #767676;
+}
+
+.table td.left-align {
+    text-align: left;
+}
+
+.table td.right-align {
+    text-align: right;
+}
+
+.remove-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #FF3B30;
+}
+
+.table td {
+    vertical-align: middle; 
+}
+
+
+/* Timetable */
+.period {
+    position: relative;
+    height: 90px;
+    box-sizing: border-box;
+}
+
+.subject {
+    height: 54px;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.period .teacher {
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 35px;
+    text-align: center;
+}
+
+.place {
+    font-size: 13px;
+}
+
+/* Teachers */
+.profile-pic img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}

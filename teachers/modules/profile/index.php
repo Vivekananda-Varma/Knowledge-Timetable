@@ -1,24 +1,18 @@
 <?php
 
-    $mobile = $student['mobile'];
-    $email = $student['email'];
-    $dob = MySQLDateToDate($student['dob']);
-    $class_of = $student['class_of'];
-    $year = $student['year'] ?? '1';
-    $last_login = $student['last_login'];
+    $mobile = $teacher['mobile'];
+    $email = $teacher['email'];
+    $dob = MySQLDateToDate($teacher['dob']);
+    $last_login = $teacher['last_login'];
     
-    $address_1 = $student['address_line_1'] ?? 'No. 15, Rue Suffren Street';
-    $address_2 = $student['address_line_2'] ?? 'White Town';
-    $postal_code = $student['postal_code'] ?? '605001';
+    $address_1 = $teacher['address_line_1'] ?? 'No. 15, Rue Suffren Street';
+    $address_2 = $teacher['address_line_2'] ?? 'White Town';
+    $postal_code = $teacher['postal_code'] ?? '605001';
     
     if ($address_1 != '') {
         $address = "$address_1, $address_2, Pondicherry $postal_code";
     } else {
         $address = 'N/A';
-    }
-    
-    if ($class_of == '') {
-        $class_of = date('Y') - $year + 3;
     }
     
     $profile_image_url = GetProfileImagePathForUID($uid);
@@ -32,7 +26,7 @@
 
 <body>
     <div class="content-wrapper">
-        <?php include('students/templates/header.html'); ?>
+        <?php include('teachers/templates/header.html'); ?>
 
             <section id="snippet-2" class="wrapper bg-light wrapper-border">
                 <div class="container pt-2 pt-md-17">
@@ -43,7 +37,7 @@
                             </div>
                             <div class="card mb-3">
                                 <div class="card-body text-center position-relative">
-                                    <a href="/students/profile/edit/" class="btn btn-circle btn-primary position-absolute top-0 end-0 m-2">
+                                    <a href="/teachers/profile/edit/" class="btn btn-circle btn-primary position-absolute top-0 end-0 m-2">
                                         <i class="uil uil-pen"></i>
                                     </a>
                                     <img src="<?= $profile_image_url ?>" 
@@ -57,14 +51,6 @@
                                             <tr>
                                                 <td class="text-muted text-end">DOB</td>
                                                 <td><?= $dob ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-muted text-end">Year</td>
-                                                <td>HC-<?= $year ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-muted text-end">Class of</td>
-                                                <td><?= $class_of ?></td>
                                             </tr>
                                             <tr>
                                                 <td class="text-muted text-end">Email</td>

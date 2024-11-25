@@ -59,7 +59,7 @@
                                     $fullname = "$fullname, $place_name";
                                 }
                                 
-                                $color_index = ($category_id - 11) % 14;
+                                $color_index = $category_id % 14;
                                 $color = $colors[$color_index];
                                 
                                 if ($category_id != $previous_cat_id) {

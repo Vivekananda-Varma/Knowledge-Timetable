@@ -2,7 +2,7 @@
     
     include('admin/functions/timetable.inc');
     
-    $timetable = GetTimetableForStudentId($student_id);
+    $timetable = GetTimetableForTeacherId($teacher_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
 
     <body>
         <div class="content-wrapper">
-            <?php include('students/templates/header.html'); ?>
+            <?php include('teachers/templates/header.html'); ?>
             
             <section id="timetable" class="wrapper bg-light">
                 <div class="container pt-10 pt-md-17 pb-13 pb-md-15">
@@ -22,8 +22,6 @@
                             <div id="accordion-1" class="accordion-wrapper">
                     <?php    
                         $num_periods = 0;
-                        $num_courses_selected = count($selected_courses);
-                        $courses_assigned = array();
                         
                         for($i = 1; $i < 7; $i++) {
                             $day = $day_of_week[$i];
@@ -43,7 +41,7 @@
                                 if (empty($period)) {
                     ?>
                                                     <div class="col mb-1">
-                                                        <div class="card shadow-none" data-href="/students/timetable/period/<?= $i ?>/<?= $j ?>/">
+                                                        <div class="card shadow-none" data-href="/teachers/timetable/period/<?= $i ?>/<?= $j ?>/">
                                                             <div class="card-header subject px-4 py-2 border-0 bg-ash text-white">&nbsp;</div>
                                                             <div class="card-body p-4 bg-pale-ash text-ash">&nbsp;</div>
                                                             <div class="card-footer place px-4 py-2 border-0 bg-soft-ash text-ash">&nbsp;</div>
@@ -75,13 +73,9 @@
                                     // }
                                     
                                     $num_periods++;
-                                    
-                                    if (!in_array($course_id, $courses_assigned)) {
-                                        $courses_assigned[] = $course_id;
-                                    }
                     ?>
                                                     <div class="col mb-1">
-                                                        <div class="card shadow-none" data-href="/students/timetable/period/<?= $i ?>/<?= $j ?>/">
+                                                        <div class="card shadow-none" data-href="/teachers/timetable/period/<?= $i ?>/<?= $j ?>/">
                                                             <div class="card-header subject px-4 py-2 border-0 bg-<?= $color ?> text-white"><?= $display_name ?></div>
                                                             <div class="card-body p-4 bg-pale-<?= $color ?> text-<?= $color ?>"><?= $teacher ?></div>
                                                             <div class="card-footer place px-4 py-2 border-0 bg-soft-<?= $color ?> text-<?= $color ?>"><?= $place ?></div>
@@ -102,7 +96,7 @@
                             </div>
                         </div>
                     </div>
-                    <h5 class="text-center"><?= $num_periods ?> periods, <?= count($courses_assigned) ?> / <?= $num_courses_selected ?> courses assigned.</h5>
+                    <h5 class="text-center"><?= $num_periods ?> periods</h5>
                 </div>
 
             </section>

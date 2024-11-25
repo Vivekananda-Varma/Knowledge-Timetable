@@ -38,7 +38,7 @@
 
     <body>
         <div class="content-wrapper">
-            <?php include('students/templates/header.html'); ?>
+            <?php include('teachers/templates/header.html'); ?>
 
             <section id="snippet-2" class="wrapper bg-light wrapper-border">
                 <div class="container pt-2 pt-md-17 pb-md-14">
@@ -47,7 +47,8 @@
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <a href="javascript:history.back()" class="d-flex align-items-center text-primary" style="font-weight: bold; text-decoration: none; cursor: pointer;">
                                     <i class="uil uil-angle-left" style="font-size: 1.5rem; margin-right: -2px;"></i>Back
-                                </a>                               
+                                </a>
+                                <a href="/teachers/courses/edit/id/<?= $course_id ?>" class="btn btn-soft-primary btn-sm px-3 py-1">Edit</a>
                             </div>
                             <div class="card shadow-none bg-soft-<?= $color ?>">
                                 <div class="card-body text-<?= $color ?>">

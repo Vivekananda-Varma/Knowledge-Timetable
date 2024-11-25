@@ -1,5 +1,10 @@
 <?php
 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    ini_set('pcre.jit', '0');
+    ini_set('error_reporting', E_ALL ^ E_WARNING);
+
   // Comment if you don't want to allow posts from other domains
   header('Access-Control-Allow-Origin: *');
 
@@ -26,45 +31,37 @@
 
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
     $files = $_FILES["filepond"];
     $imageName = null;
     $id = null;
 
-    function saveImagesToTempLocation ($uploadedFile) {
-
-      global $imageName;
-      global $id;
-
-      $imageUniqueId = null;
-
-      // check that there were no errors while uploading file 
-      if (isset($uploadedFile) && $uploadedFile['error'] === UPLOAD_ERR_OK) {
-
-        $imageName = uploadImage($uploadedFile, UPLOAD_DIR);
-
-        if ($imageName) {
-
-          $filePointer = UPLOAD_DIR . $imageName;
-          $arrayDBStore = readJsonFile();
-          $id = uniqid();
-
-          $newImageInfo = [
-            "id" => $id,
-            "name" => $imageName,
-            "date" => time()
-          ];
-
-          array_push($arrayDBStore , $newImageInfo);
-
-          writeJsonFile($arrayDBStore);
-
+    function saveImagesToTempLocation($uploadedFile) {
+        global $imageName;
+        global $id;
+        
+        $imageUniqueId = null;
+        
+        // check that there were no errors while uploading file 
+        if (isset($uploadedFile) && $uploadedFile['error'] === UPLOAD_ERR_OK) {
+            $imageName = uploadImage($uploadedFile, UPLOAD_DIR);
+            
+            if ($imageName) {
+                $filePointer = UPLOAD_DIR . $imageName;
+                $arrayDBStore = readJsonFile();
+                $id = uniqid();
+                
+                $newImageInfo = [
+                "id" => $id,
+                "name" => $imageName,
+                "date" => time()
+                ];
+                
+                array_push($arrayDBStore , $newImageInfo);
+                writeJsonFile($arrayDBStore);
+            }
         }
-
-      }
-
-      return $id;
-
+        
+        return $id;
     }
 
     $structuredFiles = [];
@@ -101,16 +98,13 @@
 
     $response = [];
     if ($uniqueImgID) {
-
       $response["status"] = "success";
       $response["key"] = $uniqueImgID;
       $response["msg"] = null;
       $response["files"] = json_encode($structuredFiles);
 
       http_response_code(200);
-
     } else {
-
       $response["status"] = "error";
       $response["key"] = null;
       $response["msg"] = "An error occured while uploading image";
@@ -124,13 +118,8 @@
     echo json_encode($response);
 
     exit();
-
   } else {
-
     exit();
-
   }
-
-  
 
 ?>

@@ -49,7 +49,7 @@
                                                 </button>
                                             </div>
                                             <div class="card-body text-center">
-                                                <img src="/admin/images/user-default-profile-pic.jpg" alt="Stacie Hall" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+                                                <img src="/admin/images/user-default-profile-pic.jpg" alt="Stacie Hall" class="img-fluid rounded-circle mb-2" width="200" height="200" />
                                                 <h5 class="card-title mb-0"><?= $fullname ?></h5>
                                             </div>
                                             <!-- <hr class="my-0"> -->
@@ -87,7 +87,7 @@
 										    </div>
 										    <div class="card-body">	
 											    <div class="card-body text-center">
-												    <img src="/admin/images/user-default-profile-pic.jpg" alt="User Default Profile Pic" class="img-fluid rounded-circle mb-2" width="128" height="128">
+												    <img src="/admin/images/user-default-profile-pic.jpg" alt="User Default Profile Pic" class="img-fluid rounded-circle mb-2" width="200" height="200">
 											    </div>
 											    <form name="student-form" method="post" action="/admin/teachers/<?= $teacher_id ?>/editpost/">
 												    <div class="row">

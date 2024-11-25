@@ -47,7 +47,7 @@
         $teachers = array();
         
         $query = "
-            SELECT `teachers`.*, `users`.*,
+            SELECT `teachers`.`teacher_id`, `teachers`.`is_active`, `users`.*,
             COUNT(courses.teacher_id) AS num_courses
             FROM `teachers` 
             LEFT JOIN `users` ON `users`.`user_id`=`teachers`.`user_id`
@@ -91,7 +91,7 @@
         return false;
     }
     
-    function GetTeacherByFirstname($firstname) {
+    function GetTeacherByDisplayName($display_name) {
         global $mysqli;
         
         $query = "
@@ -99,7 +99,7 @@
             FROM `teachers` 
             LEFT JOIN `users` 
             ON `teachers`.`user_id`=`users`.`user_id`
-            WHERE `firstname`='$firstname'
+            WHERE `display_name`='$display_name'
         ";
         
         $result = $mysqli->query($query);
@@ -141,6 +141,61 @@
         $teacher = GetTeacherByID($teacher_id);
         
         return $teacher;
+    }
+    
+    function ImportTeacher($data) {
+        global $mysqli;
+        
+       $uid = SanitiseUserInput($data[1]);
+        $legalname = SanitiseUserInput($data[2]);
+        $firstname = SanitiseUserInput($data[3]);
+        $lastname = SanitiseUserInput($data[4]);
+        $display_name = SanitiseUserInput($data[5]);
+        $gender = SanitiseUserInput($data[6]);
+            
+        $mobile = SanitiseUserInput($data[7]);
+        $email = SanitiseUserInput($data[8]);
+        $is_active = SanitiseUserInput($data[9]);
+        
+        $is_active = $is_active == 'Y' ? 1 : 0;
+        
+        $query = "
+            INSERT INTO `users`
+            SET `uid`='$uid',
+                `firstname`='$firstname',
+                `lastname`='$lastname',
+                `legalname`='$legalname',
+                `display_name`='$display_name',
+                `gender`='$gender',
+                `mobile`='$mobile',
+                `email`='$email'
+            ON DUPLICATE KEY UPDATE
+                `firstname`='$firstname',
+                `lastname`='$lastname',
+                `legalname`='$legalname',
+                `display_name`='$display_name',
+                `gender`='$gender',
+                `mobile`='$mobile',
+                `email`='$email'
+        ";
+        
+        // print "$query<br><br>"; return;
+        
+        $result = $mysqli->query($query);
+        $user_id = $mysqli->insert_id;
+        
+        $query = "
+            INSERT INTO `teachers`
+            SET `user_id`='$user_id',
+                `is_active`='$is_active'
+        ";
+        
+        $result = $mysqli->query($query);
+        $teacher_id = $mysqli->insert_id;
+        $teacher = GetTeacherByID($teacher_id);
+        
+        return $teacher;
+        
     }
     
     function UpdateTeacher($teacher_id, $data) {
