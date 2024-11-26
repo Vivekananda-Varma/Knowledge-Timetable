@@ -216,7 +216,7 @@
                                     } 
                             ?>
                                             <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body my-2">
-                                                <?= $avatar ?><?= $firstname ?> <?= $lastname ?>
+                                                <?= $avatar ?><b><?= $firstname ?></b>&nbsp; <?= $lastname ?>
                                             </span>
                             <?php 
                                 }
