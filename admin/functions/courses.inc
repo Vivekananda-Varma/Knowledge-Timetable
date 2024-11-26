@@ -157,13 +157,22 @@
         
         $course_name = SanitiseUserInput($data['course_name']);
         $blurb = SanitiseUserInput($data['blurb']);
-        $default_place_id = $data['default_place_id'];
+        $requirements = SanitiseUserInput($data['requirements']);
+        // $default_place_id = $data['default_place_id'];
+        
+        // $query = "
+        //     UPDATE `courses`
+        //     SET `course_name`='$course_name',
+        //         `blurb`='$blurb',
+        //         `default_place_id`=$default_place_id
+        //     WHERE `course_id`=$course_id
+        // ";
         
         $query = "
             UPDATE `courses`
             SET `course_name`='$course_name',
                 `blurb`='$blurb',
-                `default_place_id`=$default_place_id
+                `requirements`='$requirements'
             WHERE `course_id`=$course_id
         ";
         

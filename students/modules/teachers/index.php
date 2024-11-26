@@ -23,6 +23,7 @@
                         $previous_teacher_id = '';
                         
                         foreach($teachers as $teacher) {
+                            $uid = $teacher['uid'];
                             $teacher_id = $teacher['teacher_id'];
                             $firstname = $teacher['firstname'];
                             $lastname = $teacher['lastname'];
@@ -49,6 +50,8 @@
                             $color_index = $category_id % 14;
                             $color = $colors[$color_index];
                             
+                            $profile_image_url = GetProfileImagePathForUID($uid);
+                            
                             if ($teacher_id != $previous_teacher_id) {
                                 if ($previous_teacher_id != '') {               // only close card html if we are in the middle of the loop 
                     ?>
@@ -68,7 +71,7 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center">
                                                 <div class="profile-pic me-4">
-                                                    <img src="/frontend/images/user-default-profile-pic.jpg" alt="Profile" />
+                                                    <img src="<?= $profile_image_url ?>" alt="Profile" />
                                                 </div>
                                                 <div class="d-flex flex-column">
                                                     <span class="text-body fw-bold text-start"><?= $fullname ?></span>

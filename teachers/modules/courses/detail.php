@@ -45,10 +45,10 @@
                     <div class="row">
                         <div class="col-xl-10 mx-auto">
                             <div class="d-flex justify-content-between align-items-center mb-4">
-                                <a href="javascript:history.back()" class="d-flex align-items-center text-primary" style="font-weight: bold; text-decoration: none; cursor: pointer;">
+                                <a href="/teachers/courses/" class="d-flex align-items-center text-primary" style="font-weight: bold; text-decoration: none; cursor: pointer;">
                                     <i class="uil uil-angle-left" style="font-size: 1.5rem; margin-right: -2px;"></i>Back
                                 </a>
-                                <a href="/teachers/courses/edit/id/<?= $course_id ?>" class="btn btn-soft-primary btn-sm px-3 py-1">Edit</a>
+                                <a href="/teachers/courses/id/<?= $course_id ?>/edit/" class="btn btn-soft-primary btn-sm px-3 py-1">Edit</a>
                             </div>
                             <div class="card shadow-none bg-soft-<?= $color ?>">
                                 <div class="card-body text-<?= $color ?>">

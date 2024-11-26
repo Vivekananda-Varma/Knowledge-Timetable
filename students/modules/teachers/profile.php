@@ -4,6 +4,7 @@
     
     $teacher = GetTeacherByID($teacher_id);
     
+    $uid = $teacher['uid'];
     $firstname = $teacher['firstname'];
     $lastname = $teacher['lastname'];
     $fullname = "$firstname $lastname";
@@ -28,6 +29,8 @@
     } else {
         $address = 'N/A';
     }
+    
+    $profile_image_url = GetProfileImagePathForUID($uid);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +54,7 @@
                             </div>
                             <div class="card mb-3">
                                 <div class="card-body text-center position-relative">
-                                    <img src="/admin/images/user-default-profile-pic.jpg" alt="User Profile" class="img-fluid rounded-circle mb-4" width="200" height="200" />
+                                    <img src="<?= $profile_image_url ?>" alt="User Profile" class="img-fluid rounded-circle mb-4" width="200" height="200" />
                                     <h5 class="card-title mb-0"><?= $fullname ?></h5>
                                 </div>
                                 <div class="card-body">

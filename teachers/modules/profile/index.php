@@ -10,7 +10,7 @@
     $postal_code = $teacher['postal_code'] ?? '605001';
     
     if ($address_1 != '') {
-        $address = "$address_1, $address_2, Pondicherry $postal_code";
+        $address = "$address_1,<br>$address_2,<br>Pondicherry $postal_code";
     } else {
         $address = 'N/A';
     }
@@ -61,8 +61,8 @@
                                                 <td><?= $mobile ?></td>
                                             </tr>
                                             <tr>
-                                                <td class="text-muted text-end">Address</td>
-                                                <td><?= $address ?></td>
+                                                <td class="text-muted text-end align-text-top">Address</td>
+                                                <td class="align-text-top"><?= $address ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -78,7 +78,7 @@
                                     <div class="card p-2 text-center">
                                         <div class="card-body p-3">
                                             <div class="icon btn btn-circle btn-lg btn-soft-red mx-auto mb-3">
-                                                <i class="uil uil-server"></i>
+                                                <i class="uil uil-calender"></i>
                                             </div>
                                             <h4 class="counter mb-1">24</h4>
                                             <p class="mb-0 small">Periods</p>
@@ -89,10 +89,10 @@
                                     <div class="card p-2 text-center">
                                         <div class="card-body p-3">
                                             <div class="icon btn btn-circle btn-lg btn-soft-leaf mx-auto mb-3">
-                                                <i class="uil uil-books"></i>
+                                                <i class="uil uil-users-alt"></i>
                                             </div>
                                             <h4 class="counter mb-1">11</h4>
-                                            <p class="mb-0 small">Courses</p>
+                                            <p class="mb-0 small">Students</p>
                                         </div>
                                     </div>
                                 </div>

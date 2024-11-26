@@ -784,6 +784,28 @@
 					exit;
 					
 				case 'editpost':
+					$profilepic_path = "images/profilepics/$uid.jpg";								
+												
+					if (isset($_POST['filepond'])) {
+						$uniqueFileID = $_POST['filepond'][0];
+						$arrayDBStore = readJsonFile($TS_PARAMS['docroot'] . "filepond/database.json");
+						$imageInfoIndex = array_search($uniqueFileID, array_column($arrayDBStore, 'id'));
+						
+						if (isset($imageInfoIndex)) {
+							$imageInfo = $arrayDBStore[$imageInfoIndex];
+							$imageName = $imageInfo["name"];
+							$source_path = $TS_PARAMS['docroot'] . "filepond/uploads/$imageName";
+							$destination_path = $TS_PARAMS['docroot'] . $profilepic_path;
+					
+							// print "id: $uniqueFileID, file: $source_path<br>logo path: $destination_path";					
+							@rename($source_path, $destination_path);
+							
+							$_POST['profile_image_path'] = "/$profilepic_path";
+						}
+					}
+					
+					UpdateTeacher($teacher_id, $_POST);
+					Redirect('/teachers/profile/');
 					
 				default:
 					$page_title = "My Profile";
@@ -801,9 +823,26 @@
 				switch ($action) {
 				case 'id':
 					$course_id = $tokens[4];
+					$action = $tokens[5] ?? '';
 					
-					include('teachers/modules/courses/detail.php');
-					exit;
+					switch ($action) {
+					case 'edit':
+						$page_title = "Edit Course";
+						
+						include('teachers/modules/courses/edit.php');
+						exit;
+						
+					case 'editpost':
+						UpdateCourse($course_id, $_POST);
+						Redirect("/teachers/courses/id/$course_id");
+						
+					default:
+						$page_title = "Course Details";
+						include('teachers/modules/courses/detail.php');
+						exit;
+					}
+					
+					break;
 					
 				default:
 					$page_title = "My Courses";
