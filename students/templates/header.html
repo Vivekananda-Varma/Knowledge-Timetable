@@ -28,7 +28,7 @@
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="dropdown-item" href="/students/profile/">My Profile</a></li>
                                 <li class="nav-item"><a class="dropdown-item" href="/students/modules/contact-admin/">Contact Admin</a></li>
-                                <li class="nav-item"><a class="dropdown-item" href="/logout/">Logout <?= $fullname ?></a></li>
+                                <li class="nav-item"><a class="dropdown-item" href="/logout/">Logout <?= $loggedin_user_fullname ?></a></li>
         
                             </ul>
                     </li>
@@ -43,7 +43,7 @@
                                 <a class="nav-link" href="/students/modules/contact-admin/"> <i class="uil uil-user-md"></i> Contact Admin </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/logout/"> <i class="uil uil-signout"></i> Logout <?= $fullname ?></a>
+                                <a class="nav-link" href="/logout/"> <i class="uil uil-signout"></i> Logout <?= $loggedin_user_firstname ?></a>
                             </li>
                         </ul>
                     </div>

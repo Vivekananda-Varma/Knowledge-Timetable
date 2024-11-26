@@ -180,7 +180,6 @@ function SendMail($from_name, $from_email, $recipient, $return_path, $subject, $
     $smtp = Mail::factory('smtp', array ('host' => $host, 'port' => $port, 'auth' => true, 'username' => $username, 'password' => $password));
     $mail = $smtp->send($recipient, $headers, $message);
     
-    
     if (PEAR::isError($mail)) {
 // 		echo("<p>" . $mail->getMessage() . "</p>");
     } else {
@@ -188,16 +187,18 @@ function SendMail($from_name, $from_email, $recipient, $return_path, $subject, $
     }
 }
 
-function GetProfileImagePathForUID($uid) {
-     $profilepic_path = "images/profilepics/$uid.jpg";
+function GetProfileImagePathForUID($uid, $failover=true) {
+    $profilepic_path = "images/profilepics/$uid.jpg";
      
-     if (file_exists($profilepic_path)) {
-         $profile_image_url = "/$profilepic_path";
-     } else {
-         $profile_image_url = '/admin/images/user-default-profile-pic.jpg';
-     }
-     
-     return $profile_image_url;
+    if (file_exists($profilepic_path)) {
+        $profile_image_url = "/$profilepic_path";
+    } else if ($failover) {
+        $profile_image_url = '/admin/images/user-default-profile-pic.jpg';
+    } else {
+        $profile_image_url = '';
+    }
+    
+    return $profile_image_url;
  }
 
 function GetAvatarForEntity($entity, $id) {
