@@ -1,9 +1,15 @@
 <?php
 
     include('admin/functions/courses.inc');        
-    include('admin/functions/timetable.inc');        
-
+    include('admin/functions/timetable.inc');  
+    
     $period = GetPeriodDetailsForStudent($student_id, $day, $period_no);
+    $status = '';
+    
+    if (empty($period)) {
+        $period = GetProvisionalPeriodDetailsForStudent($student_id, $day, $period_no);
+        $status = $period['status'];
+    }
     
     if (empty($period)) {
         Redirect("/students/timetable/period/$day/$period_no/select/");
@@ -49,6 +55,16 @@
     $fullname = "$firstname $lastname";
     
     $course_name_label = $course_name == $subject_name ? "Course / Subject Name" : "Course Name";
+    
+    $status_color = BadgeColorForStatus($status);
+    
+    if ($status_color != '') {
+        $status_title = ucfirst($status);
+        $status_label = substr($status_title, 0, 1);
+        $status_badge = "<div class=\"badge bg-$status_color rounded-pill ms-2 px-4 \">$status_title</div>";
+    } else {
+        $status_badge = '';
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +84,7 @@
                                 <a href="javascript:history.back()" class="d-flex align-items-center text-primary" style="font-weight: bold; text-decoration: none; cursor: pointer;">
                                     <i class="uil uil-angle-left" style="font-size: 1.5rem; margin-right: -2px;"></i>Back
                                 </a>
-                                <h3 class="card-title mb-0 w-100 text-center"><?= $page_title ?></h3>
+                                <h3 class="card-title mb-0 w-100 text-center"><?= $page_title ?> <?= $status_badge ?></h3>
                                 <a href="select.php" class="btn btn-soft-primary p-1">Choose</a>
                             </div>
                             <div class="card shadow-none">
@@ -117,38 +133,94 @@
                                 </div>
                             </div>
                             
-                            <h3 class="card-title mb-0 w-100 text-center mt-4">Classmates</h3>
-                            <p class="lead text-center mb-10 px-md-16 px-lg-0">Others who have signed up for this course in this period.</p>
+                            <h3 class="card-title mb-0 w-100 mt-4">Classmates</h3>
+                            <p class="lead mb-4 px-md-16 px-lg-0">Others who have signed up for this course in this period.</p>
                             <div id="accordion-1" class="accordion-wrapper">
                                 <div class="card shadow-none accordion-item">
                                     <div class="card-header" id="accordion-heading-1-1">
                                         <button class="collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-1-1" aria-expanded="false" aria-controls="accordion-collapse-1-1">
-                                            <span class="avatar bg-red text-white w-9 h-9 fs-17 me-1">AR</span>
-                                            <span class="avatar bg-green text-white w-9 h-9 fs-17 me-1">A</span>
-                                            <span class="avatar bg-blue text-white w-9 h-9 fs-17 me-1">AD</span>
-                                            <span class="avatar bg-yellow text-white w-9 h-9 fs-17 me-1">CS</span>
-                                            <span class="avatar bg-purple text-white w-9 h-9 fs-17 me-1">HS</span>
-                                            <span class="ms-2">+3</span>
+                            <?php
+                                $attendees = GetProvisionalAttendeesForPeriod($student_id, $course_id, $day, $period_no);
+                                $num_attendees = count($attendees);
+                                $num_in_summary = $num_attendees < 6 ? $num_attendees : 3;
+                                    
+                                $i = 0;
+                                foreach($attendees as $attendee) {
+                                    $uid = $attendee['uid'];
+                                    $firstname = $attendee['firstname'];
+                                    $lastname = $attendee['lastname'];
+                                    
+                                    $status = $attendee['status'];
+                                    $status_color = BadgeColorForStatus($status);
+                                    
+                                    $avatar_url = GetProfileImagePathForUID($uid, false);   // failover: false returns ''
+                                    
+                                    if ($avatar_url == '') {
+                                        $f = substr($firstname, 0, 1);
+                                        $l = substr($lastname, 0, 1);
+                                        
+                                        if ($status_color == '') {
+                                            $color_index = random_int(0, count($colors) - 1);
+                                            $color = $colors[$color_index];
+                                        } else {
+                                            $color = $status_color;
+                                        }
+                                        
+                                        $avatar = "<span class=\"avatar bg-$color text-white w-12 h-12 fs-17 me-1\">{$f}{$l}</span>";
+                                    } 
+                            ?>
+                                            <?= $avatar ?>
+                            <?php 
+                                    if ($i < $num_in_summary) {
+                                        $i++;
+                                    }   else {
+                                        break;
+                                    }
+                                }
+                                
+                                if ($num_attendees > $num_in_summary) {
+                                    $spillover_count = $num_attendees - $num_in_summary;
+                            ?>
+                                    <span class="ms-2"><?= $spillover_count ?></span>
+                            <?php
+                                }
+                            ?>
+                                            
                                         </button>
                                     </div>                                    
                                     <div id="accordion-collapse-1-1" class="collapse" aria-labelledby="accordion-heading-1-1" data-bs-target="#accordion-1">
                                         <div class="card-body">
-                                            <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body">
-                                                <span class="avatar bg-red text-white w-9 h-9 fs-17 me-3">AR</span>Aadya Ramswaroop</span>
-                                            <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body">
-                                                <span class="avatar bg-green text-white w-9 h-9 fs-17 me-3">A</span>Agastya</span>
-                                            <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body">
-                                                <span class="avatar bg-blue text-white w-9 h-9 fs-17 me-3">AD</span>Arunaditya Das</span>
-                                            <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body">
-                                                <span class="avatar bg-yellow text-white w-9 h-9 fs-17 me-3">CS</span>Chaitanya Sharma</span>
-                                            <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body">
-                                                <span class="avatar bg-purple text-white w-9 h-9 fs-17 me-3">HS</span>Harshit Somani</span>
-                                            <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body">
-                                                <span class="avatar bg-pink text-white w-9 h-9 fs-17 me-3">HM</span>Harumi Mima</span>
-                                            <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body">
-                                                <span class="avatar bg-<?= $color ?> text-white w-9 h-9 fs-17 me-3">RM</span>Ritaja Mishra</span>
-                                            <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body">
-                                                <span class="avatar bg-orange text-white w-9 h-9 fs-17 me-3">VG</span>Vivekananda Gokaraju</span>
+                            <?php
+                                foreach($attendees as $attendee) {
+                                    $uid = $attendee['uid'];
+                                    $firstname = $attendee['firstname'];
+                                    $lastname = $attendee['lastname'];
+                                    
+                                    $status = $attendee['status'];
+                                    $status_color = BadgeColorForStatus($status);
+                                    
+                                    $avatar_url = GetProfileImagePathForUID($uid, false);   // failover: false returns ''
+                                    
+                                    if ($avatar_url == '') {
+                                        $f = substr($firstname, 0, 1);
+                                        $l = substr($lastname, 0, 1);
+                                        
+                                        if ($status_color == '') {
+                                            $color_index = random_int(0, count($colors) - 1);
+                                            $color = $colors[$color_index];
+                                        } else {
+                                            $color = $status_color;
+                                        }
+                                        
+                                        $avatar = "<span class=\"avatar bg-$color text-white w-9 h-9 fs-17 me-2\">{$f}{$l}</span>";
+                                    } 
+                            ?>
+                                            <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body my-2">
+                                                <?= $avatar ?><b><?= $firstname ?></b>&nbsp; <?= $lastname ?>
+                                            </span>
+                            <?php 
+                                }
+                            ?>
                                         </div>
                                     </div>
                                 </div>

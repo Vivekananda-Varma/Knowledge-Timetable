@@ -11,7 +11,7 @@
     $subject_id = $course['subject_id'];
     $teacher_id = $course['teacher_id'];
     $place_id = $course['default_place_id'] ?? '';
-    $place_name = $course['place_name'] ?? '';
+    $place_name = $course['place_name'] ?? 'Unspecified';
     
     $requirements = str_replace("\r\n", "<br>", $course['requirements'] ?? 'N/A');
     $blurb = str_replace("\r\n", "<br>", $course['blurb'] ?? 'N/A');
@@ -77,6 +77,10 @@
                                     <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
                                         <div class="col-12 col-md-4 col-lg-3">Duration of Course</div>
                                         <div class="col-12 col-md-8 col-lg-9">3 years</div>
+                                    </div> 
+                                    <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
+                                        <div class="col-12 col-md-4 col-lg-3">Preferred Place</div>
+                                        <div class="col-12 col-md-8 col-lg-9"><?= $place_name ?></div>
                                     </div> 
                                     <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
                                         <div class="col-12 col-md-4 col-lg-3">Description</div>

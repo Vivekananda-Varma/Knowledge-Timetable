@@ -6,7 +6,7 @@
     $courses = GetCourses();
     
     $day_name = $day_of_week[$day];
-    $subtitle = "$day_name $day Period";
+    $subtitle = "$day_name $period_no Period";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +23,8 @@
                 <div class="container pt-2 pt-md-17 pb-md-14">
                     <div class="row">
                         <div class="col-xl-10 mx-auto">
-                            <h3 class="mb-0 text-center w-100 mb-4"><?= $subtitle ?></h3>
+                            <h3 class="mb-0 text-center w-100"><?= $subtitle ?></h3>
+                            <p class="text-center w-100 mb-4">Assign a course to this period</p>
                             <div class="job-list mb-10">
                         <?php
                         

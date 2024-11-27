@@ -361,8 +361,8 @@
 							
 						case 'editpost':
 							$student = GetStudentByID($student_id);
-							$uid = $student['uid'];
-							$profilepic_path = "images/profilepics/$uid.jpg";								
+							$loggedin_user_uid = $student['uid'];
+							$profilepic_path = "images/profilepics/$loggedin_user_uid.jpg";								
 																
 							if (isset($_POST['filepond'])) {
 								$uniqueFileID = $_POST['filepond'][0];
@@ -600,18 +600,24 @@
 			RequiresLogin();
 			
 			include('admin/functions/students.inc');
+			include('admin/functions/provisionals.inc');         
 			
 			$loggedin_user = $_SESSION['login_user'];
 			$is_student = $loggedin_user['is_student'] ?? false;
+			
+			if (!$is_student) {
+				Redirect('/logout');
+			}
+			
 			$student_id = $loggedin_user['student_id'];
 			
 			$student = GetStudentByID($student_id);
-			$uid = $student['uid'];
-			$firstname = $student['firstname'];
+			$loggedin_user_uid = $student['uid'];
+			$loggedin_user_firstname = $student['firstname'];
 			$lastname = $student['lastname'];
-			$fullname = "$firstname $lastname";
+			$loggedin_user_fullname = "$loggedin_user_firstname $lastname";
 			
-			$profile_image_url = GetProfileImagePathForUID($uid);
+			$profile_image_url = GetProfileImagePathForUID($loggedin_user_uid);
 			
 			$selected_courses = GetCoursesForStudent($student_id);
 			
@@ -714,7 +720,7 @@
 					$period_no = $tokens[5];
 					$day_name = $day_of_week[$day];
 					
-					switch ($tokens[6]) {
+					switch ($tokens[6]) {									// /students/timetable/period/2/7/select/
 					case 'select':
 						$page_title = "Select Course";
 						
@@ -724,7 +730,9 @@
 					case 'assign':
 						$course_id = $tokens[7];
 						
-						print "course $course_id needs to be assigned";
+						AssignCourseToPeriod($student_id, $course_id, $day, $period_no);
+						Redirect("/students/timetable/period/$day/$period_no/");
+						
 						break;
 					
 					default:
@@ -760,15 +768,19 @@
 			$loggedin_user = $_SESSION['login_user'];
 			$is_teacher = $loggedin_user['is_teacher'] ?? false;
 			
+			if (!$is_teacher) {
+				Redirect('/logout');
+			}
+			
 			$teacher_id = $loggedin_user['teacher_id'];
 			
 			$teacher = GetTeacherByID($teacher_id);
-			$uid = $teacher['uid'];
-			$firstname = $teacher['firstname'];
+			$loggedin_user_uid = $teacher['uid'];
+			$loggedin_user_firstname = $teacher['firstname'];
 			$lastname = $teacher['lastname'];
-			$fullname = "$firstname $lastname";
+			$loggedin_user_fullname = "$loggedin_user_firstname $lastname";
 			
-			$profile_image_url = GetProfileImagePathForUID($uid);
+			$profile_image_url = GetProfileImagePathForUID($loggedin_user_uid);
 			
 			$module = $tokens[2];
 			
@@ -784,7 +796,7 @@
 					exit;
 					
 				case 'editpost':
-					$profilepic_path = "images/profilepics/$uid.jpg";								
+					$profilepic_path = "images/profilepics/$loggedin_user_uid.jpg";								
 												
 					if (isset($_POST['filepond'])) {
 						$uniqueFileID = $_POST['filepond'][0];
