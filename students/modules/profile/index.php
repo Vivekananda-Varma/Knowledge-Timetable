@@ -21,7 +21,7 @@
         $class_of = date('Y') - $year + 3;
     }
     
-    $profile_image_url = GetProfileImagePathForUID($uid);
+    $profile_image_url = GetProfileImagePathForUID($loggedin_user_uid);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +49,7 @@
                                     <img src="<?= $profile_image_url ?>" 
                                          alt="User Profile" class="img-fluid rounded-circle mb-2" 
                                          width="200" height="200" />
-                                    <h5 class="card-title mb-0"><?= $fullname ?></h5>
+                                    <h5 class="card-title mb-0"><?= $loggedin_user_fullname ?></h5>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-sm my-2">
@@ -75,8 +75,8 @@
                                                 <td><?= $mobile ?></td>
                                             </tr>
                                             <tr>
-                                                <td class="text-muted text-end">Address</td>
-                                                <td><?= $address ?></td>
+                                                <td class="text-muted text-end align-text-top">Address</td>
+                                                <td class="align-text-top"><?= $address ?></td>
                                             </tr>
                                         </tbody>
                                     </table>

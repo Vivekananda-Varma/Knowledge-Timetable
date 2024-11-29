@@ -1,26 +1,31 @@
 <?php
 	$timetable = GetTimetableForTeacherId($teacher_id);
 	
+	$uid = $teacher['uid'];
 	$firstname = $teacher['firstname'];
 	$lastname = $teacher['lastname'];
-	$fullname = "$firstname $lastname";
-	
+	$legalname = $teacher['legalname'];
 	$display_name = $teacher['display_name'];
 	
-	if ($display_name == '' ) {
-		$display_name = $fullname;
-	}
+	$fullname = "$firstname $lastname";
 	
 	$mobile = $teacher['mobile'];
 	$email = $teacher['email'];
 	$dob = MySQLDateToDate($teacher['dob']);
+	$gender = $teacher['gender'];
 	$last_login = $teacher['last_login'];
 	
 	$address_1 = $teacher['address_line_1'] ?? 'No. 15, Rue Suffren Street';
 	$address_2 = $teacher['address_line_2'] ?? 'White Town';
 	$postal_code = $teacher['postal_code'] ?? '605001';
 	
-	$address = "$address_1, $address_2, Pondicherry $postal_code";
+	if ($address_1 != '') {
+		$address = "$address_1, $address_2, Pondicherry $postal_code";
+	} else {
+		$address = 'N/A';
+	}
+	
+	$profile_image_url = GetProfileImagePathForUID($uid);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +54,7 @@
                                                 </button>
                                             </div>
                                             <div class="card-body text-center">
-                                                <img src="/admin/images/user-default-profile-pic.jpg" alt="Stacie Hall" class="img-fluid rounded-circle mb-2" width="200" height="200" />
+                                                <img src="<?= $profile_image_url ?>" alt="Stacie Hall" class="img-fluid rounded-circle mb-2" width="200" height="200" />
                                                 <h5 class="card-title mb-0"><?= $fullname ?></h5>
                                             </div>
                                             <!-- <hr class="my-0"> -->
@@ -91,28 +96,36 @@
 											    </div>
 											    <form name="student-form" method="post" action="/admin/teachers/<?= $teacher_id ?>/editpost/">
 												    <div class="row">
-													    <div class="mb-3 col-md-4">
-														    <label class="form-label" for="inputFirstName">First Name</label>
-														    <input type="text" class="form-control" id="inputFirstName" name="firstname" value="<?= $firstname ?>" placeholder="First Name" />
-													    </div>
-													    <div class="mb-3 col-md-4">
-														    <label class="form-label" for="inputLastName">Last Name</label>
-														    <input type="text" class="form-control" id="inputLastName" name="lastname" value="<?= $lastname ?>" placeholder="Last Name" />
-													    </div>
-													    <div class="mb-3 col-md-4">
-														    <label class="form-label" for="inputDateOfBirst">Date of Birth</label>
-														    <input type="text" class="form-control" id="inputDateOfBirth" name="dob" placeholder="DD/MM/YYYY" value="<?= $dob ?>" />
-													    </div>
+													    <div class="mb-3 col-md-3">
+															<label class="form-label" for="inputFirstName">First Name</label>
+															<input type="text" class="form-control" id="inputFirstName" name="firstname" value="<?= $firstname ?>" placeholder="First Name" />
+														</div>
+														<div class="mb-3 col-md-3">
+															<label class="form-label" for="inputLastName">Last Name</label>
+															<input type="text" class="form-control" id="inputLastName" name="lastname" value="<?= $lastname ?>" placeholder="Last Name" />
+														</div>
+														<div class="mb-3 col-md-3">
+															<label class="form-label" for="inputLegalName">Legal Name</label>
+															<input type="text" class="form-control" id="inputLegalName" name="legalname" value="<?= $legalname ?>" placeholder="For official purposes" />
+														</div>
+														<div class="mb-3 col-md-3">
+															<label class="form-label" for="inputDisplayName">Display Name</label>
+															<input type="text" class="form-control" id="inputDisplayName" name="display_name" value="<?= $display_name ?>" placeholder="Known as" />
+														</div>
 												    </div>
 												    <div class="row">
-													    <div class="mb-3 col-md-8">
+													    <div class="mb-3 col-md-6">
 														    <label class="form-label" for="inputEmail">Email</label>
 														    <input type="email" class="form-control" id="inputEmail" name="email" value="<?= $email ?>" placeholder="Email" />
 													    </div>
-													    <div class="mb-3 col-md-4">
+													    <div class="mb-3 col-md-3">
 														    <label class="form-label" for="inputMobile">Mobile</label>
 														    <input type="text" class="form-control" id="inputMobile" name="mobile" value="<?= $mobile ?>" placeholder="Mobile" />
 													    </div>
+														<div class="mb-3 col-md-3">
+															<label class="form-label" for="inputGender">Gender</label>
+															<input type="text" class="form-control" id="inputGender" name="gender" value="<?= $gender ?>" placeholder="Mobile" />
+														</div>
 												    </div>
 												    <div class="row">
 													    <div class="mb-3 col-md-8">

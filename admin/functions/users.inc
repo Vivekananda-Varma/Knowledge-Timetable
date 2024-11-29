@@ -37,4 +37,21 @@
         
         return false;
     }
+    
+    function GetUserByUID($uid) {
+        global $mysqli;
+        
+        $query = "
+            SELECT * 
+            FROM `users` 
+            WHERE `uid`=$uid
+        ";
+        
+        $result = $mysqli->query($query);
+        if ($result->num_rows) {
+            return $result->fetch_assoc();
+        }
+        
+        return false;
+    }
 ?>

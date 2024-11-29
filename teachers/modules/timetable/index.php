@@ -1,8 +1,11 @@
 <?php
     
     include('admin/functions/timetable.inc');
+    include('admin/functions/provisionals.inc');
     
-    $timetable = GetTimetableForTeacherId($teacher_id);
+    // TODO: merge timetable data with provisional data
+    // $timetable = GetTimetableForTeacherId($teacher_id);
+    $timetable = GetProvisionalTimetableForTeacherId($teacher_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,34 +53,42 @@
 
                     <?php				
                                 } else {
+                                    $period = $period[array_key_first($period)];      // for now just take the first course if there are more than 1
+                                                                    
+                                    $attendees = $period['attendees'];
+                                    $period = $period['details'];
+
                                     $place = $period['place_name'] ?? '';
                                     $category_id = $period['category_id'];
                                     $course_id = $period['course_id'];
-                                    $subject = $period['course_name'] ?? '&nbsp;';
-                                    $display_name = $period['display_name'] ?? '';
-                                    $teacher_id = $period['teacher_id'] ?? '';
-                                    $teacher = $period['firstname'] ?? '&nbsp;';
+                                    $course_name = $period['course_name'] ?? '&nbsp;';
                                     $place = $period['place_name'] ?? '&nbsp;';
                                     
                                     $color_index = $category_id % 14;
                                     $color = $colors[$color_index];
                                     
-                                    if ($display_name == '') {
-                                        $display_name = $subject;
+                                    $course_name = str_replace(' and ', ' &amp; ', $course_name);
+                                    
+                                    $firstnames = [];
+                                    
+                                    foreach($attendees as $student) {
+                                        $display_name = $student['display_name'];
+                                        
+                                        if ($display_name == '') {
+                                            $display_name = $student['firstname'];
+                                        }
+                                        
+                                        $firstnames[] = $display_name;
                                     }
                                     
-                                    $display_name = str_replace(' and ', ' &amp; ', $display_name);
-                                    
-                                    // if ($teacher_id != '') {
-                                    //     $teacher = "<a href=\"/admin/teachers/$teacher_id/edit/\">$teacher</a>";
-                                    // }
+                                    $students = join(', ', $firstnames);
                                     
                                     $num_periods++;
                     ?>
                                                     <div class="col mb-1">
                                                         <div class="card shadow-none" data-href="/teachers/timetable/period/<?= $i ?>/<?= $j ?>/">
-                                                            <div class="card-header subject px-4 py-2 border-0 bg-<?= $color ?> text-white"><?= $display_name ?></div>
-                                                            <div class="card-body p-4 bg-pale-<?= $color ?> text-<?= $color ?>"><?= $teacher ?></div>
+                                                            <div class="card-header subject px-4 py-2 border-0 bg-<?= $color ?> text-white"><?= $course_name ?></div>
+                                                            <div class="card-body p-4 bg-pale-<?= $color ?> text-<?= $color ?>"><?= $students ?></div>
                                                             <div class="card-footer place px-4 py-2 border-0 bg-soft-<?= $color ?> text-<?= $color ?>"><?= $place ?></div>
                                                         </div>
                                                     </div>

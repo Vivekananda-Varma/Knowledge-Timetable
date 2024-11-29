@@ -163,6 +163,64 @@
         return $attendees;
     }
     
+    function GetProvisionalTimetableForTeacherId($teacher_id) {
+            global $mysqli;
+           
+            $timetable = array();
+           
+            $query = "
+                SELECT temp.day, temp.period_no, students.student_id, users.*, temp.status, courses.course_id, courses.course_name, categories.category_id, places.*
+                FROM `xref_students_courses_periods` AS temp
+                LEFT JOIN students ON students.student_id=temp.student_id
+                LEFT JOIN users ON users.user_id=students.user_id
+                LEFT JOIN courses ON courses.course_id=temp.course_id
+                LEFT JOIN subjects ON subjects.subject_id=courses.subject_id
+                LEFT JOIN categories ON categories.category_id=subjects.category_id
+                LEFT JOIN places ON places.place_id=courses.default_place_id
+                WHERE courses.teacher_id=$teacher_id
+                ORDER BY day, period_no
+            ";
+           
+            $result = $mysqli->query($query);
+            $num_results = $result->num_rows;
+           
+            if ($num_results == 0) {
+               
+            } else {
+                for ($i = 0; $i < $num_results; $i++) {
+                    $row = $result->fetch_assoc();
+                    
+                    $day = $row['day'];
+                    $period_no = $row['period_no'];
+                    
+                    $course_id = $row['course_id'];
+                    
+                    if (empty($timetable[$day][$period_no][$course_id])) {
+                        $course = array(
+                           'course_id' => $course_id,
+                           'course_name' => $row['course_name'],
+                           'category_id' => $row['category_id'],
+                           'place_id' => $row['place_id'],
+                           'place_name' => $row['place_name']
+                        );
+                        
+                        $timetable[$day][$period_no][$course_id]['details'] = $course;
+                    }
+                    
+                    $student = array(
+                        'student_id' => $row['student_id'],
+                        'firstname' => $row['firstname'],
+                        'lastname' => $row['lastname'],
+                        'display_name' => $row['display_name']
+                    );
+                    
+                    $timetable[$day][$period_no][$course_id]['attendees'][] = $student;
+                }
+            }
+           
+            return $timetable;
+       }
+    
     function GetStudentsForTeacher($student_id) {
     global $mysqli;
     

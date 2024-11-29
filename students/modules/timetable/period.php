@@ -8,7 +8,7 @@
     
     if (empty($period)) {
         $period = GetProvisionalPeriodDetailsForStudent($student_id, $day, $period_no);
-        $status = $period['status'];
+        $status = str_replace('_', ' ', $period['status'] ?? '');
     }
     
     if (empty($period)) {
@@ -85,7 +85,7 @@
                                     <i class="uil uil-angle-left" style="font-size: 1.5rem; margin-right: -2px;"></i>Back
                                 </a>
                                 <h3 class="card-title mb-0 w-100 text-center"><?= $page_title ?> <?= $status_badge ?></h3>
-                                <a href="select.php" class="btn btn-soft-primary p-1">Choose</a>
+                                <a href="select.php" class="btn btn-soft-primary px-2 py-1">Change</a>
                             </div>
                             <div class="card shadow-none">
                                 <div class="card-header subject px-4 py-2 border-0 bg-<?= $color ?> text-white"><?= $course_display_name ?></div>
@@ -123,6 +123,10 @@
                                         <div class="col-12 col-md-8 col-lg-9">3 years</div>
                                     </div> 
                                     <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
+                                        <div class="col-12 col-md-4 col-lg-3">Preferred Place</div>
+                                        <div class="col-12 col-md-8 col-lg-9"><?= $place_name ?></div>
+                                    </div>
+                                    <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
                                         <div class="col-12 col-md-4 col-lg-3">Description</div>
                                         <div class="col-12 col-md-8 col-lg-9"><?= $blurb ?></div>
                                     </div> 
@@ -133,8 +137,8 @@
                                 </div>
                             </div>
                             
-                            <h3 class="card-title mb-0 w-100 mt-4">Classmates</h3>
-                            <p class="lead mb-4 px-md-16 px-lg-0">Others who have signed up for this course in this period.</p>
+                            <h3 class="card-title mb-0 w-100 mt-4">Your classmates</h3>
+                            <p class="lead mb-4 px-md-16 px-lg-0">Other students who want to sign up for this course in this period.</p>
                             <div id="accordion-1" class="accordion-wrapper">
                                 <div class="card shadow-none accordion-item">
                                     <div class="card-header" id="accordion-heading-1-1">
@@ -166,11 +170,13 @@
                                             $color = $status_color;
                                         }
                                         
-                                        $avatar = "<span class=\"avatar bg-$color text-white w-12 h-12 fs-17 me-1\">{$f}{$l}</span>";
-                                    } 
+                                        $avatar = "<span class=\"avatar bg-$color text-white w-12 h-12 fs-17 me-1\">$f$l</span>";
+                                    } else {
+                                        $avatar = "<img src=\"$avatar_url\" class=\"img-fluid rounded-circle me-1 w-12 h-12\" />";
+                                    }
                             ?>
                                             <?= $avatar ?>
-                            <?php 
+                            <?php
                                     if ($i < $num_in_summary) {
                                         $i++;
                                     }   else {
@@ -181,11 +187,10 @@
                                 if ($num_attendees > $num_in_summary) {
                                     $spillover_count = $num_attendees - $num_in_summary;
                             ?>
-                                    <span class="ms-2"><?= $spillover_count ?></span>
+                                            <span class="ms-2"><?= $spillover_count ?></span>
                             <?php
                                 }
                             ?>
-                                            
                                         </button>
                                     </div>                                    
                                     <div id="accordion-collapse-1-1" class="collapse" aria-labelledby="accordion-heading-1-1" data-bs-target="#accordion-1">
@@ -212,9 +217,21 @@
                                             $color = $status_color;
                                         }
                                         
-                                        $avatar = "<span class=\"avatar bg-$color text-white w-9 h-9 fs-17 me-2\">{$f}{$l}</span>";
-                                    } 
+                                        $avatar = "<span class=\"avatar bg-$color text-white w-9 h-9 fs-17 me-1\">$f$l</span>";
+                                    } else {
+                                        $avatar = "<img src=\"$avatar_url\" class=\"img-fluid rounded-circle me-1 w-9 h-9\" />";
+                                    }
+                                    
+                                    if ($status_color != '') {
+                                        $status = str_replace('_', ' ', $status);
+                                        $status_title = ucwords($status);
+                                        $status_label = substr($status_title, 0, 1);
+                                        $status_badge = "<div class=\"badge bg-$status_color rounded-pill ms-2 px-4 \">$status_title</div>";
+                                    } else {
+                                        $status_badge = '';
+                                    }
                             ?>
+                                            <span class="float-end"><?= $status_badge ?></span>
                                             <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body my-2">
                                                 <?= $avatar ?><b><?= $firstname ?></b>&nbsp; <?= $lastname ?>
                                             </span>

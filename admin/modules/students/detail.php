@@ -1,21 +1,19 @@
 <?php
 
-	// $name = $_GET['name'] ?? 'aadya';
-	// $json_filename = "admin/modules/students/json/$name.json";
-	// 
-	// $json = file_get_contents($json_filename);
-	// $timetable = json_decode($json, true);
-	
 	$timetable = GetTimetableForStudentId($student_id);
 
 	$uid = $student['uid'];
 	$firstname = $student['firstname'];
 	$lastname = $student['lastname'];
+	$legalname = $student['legalname'];
+	$display_name = $student['display_name'];
+	
 	$fullname = "$firstname $lastname";
 	
 	$mobile = $student['mobile'];
 	$email = $student['email'];
 	$dob = MySQLDateToDate($student['dob']);
+	$gender = $student['gender'];
 	$class_of = $student['class_of'];
 	$year = $student['year'] ?? '1';
 	$last_login = $student['last_login'];
@@ -24,7 +22,11 @@
 	$address_2 = $student['address_line_2'] ?? '';
 	$postal_code = $student['postal_code'] ?? '';
 	
-	$address = "$address_1, $address_2, Pondicherry $postal_code";
+	if ($address_1 != '') {
+		$address = "$address_1, $address_2, Pondicherry $postal_code";
+	} else {
+		$address = 'N/A';
+	}
 	
 	if ($class_of == '') {
 		$class_of = date('Y') - $year + 3;
@@ -108,26 +110,7 @@
 												</div>
 												<div class="card-body">	
 													<div class="card-body text-center">
-														<!-- <div class="profile-pic-wrapper">
-													    	<div class="pic-holder">
-																<img id="profilePic" class="pic" src="https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg">
-															
-																<input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
-																<label for="newProfilePhoto" class="upload-file-block">
-														  			<div class="text-center">
-																		<div class="mb-2">
-															  				<i class="fa fa-camera fa-2x"></i>
-																		</div>
-																		<div class="text-uppercase">
-															    			Update <br /> Profile Photo
-																		</div>
-																	</div>
-																</label>
-													  		</div>
-														</div> -->
-														
 															<input type="file" class="filepond" name="filepond[]" data-max-file-size="3MB" data-max-files="1" accepted-file-types="image/*">
-															<!-- <input type="file" class="filepond" name="filepond[]" data-max-file-size="3MB" accept="image/png, image/jpeg, image/gif"/> -->
 														<!-- <a href="#" class="profile-container">
 															<img src="/admin/images/user-default-profile-pic.jpg" alt="User Default Profile Pic" class="profile-pic img-fluid mb-2">
 															<div class="profile-pic-edit-icon">
@@ -136,23 +119,35 @@
 														</a> -->
 													</div>
 													<div class="row">
-														<div class="mb-3 col-md-6">
+														<div class="mb-3 col-md-3">
 															<label class="form-label" for="inputFirstName">First Name</label>
 															<input type="text" class="form-control" id="inputFirstName" name="firstname" value="<?= $firstname ?>" placeholder="First Name" />
 														</div>
-														<div class="mb-3 col-md-6">
+														<div class="mb-3 col-md-3">
 															<label class="form-label" for="inputLastName">Last Name</label>
 															<input type="text" class="form-control" id="inputLastName" name="lastname" value="<?= $lastname ?>" placeholder="Last Name" />
 														</div>
+														<div class="mb-3 col-md-3">
+															<label class="form-label" for="inputLegalName">Legal Name</label>
+															<input type="text" class="form-control" id="inputLegalName" name="legalname" value="<?= $legalname ?>" placeholder="For official purposes" />
+														</div>
+														<div class="mb-3 col-md-3">
+															<label class="form-label" for="inputDisplayName">Display Name</label>
+															<input type="text" class="form-control" id="inputDisplayName" name="display_name" value="<?= $display_name ?>" placeholder="Known as" />
+														</div>
 													</div>
 													<div class="row">
-														<div class="mb-3 col-md-4">
-															<label class="form-label" for="inputDateOfBirst">Date of Birth</label>
+														<div class="mb-3 col-md-3">
+															<label class="form-label" for="inputDateOfBirth">Date of Birth</label>
 															<input type="text" class="form-control" id="inputDateOfBirth" name="dob" placeholder="DD/MM/YYYY" value="<?= $dob ?>" />
 														</div>
-														<div class="mb-3 col-md-4">
+														<div class="mb-3 col-md-3">
+															<label class="form-label" for="inputGender">Gender</label>
+															<input type="text" class="form-control" id="inputGender" name="gender" placeholder="" value="<?= $gender ?>" />
+														</div>
+														<div class="mb-3 col-md-3">
 															<label class="form-label" for="inputYear">Year</label>
-															<select id="inputYear" class="form-control" name="year">
+															<select id="inputYear" class="form-select" name="year">
 																<option>Select...</option>
 															<?php
 																for($i = 1; $i < 5; $i++) {
@@ -170,39 +165,43 @@
 															?>
 															</select>
 														</div>
-														<div class="mb-3 col-md-4">
-															<label class="form-label" for="inputDateOfBirst">Class of</label>
-															<input type="text" class="form-control" id="inputDateOfBirth" name="class_of" value="<?= $class_of ?>" placeholder="Year of graduation" />
+														<div class="mb-3 col-md-3">
+															<label class="form-label" for="inputClassOf">Class of</label>
+															<input type="text" class="form-control" id="inputClassOf" name="class_of" value="<?= $class_of ?>" placeholder="Year of graduation" />
 														</div>
 													</div>
 													<div class="row">
-														<div class="mb-3 col-md-8">
+														<div class="mb-3 col-md-6">
 															<label class="form-label" for="inputEmail">Email</label>
 															<input type="email" class="form-control" id="inputEmail" name="email" value="<?= $email ?>" placeholder="Email" />
 														</div>
-														<div class="mb-3 col-md-4">
+														<div class="mb-3 col-md-3">
 															<label class="form-label" for="inputMobile">Mobile</label>
 															<input type="text" class="form-control" id="inputMobile" name="mobile" value="<?= $mobile ?>" placeholder="Mobile" />
 														</div>
 													</div>
 													<div class="row">
-														<div class="mb-3 col-md-8">
+														<div class="mb-3 col-md-6">
 															<label class="form-label" for="inputAddressLine1">Address Line 1</label>
 															<input type="text" class="form-control" id="inputAddressLine1" name="address_line_1" value="<?= $address_1 ?>" placeholder="Apartment, studio, or floor" />
 														</div>
-														<div class="mb-3 col-md-8">
+													</div>
+													<div class="row">
+														<div class="mb-3 col-md-6">
 															<label class="form-label" for="inputAddressLine2">Address Line 2</label>
 															<input type="text" class="form-control" id="inputAddressLine2" name="address_line_2" value="<?= $address_2 ?>" placeholder="Street Name" />
 														</div>
-														<div class="mb-3 col-md-4">
+													</div>
+													<div class="row">
+														<div class="mb-3 col-md-3">
 															<label class="form-label" for="inputPincode">Postal Code</label>
 															<input type="text" class="form-control" id="inputPincode" name="postal_code" value="<?= $postal_code ?>" placeholder="Pincode" />
 														</div>
 													</div>
 													<div class="modal-footer">
-														<button type="button" class="btn btn-danger">Delete</button>
+														<!-- <button type="button" class="btn btn-danger">Delete</button> -->
 														<div class="ms-auto">
-															<a class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#editProfileCard" style="margin-right: 10px;">Close</a>
+															<a class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#editProfileCard" style="margin-right: 10px;">Cancel</a>
 															<input type="submit" class="btn btn-primary" name="submit" value="Save">
 														</div>
 													</div>

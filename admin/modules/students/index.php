@@ -62,10 +62,10 @@
 				?>
 							<tr data-href="/admin/students/<?= $student_id ?>/edit/">
 								<td>
-									<img src="<?= $profile_image_url ?>" width="36" height="36" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
-									<div style="display: inline-block">
-										<?= $fullname ?><br>
-										<small class="text-muted">Class of <?= $class_of ?></small>
+									<img src="<?= $profile_image_url ?>" width="44" height="44" class="rounded-circle me-2 align-top" alt="Ashley Briggs">
+									<div class="d-inline-block mt-1">
+										<?= $fullname ?>
+										<small class="text-muted d-block" style="margin-top: -2px">Class of <?= $class_of ?></small>
 									</div>
 								</td>
 								<td width="50" class="text-center">HC-<?= $year ?></td>

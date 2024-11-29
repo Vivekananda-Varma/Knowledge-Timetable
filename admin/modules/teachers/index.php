@@ -39,6 +39,8 @@
 				<?php
 					foreach($teachers as $teacher) {
 						$teacher_id = $teacher['teacher_id'];
+						$uid = $teacher['uid'];
+						
 						$firstname = $teacher['firstname'];
 						$lastname = $teacher['lastname'];
 						$fullname = "<b>$firstname</b> $lastname";
@@ -71,12 +73,14 @@
 						if ($num_periods == 0) {
 							$num_periods = '';
 						}
+						
+						$profile_image_url = GetProfileImagePathForUID($uid);
 				?>
 				
 							 <tr data-href="/admin/teachers/<?= $teacher_id ?>/edit/">
 								<td>
-									<img src="/admin/images/user-default-profile-pic.jpg" width="36" height="36" class="rounded-circle me-2 align-top">
-									<span class="d-inline-block text-muted"><?= $fullname ?><br><?= $display_name ?></span>
+									<img src="<?= $profile_image_url ?>" width="36" height="36" class="rounded-circle me-2 align-top">
+									<span class="d-inline-block text-muted"><?= $fullname ?><br><?= $last_login ?></span>
 								</td>
 								<td><?= $display_name ?></td>
 								<td><?= $mobile ?></td>

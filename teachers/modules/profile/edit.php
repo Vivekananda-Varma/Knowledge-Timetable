@@ -40,7 +40,7 @@
                                     <h4 class="card-title mb-0">Edit Profile</h4>
                                     <div class="d-flex">
                                         <a href="/teachers/profile/" class="btn btn-outline-secondary btn-sm px-3 py-1 me-2">Cancel</a>
-                                        <input type="submit" href="/teachers/profile/editpost/" class="btn btn-primary btn-sm px-3 py-1" value="Save">
+                                        <input type="submit" class="btn btn-primary btn-sm px-3 py-1" value="Save">
                                     </div>
                                 </div>                            
                                 <div class="card mb-3">

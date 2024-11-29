@@ -119,7 +119,7 @@
         $timetable = array();
        
         $query = "
-            SELECT periods.*, places.place_name, courses.*
+            SELECT periods.*, places.*, courses.*
             FROM `courses`
             LEFT JOIN `periods` ON periods.course_id=courses.course_id
             LEFT JOIN places ON places.place_id=periods.place_id

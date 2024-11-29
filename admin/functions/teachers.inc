@@ -206,19 +206,26 @@
         
         $firstname = SanitiseUserInput($data['firstname']);
         $lastname = SanitiseUserInput($data['lastname']);
+        $legalname = SanitiseUserInput($data['legalname'] ?? '');
+        $display_name = SanitiseUserInput($data['display_name'] ?? '');
         $mobile = SanitiseUserInput($data['mobile']);
         $email = SanitiseUserInput($data['email']);
         $dob = SanitiseUserInput($data['dob']);
+        $gender = SanitiseUserInput($data['gender'] ?? '');
         $address_line_1 = SanitiseUserInput($data['address_line_1']);
         $address_line_2 = SanitiseUserInput($data['address_line_2']);
         $postal_code  = SanitiseUserInput($data['postal_code']);
         
         $dob = DateToMySQLDate($dob);
+        $gender = strtoupper(substr($gender, 0, 1));                   // M, F
         
         $query = "
             UPDATE `users`
             SET `firstname`='$firstname',
                 `lastname`='$lastname',
+                `legalname`='$legalname',
+                `display_name`='$display_name',
+                `gender`='$gender',
                 `mobile`='$mobile',
                 `email`='$email',
                 `dob`='$dob',

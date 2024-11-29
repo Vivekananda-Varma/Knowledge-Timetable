@@ -436,7 +436,7 @@
 											continue;
 										}
 										
-										$student = ImportStudent($row);
+										ImportStudent($row);
 									}
 								}
 							}
@@ -614,8 +614,9 @@
 			$student = GetStudentByID($student_id);
 			$loggedin_user_uid = $student['uid'];
 			$loggedin_user_firstname = $student['firstname'];
-			$lastname = $student['lastname'];
-			$loggedin_user_fullname = "$loggedin_user_firstname $lastname";
+			$loggedin_user_lastname = $student['lastname'];
+			$loggedin_user_display_name = $student['display_name'];
+			$loggedin_user_fullname = "$loggedin_user_firstname $loggedin_user_lastname";
 			
 			$profile_image_url = GetProfileImagePathForUID($loggedin_user_uid);
 			
@@ -650,6 +651,8 @@
 					exit;
 					
 				case 'editpost':
+					UpdateStudentProfile($student_id, $_POST);
+					Redirect('/students/profile/');
 					
 				default:
 					$page_title = "My Profile";
@@ -777,8 +780,8 @@
 			$teacher = GetTeacherByID($teacher_id);
 			$loggedin_user_uid = $teacher['uid'];
 			$loggedin_user_firstname = $teacher['firstname'];
-			$lastname = $teacher['lastname'];
-			$loggedin_user_fullname = "$loggedin_user_firstname $lastname";
+			$loggedin_user_lastname = $teacher['lastname'];
+			$loggedin_user_fullname = "$loggedin_user_firstname $loggedin_user_lastname";
 			
 			$profile_image_url = GetProfileImagePathForUID($loggedin_user_uid);
 			
