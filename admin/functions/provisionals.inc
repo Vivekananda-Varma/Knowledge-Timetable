@@ -136,6 +136,60 @@
         return $period;
     }
     
+    function GetProvisionalPeriodDetailsForTeacher($teacher_id, $day, $period_no) {
+        global $mysqli;
+        
+        $query = "
+            SELECT courses.course_id, courses.course_name, subjects.category_id, temp.student_id, users.uid, users.firstname, users.lastname, users.display_name, places.place_id, places.place_name, temp.status
+            FROM `xref_students_courses_periods` AS temp
+            LEFT JOIN courses ON courses.course_id=temp.course_id
+            LEFT JOIN places ON places.place_id=courses.default_place_id
+            LEFT JOIN subjects ON subjects.subject_id=courses.subject_id
+            LEFT JOIN teachers ON teachers.teacher_id=courses.teacher_id
+            LEFT JOIN students ON students.student_id=temp.student_id
+            LEFT JOIN users ON users.user_id=students.user_id
+            WHERE teachers.teacher_id=$teacher_id AND temp.`day`=$day AND temp.`period_no`=$period_no
+        ";
+        
+        $result = $mysqli->query($query);
+        $num_results = $result->num_rows;
+        
+        $period = array();
+        
+        if ($num_results) {
+            for ($i = 0; $i < $num_results; $i++) {
+                $row = $result->fetch_assoc();
+                
+                $course_id = $row['course_id'];
+                
+                if (empty($period[$course_id])) {
+                    $course = array(
+                       'course_id' => $course_id,
+                       'course_name' => $row['course_name'],
+                       'category_id' => $row['category_id'],
+                       'place_id' => $row['place_id'],
+                       'place_name' => $row['place_name']
+                    );
+                    
+                    $period[$course_id]['details'] = $course;
+                }
+                
+                $student = array(
+                    'student_id' => $row['student_id'],
+                    'uid' => $row['uid'],
+                    'firstname' => $row['firstname'],
+                    'lastname' => $row['lastname'],
+                    'display_name' => $row['display_name'],
+                    'status' => $row['status']
+                );
+                
+                $period[$course_id]['attendees'][] = $student;
+            }
+        }
+        
+        return $period;
+    }
+    
     function GetProvisionalAttendeesForPeriod($student_id, $course_id, $day, $period_no) {
         global $mysqli;
         
@@ -163,63 +217,123 @@
         return $attendees;
     }
     
-    function GetProvisionalTimetableForTeacherId($teacher_id) {
-            global $mysqli;
+    function GetProvisionalTimetableForStudentId($student_id) {
+        global $mysqli;
+       
+        $timetable = array();
+       
+        $query = "
+            SELECT temp.day, temp.period_no, temp.status, courses.course_id, courses.course_name, courses.teacher_id, users.*, categories.category_id, places.*
+            FROM `xref_students_courses_periods` AS temp
+            LEFT JOIN courses ON courses.course_id=temp.course_id
+            LEFT JOIN subjects ON subjects.subject_id=courses.subject_id
+            LEFT JOIN categories ON categories.category_id=subjects.category_id
+            LEFT JOIN places ON places.place_id=courses.default_place_id
+            LEFT JOIN teachers ON teachers.teacher_id=courses.teacher_id
+            LEFT JOIN users ON users.user_id=teachers.user_id
+            WHERE temp.student_id=$student_id
+            ORDER BY day, period_no
+        ";
+       
+        $result = $mysqli->query($query);
+        $num_results = $result->num_rows;
+       
+        if ($num_results == 0) {
            
-            $timetable = array();
-           
-            $query = "
-                SELECT temp.day, temp.period_no, students.student_id, users.*, temp.status, courses.course_id, courses.course_name, categories.category_id, places.*
-                FROM `xref_students_courses_periods` AS temp
-                LEFT JOIN students ON students.student_id=temp.student_id
-                LEFT JOIN users ON users.user_id=students.user_id
-                LEFT JOIN courses ON courses.course_id=temp.course_id
-                LEFT JOIN subjects ON subjects.subject_id=courses.subject_id
-                LEFT JOIN categories ON categories.category_id=subjects.category_id
-                LEFT JOIN places ON places.place_id=courses.default_place_id
-                WHERE courses.teacher_id=$teacher_id
-                ORDER BY day, period_no
-            ";
-           
-            $result = $mysqli->query($query);
-            $num_results = $result->num_rows;
-           
-            if ($num_results == 0) {
-               
-            } else {
-                for ($i = 0; $i < $num_results; $i++) {
-                    $row = $result->fetch_assoc();
-                    
-                    $day = $row['day'];
-                    $period_no = $row['period_no'];
-                    
-                    $course_id = $row['course_id'];
-                    
-                    if (empty($timetable[$day][$period_no][$course_id])) {
-                        $course = array(
-                           'course_id' => $course_id,
-                           'course_name' => $row['course_name'],
-                           'category_id' => $row['category_id'],
-                           'place_id' => $row['place_id'],
-                           'place_name' => $row['place_name']
-                        );
-                        
-                        $timetable[$day][$period_no][$course_id]['details'] = $course;
-                    }
-                    
-                    $student = array(
-                        'student_id' => $row['student_id'],
-                        'firstname' => $row['firstname'],
-                        'lastname' => $row['lastname'],
-                        'display_name' => $row['display_name']
+        } else {
+            for ($i = 0; $i < $num_results; $i++) {
+                $row = $result->fetch_assoc();
+                
+                $day = $row['day'];
+                $period_no = $row['period_no'];
+                $course_id = $row['course_id'];
+                
+                // if (empty($timetable[$day][$period_no][$course_id])) {
+                    $course = array(
+                       'course_id' => $course_id,
+                       'course_name' => $row['course_name'],
+                       'category_id' => $row['category_id'],
+                       'teacher_id' => $row['teacher_id'],
+                       'teacher_name' => $row['display_name'],
+                       'place_id' => $row['place_id'],
+                       'place_name' => $row['place_name'],
+                       'status' => $row['status']
                     );
                     
-                    $timetable[$day][$period_no][$course_id]['attendees'][] = $student;
-                }
+                    $timetable[$day][$period_no][$course_id]['details'] = $course;
+                // }
+                
+                // $student = array(
+                //     'student_id' => $row['student_id'],
+                //     'firstname' => $row['firstname'],
+                //     'lastname' => $row['lastname'],
+                //     'display_name' => $row['display_name']
+                // );
+                
+                // $timetable[$day][$period_no][$course_id]['attendees'][] = $student;
             }
+        }
+       
+        return $timetable;
+    }
+    
+    function GetProvisionalTimetableForTeacherId($teacher_id) {
+        global $mysqli;
+       
+        $timetable = array();
+       
+        $query = "
+            SELECT temp.day, temp.period_no, students.student_id, users.*, temp.status, courses.course_id, courses.course_name, categories.category_id, places.*
+            FROM `xref_students_courses_periods` AS temp
+            LEFT JOIN students ON students.student_id=temp.student_id
+            LEFT JOIN users ON users.user_id=students.user_id
+            LEFT JOIN courses ON courses.course_id=temp.course_id
+            LEFT JOIN subjects ON subjects.subject_id=courses.subject_id
+            LEFT JOIN categories ON categories.category_id=subjects.category_id
+            LEFT JOIN places ON places.place_id=courses.default_place_id
+            WHERE courses.teacher_id=$teacher_id
+            ORDER BY day, period_no, firstname
+        ";
+       
+        $result = $mysqli->query($query);
+        $num_results = $result->num_rows;
+       
+        if ($num_results == 0) {
            
-            return $timetable;
-       }
+        } else {
+            for ($i = 0; $i < $num_results; $i++) {
+                $row = $result->fetch_assoc();
+                
+                $day = $row['day'];
+                $period_no = $row['period_no'];
+                $course_id = $row['course_id'];
+                
+                if (empty($timetable[$day][$period_no][$course_id])) {
+                    $course = array(
+                       'course_id' => $course_id,
+                       'course_name' => $row['course_name'],
+                       'category_id' => $row['category_id'],
+                       'place_id' => $row['place_id'],
+                       'place_name' => $row['place_name']
+                    );
+                    
+                    $timetable[$day][$period_no][$course_id]['details'] = $course;
+                }
+                
+                $student = array(
+                    'student_id' => $row['student_id'],
+                    'firstname' => $row['firstname'],
+                    'lastname' => $row['lastname'],
+                    'display_name' => $row['display_name'],
+                    'status' => $row['status']
+                );
+                
+                $timetable[$day][$period_no][$course_id]['attendees'][] = $student;
+            }
+        }
+       
+        return $timetable;
+    }
     
     function GetStudentsForTeacher($student_id) {
     global $mysqli;

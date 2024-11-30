@@ -88,12 +88,17 @@
                                 <a href="select.php" class="btn btn-soft-primary px-2 py-1">Change</a>
                             </div>
                             <div class="card shadow-none">
-                                <div class="card-header subject px-4 py-2 border-0 bg-<?= $color ?> text-white"><?= $course_display_name ?></div>
+                                <div id="course-header" class="card-header subject px-4 py-2 border-0 bg-<?= $color ?> text-white">
+                                    <?= $course_display_name ?>
+                                    <a href="" class="float-end mt-2" data-bs-toggle="collapse" data-bs-target="#course-details" aria-expanded="true" aria-controls="course-details">
+                                        <i class="uil uil-info-circle text-white fs-24"></i>
+                                    </a>
+                                </div>
                                 <div class="card-body p-4 bg-pale-<?= $color ?> text-<?= $color ?>"><?= $teacher ?></div>
                                 <div class="card-footer place px-4 py-2 border-0 bg-soft-<?= $color ?> text-<?= $color ?>"><?= $place ?></div>
                             </div>
                             
-                            <div class="card shadow-none mt-4 bg-soft-<?= $color ?>">
+                            <div id="course-details" aria-labelledby="course-header" class="accordion-collapse collapse hide card shadow-none mt-4 bg-soft-<?= $color ?>">
                                 <div class="card-body text-<?= $color ?>">
                                     <h4 class="mb-3 text-<?= $color ?>" style="text-align: left; font-weight: bold;">Course Details</h4>
                                     <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
@@ -139,10 +144,8 @@
                             
                             <h3 class="card-title mb-0 w-100 mt-4">Your classmates</h3>
                             <p class="lead mb-4 px-md-16 px-lg-0">Other students who want to sign up for this course in this period.</p>
-                            <div id="accordion-1" class="accordion-wrapper">
-                                <div class="card shadow-none accordion-item">
-                                    <div class="card-header" id="accordion-heading-1-1">
-                                        <button class="collapsed d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-1-1" aria-expanded="false" aria-controls="accordion-collapse-1-1">
+                            <div class="card shadow-none">
+                                <div class="card-body">
                             <?php
                                 $attendees = GetProvisionalAttendeesForPeriod($student_id, $course_id, $day, $period_no);
                                 $num_attendees = count($attendees);
@@ -174,72 +177,26 @@
                                     } else {
                                         $avatar = "<img src=\"$avatar_url\" class=\"img-fluid rounded-circle me-1 w-12 h-12\" />";
                                     }
-                            ?>
-                                            <?= $avatar ?>
-                            <?php
-                                    if ($i < $num_in_summary) {
-                                        $i++;
-                                    }   else {
-                                        break;
-                                    }
-                                }
-                                
-                                if ($num_attendees > $num_in_summary) {
-                                    $spillover_count = $num_attendees - $num_in_summary;
-                            ?>
-                                            <span class="ms-2"><?= $spillover_count ?></span>
-                            <?php
-                                }
-                            ?>
-                                        </button>
-                                    </div>                                    
-                                    <div id="accordion-collapse-1-1" class="collapse" aria-labelledby="accordion-heading-1-1" data-bs-target="#accordion-1">
-                                        <div class="card-body">
-                            <?php
-                                foreach($attendees as $attendee) {
-                                    $uid = $attendee['uid'];
-                                    $firstname = $attendee['firstname'];
-                                    $lastname = $attendee['lastname'];
-                                    
-                                    $status = $attendee['status'];
-                                    $status_color = BadgeColorForStatus($status);
-                                    
-                                    $avatar_url = GetProfileImagePathForUID($uid, false);   // failover: false returns ''
-                                    
-                                    if ($avatar_url == '') {
-                                        $f = substr($firstname, 0, 1);
-                                        $l = substr($lastname, 0, 1);
-                                        
-                                        if ($status_color == '') {
-                                            $color_index = random_int(0, count($colors) - 1);
-                                            $color = $colors[$color_index];
-                                        } else {
-                                            $color = $status_color;
-                                        }
-                                        
-                                        $avatar = "<span class=\"avatar bg-$color text-white w-9 h-9 fs-17 me-1\">$f$l</span>";
-                                    } else {
-                                        $avatar = "<img src=\"$avatar_url\" class=\"img-fluid rounded-circle me-1 w-9 h-9\" />";
-                                    }
                                     
                                     if ($status_color != '') {
                                         $status = str_replace('_', ' ', $status);
                                         $status_title = ucwords($status);
                                         $status_label = substr($status_title, 0, 1);
-                                        $status_badge = "<div class=\"badge bg-$status_color rounded-pill ms-2 px-4 \">$status_title</div>";
                                     } else {
                                         $status_badge = '';
                                     }
                             ?>
-                                            <span class="float-end"><?= $status_badge ?></span>
-                                            <span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body my-2">
-                                                <?= $avatar ?><b><?= $firstname ?></b>&nbsp; <?= $lastname ?>
+                                    <a data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="<?= $firstname ?>" data-bs-content="<?= htmlspecialchars($status_badge, ENT_QUOTES) ?>" data-bs-html="true">
+                                        <span class="d-inline-flex position-relative">
+                                            <span class="position-absolute bottom-0 end-0 bg-<?= $status_color ?> border border-2 border-light rounded-circle" style="padding: 8px">
+                                                <span class="visually-hidden"><?= $status ?></span>
                                             </span>
-                            <?php 
+                                            <?= $avatar ?>
+                                        </span>
+                                    </a>
+                            <?php
                                 }
                             ?>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

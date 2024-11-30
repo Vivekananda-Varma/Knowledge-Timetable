@@ -710,7 +710,7 @@
 					$teachers = GetTeachersForStudent($student_id);
 					include('students/modules/teachers/index.php');
 				} else {
-					include('students/modules/courses/emptyview.php');
+					include('students/modules/teachers/emptyview.php');
 				}
 				exit;
 				
@@ -753,7 +753,7 @@
 					if (count($selected_courses)) {
 						include('students/modules/timetable/index.php');
 					} else {
-						include('students/modules/courses/emptyview.php');
+						include('students/modules/timetable/emptyview.php');
 					}
 					
 					exit;

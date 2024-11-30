@@ -83,6 +83,8 @@
             WHERE `teacher_id`=$teacher_id
         ";
         
+        // print $query;
+        
         $result = $mysqli->query($query);
         if ($result->num_rows) {
             return $result->fetch_assoc();

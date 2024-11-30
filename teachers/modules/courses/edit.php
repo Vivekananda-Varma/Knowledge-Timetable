@@ -43,6 +43,7 @@
     
     $major_selected = $is_major === false ? '' : ($is_major ? 'selected' : '');
     $minor_selected = $is_major === false ? '' : (!$is_major ? 'selected' : '');
+    $project_selected = false;
 ?>
 <!DOCTYPE html>
 <html lang="en">

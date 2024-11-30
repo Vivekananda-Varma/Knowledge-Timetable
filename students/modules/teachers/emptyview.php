@@ -13,10 +13,10 @@
             <div class="container pt-15 pt-md-17 pb-13 pb-md-15 text-center">
                 <div class="row">
                     <div class="col-md-9 col-lg-7 col-xl-7 mx-auto text-center">
-                        <img src="/frontend/assets/img/illustrations/3d4.png" width="300" />
+                        <img src="/frontend/assets/img/illustrations/3d5.png" width="300" />
                         <!-- <i class="uil uil-list-ul" style="font-size: 5rem;"></i> -->
-                        <h2 class="display-4 my-3">Courses</h2>
-                        <p class="lead fs-md mb-6 px-xl-10 px-xxl-15">Start by selecting courses you would like to join this academic year. They will appear here.</p>
+                        <h2 class="display-4 my-3">Teachers</h2>
+                        <p class="lead fs-md mb-6 px-xl-10 px-xxl-15">Once you pick your courses, your list of teachers will be created automatically. So first go pick your courses.</p>
                         <a href="/students/courses/select/" class="btn btn-primary rounded">Select Courses</a>
                     </div>
                 </div>

@@ -1,4 +1,6 @@
-*[data-href], .form-check-input {
+*[data-href], 
+.form-check-input,
+*[data-bs-toggle="popover"] {
     cursor: pointer;
 }
 
@@ -98,4 +100,12 @@
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.two-line-ellipsis {
+    overflow: hidden;
+    width: 100%;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
