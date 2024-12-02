@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="col-md-8 col-lg-6 col-xl-5 mx-auto">
                             <div class="d-flex align-items-center mt-5 mb-3  position-relative">
-                                <a href="/students/teachers/" class="d-flex align-items-center text-primary position-absolute" style="font-weight: bold; text-decoration: none; cursor: pointer;">
+                                <a href="javascript:history.back()" class="d-flex align-items-center text-primary position-absolute" style="font-weight: bold; text-decoration: none; cursor: pointer;">
                                     <i class="uil uil-angle-left" style="font-size: 1.5rem; margin-right: -2px;"></i>Back
                                 </a>
                                 <h3 class="card-title mb-0 w-100 text-center">Profile</h3>

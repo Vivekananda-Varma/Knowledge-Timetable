@@ -102,7 +102,7 @@
         global $mysqli;
         
         $query = "
-            SELECT courses.course_id, courses.course_name, courses.display_name, subjects.category_id, teachers.teacher_id, users.firstname, users.lastname, places.place_id, places.place_name, temp.status
+            SELECT courses.course_id, courses.course_name, courses.display_name, subjects.category_id, teachers.teacher_id, users.firstname, users.lastname, users.display_name as teacher, places.place_id, places.place_name, temp.status
             FROM `xref_students_courses_periods` AS temp
             LEFT JOIN courses ON courses.course_id=temp.course_id
             LEFT JOIN places ON places.place_id=courses.default_place_id
@@ -129,6 +129,7 @@
                 'teacher_id' => $row['teacher_id'],
                 'firstname' => $row['firstname'],
                 'lastname' => $row['lastname'],
+                'teacher' => $row['teacher'],
                 'status' => $row['status']
             );
         }

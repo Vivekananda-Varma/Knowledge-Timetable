@@ -21,7 +21,7 @@
     $subject = $period['course_name'] ?? '&nbsp;';
     $course_display_name = $period['display_name'] ?? '';
     $teacher_id = $period['teacher_id'] ?? '';
-    $teacher = $period['firstname'] ?? '&nbsp;';
+    $teacher = $period['teacher'] ?? '&nbsp;';
     $place = $period['place_name'] ?? '&nbsp;';
     
     $color_index = $category_id % 14;
@@ -94,7 +94,12 @@
                                         <i class="uil uil-info-circle text-white fs-24"></i>
                                     </a>
                                 </div>
-                                <div class="card-body p-4 bg-pale-<?= $color ?> text-<?= $color ?>"><?= $teacher ?></div>
+                                <div id="teacher-div" class="card-body px-4 pt-3 pb-2 bg-pale-<?= $color ?> text-<?= $color ?>">
+                                    <?= $teacher ?>
+                                    <a href="/students/teachers/id/<?= $teacher_id ?>/profile/" class="float-end">
+                                        <i class="uil uil-user-circle fs-24"></i>
+                                    </a>
+                                </div>
                                 <div class="card-footer place px-4 py-2 border-0 bg-soft-<?= $color ?> text-<?= $color ?>"><?= $place ?></div>
                             </div>
                             
@@ -141,11 +146,10 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            <h3 class="card-title mb-0 w-100 mt-4">Your classmates</h3>
-                            <p class="lead mb-4 px-md-16 px-lg-0">Other students who want to sign up for this course in this period.</p>
                             <div class="card shadow-none">
-                                <div class="card-body">
+                                <div class="card-body text-center">
+                                    <h3 class="card-title mb-0 w-100 mt-4">Your classmates</h3>
+                                    <p class="lead mb-4 px-md-16 px-lg-0">Other students who want to sign up for this course in this period.</p>
                             <?php
                                 $attendees = GetProvisionalAttendeesForPeriod($student_id, $course_id, $day, $period_no);
                                 $num_attendees = count($attendees);

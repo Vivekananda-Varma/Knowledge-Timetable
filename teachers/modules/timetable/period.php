@@ -74,7 +74,7 @@
                                     <i class="uil uil-angle-left" style="font-size: 1.5rem; margin-right: -2px;"></i>Back
                                 </a>
                                 <h3 class="card-title mb-0 w-100 text-center"><?= $page_title ?></h3>
-                                <a href="select.php" class="btn btn-soft-primary p-1">Choose</a>
+                                <!-- <a href="select.php" class="btn btn-soft-primary p-1">Choose</a> -->
                             </div>
                             <div class="card shadow-none">
                                 <div id="course-header" class="card-header subject px-4 py-2 border-0 bg-<?= $color ?> text-white">
@@ -126,12 +126,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <h3 class="card-title mb-0 w-100 my-4 text-center">Your students</h3>
-                            <div class="card">
-                                <div class="card-header">
+                            <div class="card shadow-none">
+                                <div class="card-body text-center">
+                                    <h3 class="card-title mb-0 w-100 my-4">Your students</h3>
                                     <p class="lead mb-4 px-md-16 px-lg-0">You need to confirm their request to join this class.</p>
-                                </div>
-                                <div class="card-body">
                             <?php
                                 $num_attendees = count($attendees);
                                 $num_in_summary = $num_attendees < 6 ? $num_attendees : 3;
@@ -168,19 +166,20 @@
                                         $status = str_replace('_', ' ', $status);
                                         $status_title = ucwords($status);
                                         $status_label = substr($status_title, 0, 1);
-                                        $status_badge = "<div class=\"badge bg-$status_color rounded-pill ms-2 px-4 \">$status_title</div>";
+                                        $status_badge = "<span class=\"badge bg-$status_color rounded-pill px-4 \">$status_title</span>";
                                     } else {
                                         $status_badge = '';
                                     }
                             ?>
-                                    <a data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="<?= $firstname ?>" data-bs-content="<?= htmlspecialchars($status_badge, ENT_QUOTES) ?>" data-bs-html="true">
-                                        <span class="d-inline-flex position-relative">
+                                    <a class="d-inline-flex position-relative" tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="<?= $firstname ?>" data-bs-content="<?= htmlspecialchars($status_badge, ENT_QUOTES) ?>" data-bs-html="true">
+                                        <span>
                                             <span class="position-absolute bottom-0 end-0 bg-<?= $status_color ?> border border-2 border-light rounded-circle" style="padding: 8px">
                                                 <span class="visually-hidden"><?= $status ?></span>
                                             </span>
                                             <?= $avatar ?>
                                         </span>
                                     </a>
+
                             <?php
                                 }
                             ?>                                  

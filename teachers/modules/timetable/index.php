@@ -31,7 +31,7 @@
                                 for($i = 1; $i < 7; $i++) {
                                     $day = $day_of_week[$i];
                             ?>
-                                        <div class="card plain accordion-item">
+                                        <div class="card accordion-item">
                                             <div class="card-header" id="accordion-heading-1-<?= $i ?>">
                                                 <button class="collapsed" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-1-<?= $i ?>" aria-expanded="false" aria-controls="accordion-collapse-1-<?= $i ?>"><?= $day ?></button>
                                             </div>
