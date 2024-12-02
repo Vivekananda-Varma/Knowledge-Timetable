@@ -96,7 +96,7 @@
                                 </div>
                                 <div id="teacher-div" class="card-body px-4 pt-3 pb-2 bg-pale-<?= $color ?> text-<?= $color ?>">
                                     <?= $teacher ?>
-                                    <a href="/students/teachers/id/<?= $teacher_id ?>/profile/" class="float-end">
+                                    <a href="/students/teachers/id/<?= $teacher_id ?>/profile/" class="float-end text-<?= $color ?>">
                                         <i class="uil uil-user-circle fs-24"></i>
                                     </a>
                                 </div>
@@ -110,16 +110,16 @@
                                         <div class="col-12 col-md-4 col-lg-3"><?= $course_name_label ?></div>
                                         <div class="col-12 col-md-8 col-lg-9"><?= $course_name ?></div>
                                     </div>
-                                <?php
-                                    if ($course_name != $subject_name) {
-                                ?>
+                        <?php
+                            if ($course_name != $subject_name) {
+                        ?>
                                     <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
                                         <div class="col-12 col-md-4 col-lg-3">Subject</div>
                                         <div class="col-12 col-md-8 col-lg-9"><?= $subject_name ?></div>
                                     </div>   
-                                <?php
-                                    }
-                                ?>
+                        <?php
+                            }
+                        ?>
                                     <div class="row pt-1 pb-2 border-bottom border-soft-<?= $color ?>">
                                         <div class="col-12 col-md-4 col-lg-3">Category</div>
                                         <div class="col-12 col-md-8 col-lg-9"><?= $category_name ?></div>
@@ -147,49 +147,56 @@
                                 </div>
                             </div>
                             <div class="card shadow-none">
-                                <div class="card-body text-center">
-                                    <h3 class="card-title mb-0 w-100 mt-4">Your classmates</h3>
+                            <div class="card-body text-center">
+                                <h3 class="card-title mb-0 w-100 mt-4">Your classmates</h3>
+                    <?php
+                        $attendees = GetProvisionalAttendeesForPeriod($student_id, $course_id, $day, $period_no);
+                        $num_attendees = count($attendees);
+                        $num_in_summary = $num_attendees < 6 ? $num_attendees : 3;
+                            
+                        if ($num_attendees == 0) {
+                    ?>
+                                    <p class="lead mb-4 px-md-16 px-lg-0">Kinda lonely in here. No one else has signed up so far...</p>
+                    <?php
+                        } else {
+                    ?>
                                     <p class="lead mb-4 px-md-16 px-lg-0">Other students who want to sign up for this course in this period.</p>
-                            <?php
-                                $attendees = GetProvisionalAttendeesForPeriod($student_id, $course_id, $day, $period_no);
-                                $num_attendees = count($attendees);
-                                $num_in_summary = $num_attendees < 6 ? $num_attendees : 3;
+                    <?php            
+                            $i = 0;
+                            foreach($attendees as $attendee) {
+                                $uid = $attendee['uid'];
+                                $firstname = $attendee['firstname'];
+                                $lastname = $attendee['lastname'];
+                                
+                                $status = $attendee['status'];
+                                $status_color = BadgeColorForStatus($status);
+                                
+                                $avatar_url = GetProfileImagePathForUID($uid, false);   // failover: false returns ''
+                                
+                                if ($avatar_url == '') {
+                                    $f = substr($firstname, 0, 1);
+                                    $l = substr($lastname, 0, 1);
                                     
-                                $i = 0;
-                                foreach($attendees as $attendee) {
-                                    $uid = $attendee['uid'];
-                                    $firstname = $attendee['firstname'];
-                                    $lastname = $attendee['lastname'];
-                                    
-                                    $status = $attendee['status'];
-                                    $status_color = BadgeColorForStatus($status);
-                                    
-                                    $avatar_url = GetProfileImagePathForUID($uid, false);   // failover: false returns ''
-                                    
-                                    if ($avatar_url == '') {
-                                        $f = substr($firstname, 0, 1);
-                                        $l = substr($lastname, 0, 1);
-                                        
-                                        if ($status_color == '') {
-                                            $color_index = random_int(0, count($colors) - 1);
-                                            $color = $colors[$color_index];
-                                        } else {
-                                            $color = $status_color;
-                                        }
-                                        
-                                        $avatar = "<span class=\"avatar bg-$color text-white w-12 h-12 fs-17 me-1\">$f$l</span>";
+                                    if ($status_color == '') {
+                                        $color_index = random_int(0, count($colors) - 1);
+                                        $color = $colors[$color_index];
                                     } else {
-                                        $avatar = "<img src=\"$avatar_url\" class=\"img-fluid rounded-circle me-1 w-12 h-12\" />";
+                                        $color = $status_color;
                                     }
                                     
-                                    if ($status_color != '') {
-                                        $status = str_replace('_', ' ', $status);
-                                        $status_title = ucwords($status);
-                                        $status_label = substr($status_title, 0, 1);
-                                    } else {
-                                        $status_badge = '';
-                                    }
-                            ?>
+                                    $avatar = "<span class=\"avatar bg-$color text-white w-12 h-12 fs-17 me-1\">$f$l</span>";
+                                } else {
+                                    $avatar = "<img src=\"$avatar_url\" class=\"img-fluid rounded-circle me-1 w-12 h-12\" />";
+                                }
+                                
+                                if ($status_color != '') {
+                                    $status = str_replace('_', ' ', $status);
+                                    $status_title = ucwords($status);
+                                    $status_label = substr($status_title, 0, 1);
+                                } else {
+                                    $status_badge = '';
+                                }
+                    ?>
                                     <a data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="<?= $firstname ?>" data-bs-content="<?= htmlspecialchars($status_badge, ENT_QUOTES) ?>" data-bs-html="true">
                                         <span class="d-inline-flex position-relative">
                                             <span class="position-absolute bottom-0 end-0 bg-<?= $status_color ?> border border-2 border-light rounded-circle" style="padding: 8px">
@@ -198,11 +205,14 @@
                                             <?= $avatar ?>
                                         </span>
                                     </a>
-                            <?php
+                    <?php
                                 }
-                            ?>
+                    ?>
                                 </div>
                             </div>
+                    <?php
+                            }
+                    ?>
                         </div>
                     </div>
                 </div>
