@@ -1,8 +1,7 @@
 <?php
 
     include('admin/functions/timetable.inc');
-    include('admin/functions/provisionals.inc');     
-
+    
     // $period = GetPeriodDetailsForStudent($student_id, $day, $period_no);
     $period = GetProvisionalPeriodDetailsForTeacher($teacher_id, $day, $period_no);
     

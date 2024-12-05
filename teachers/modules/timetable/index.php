@@ -1,7 +1,6 @@
 <?php
     
     include('admin/functions/timetable.inc');
-    include('admin/functions/provisionals.inc');
     
     // TODO: merge timetable data with provisional data
     // $timetable = GetTimetableForTeacherId($teacher_id);
