@@ -767,6 +767,7 @@
 			
 			include('admin/functions/courses.inc');
 			include('admin/functions/teachers.inc');
+			include('admin/functions/provisionals.inc');
 			
 			$loggedin_user = $_SESSION['login_user'];
 			$is_teacher = $loggedin_user['is_teacher'] ?? false;
@@ -876,19 +877,20 @@
 				break;
 				
 			case 'students':
-				$page_title = "My Teachers";
+				$page_title = "My Students";
 				
-				if (count($selected_courses)) {
+				$students = GetStudentsForTeacher($teacher_id);
+				
+				if (count($students)) {
 					if ($tokens[3] == 'id') {
-						$teacher_id = $tokens[4];
-						include('students/modules/teachers/profile.php');
+						$student_id = $tokens[4];
+						include('teachers/modules/students/profile.php');
 						exit;
 					}
 					
-					$teachers = GetTeachersForStudent($student_id);
 					include('teachers/modules/students/index.php');
 				} else {
-					include('students/modules/courses/emptyview.php');
+					include('teachers/modules/students/emptyview.php');
 				}
 				exit;
 				

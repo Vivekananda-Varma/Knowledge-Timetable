@@ -16,26 +16,26 @@
                     <div class="row">
                         <div class="col-xl-10 mx-auto">
                             <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h3 class="mb-0 text-center w-100">Teachers</h3>
+                                <h3 class="mb-0 text-center w-100"><?= $page_title ?></h3>
                             </div>
-                            <div class="teachers-list mb-10">
+                            <div class="mb-10">
                     <?php
-                        $previous_teacher_id = '';
+                        $previous_student_id = '';
                         
-                        foreach($teachers as $teacher) {
-                            $teacher_id = $teacher['teacher_id'];
-                            $firstname = $teacher['firstname'];
-                            $lastname = $teacher['lastname'];
+                        foreach($students as $student) {
+                            $uid = $student['uid'];
+                            $student_id = $student['student_id'];
+                            $firstname = $student['firstname'];
+                            $lastname = $student['lastname'];
                             $fullname = "<b>$firstname</b> $lastname";
-                            $display_name = $teacher['display_name'];
+                            $display_name = $student['display_name'];
                             
-                            $category_id = $teacher['category_id'];
-                            $course_id = $teacher['course_id'];
-                            $course_name = $teacher['course_name'];
+                            $category_id = $student['category_id'];
+                            $course_id = $student['course_id'];
+                            $course_name = $student['course_name'];
                             
-                            $mobile = $teacher['mobile'];
-                            $email = $teacher['email'];
-                            $otp = $teacher['otp'];
+                            $mobile = $student['mobile'];
+                            $email = $student['email'];
                             $last_login = $teacher['last_login'] ?? 'Today 7:51 pm';
                             
                             // $num_courses = $teacher['num_courses'];
@@ -49,8 +49,10 @@
                             $color_index = $category_id % 14;
                             $color = $colors[$color_index];
                             
-                            if ($teacher_id != $previous_teacher_id) {
-                                if ($previous_teacher_id != '') {               // only close card html if we are in the middle of the loop 
+                            $profile_image_url = GetProfileImagePathForUID($uid);
+                            
+                            if ($student_id != $previous_student_id) {
+                                if ($previous_student_id != '') {               // only close card html if we are in the middle of the loop 
                     ?>
                                                 </div>
                                             </div>
@@ -61,14 +63,14 @@
                     <?php
                                 }
                                 
-                                $previous_teacher_id = $teacher_id;             // begin new card
+                                $previous_student_id = $student_id;             // begin new card
                     ?> 
-                                <div class="card mb-3 lift" data-href="/students/teachers/id/<?= $teacher_id ?>/">
+                                <div class="card mb-3 lift" data-href="/teachers/students/id/<?= $student_id ?>/">
                                     <div class="card-body p-5">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center">
                                                 <div class="profile-pic me-4">
-                                                    <img src="/frontend/images/user-default-profile-pic.jpg" alt="Profile" />
+                                                    <img src="<?= $profile_image_url ?>" alt="Profile" />
                                                 </div>
                                                 <div class="d-flex flex-column">
                                                     <span class="text-body fw-bold text-start"><?= $fullname ?></span>

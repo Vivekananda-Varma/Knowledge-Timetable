@@ -36,7 +36,6 @@
                             
                             $mobile = $teacher['mobile'];
                             $email = $teacher['email'];
-                            $otp = $teacher['otp'];
                             $last_login = $teacher['last_login'] ?? 'Today 7:51 pm';
                             
                             // $num_courses = $teacher['num_courses'];

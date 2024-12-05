@@ -84,6 +84,33 @@
         return $teachers;
     }
     
+    function GetStudentsForTeacher($teacher_id) {
+        global $mysqli;
+        
+        $query = "
+            SELECT courses.*, students.student_id, students.year, users.*, subjects.category_id, map.status
+            FROM xref_students_courses_periods AS map
+            LEFT JOIN courses ON courses.course_id=map.course_id
+            LEFT JOIN subjects ON subjects.subject_id=courses.subject_id
+            LEFT JOIN students ON students.student_id=map.student_id
+            LEFT JOIN users ON users.user_id=students.user_id
+            WHERE courses.`teacher_id`='$teacher_id'
+            GROUP BY students.student_id, courses.course_id
+            ORDER  BY users.firstname, courses.course_name
+        ";
+        
+        $result = $mysqli->query($query);
+        $num_results = $result->num_rows;
+        
+        $students = array();
+        
+        for ($i = 0; $i < $num_results; $i++) {
+            $students[] = $result->fetch_assoc();
+        }
+        
+        return $students;
+    }
+    
     function AssignCourseToPeriod($student_id, $course_id, $day, $period_no) {
         global $mysqli;
         
@@ -334,12 +361,6 @@
         }
        
         return $timetable;
-    }
-    
-    function GetStudentsForTeacher($student_id) {
-    global $mysqli;
-    
-        return array();
     }
     
     function BadgeColorForStatus($status) {
