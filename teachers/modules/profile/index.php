@@ -1,5 +1,7 @@
 <?php
 
+    $uid = $teacher['uid'];
+    
     $mobile = $teacher['mobile'];
     $email = $teacher['email'];
     $dob = MySQLDateToDate($teacher['dob']);
@@ -43,7 +45,7 @@
                                     <img src="<?= $profile_image_url ?>" 
                                          alt="User Profile" class="img-fluid rounded-circle mb-2" 
                                          width="200" height="200" />
-                                    <h5 class="card-title mb-0"><?= $fullname ?></h5>
+                                    <h5 class="card-title mb-0"><?= $loggedin_user_fullname ?></h5>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-sm my-2">

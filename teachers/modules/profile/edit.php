@@ -1,5 +1,7 @@
 <?php
 
+    $uid = $teacher['uid'];
+    
     $firstname = $teacher['firstname'];
     $lastname = $teacher['lastname'];
     $mobile = $teacher['mobile'];
@@ -47,7 +49,7 @@
                                     <div class="card-body text-center">
                                         <input type="file" class="filepond" name="filepond[]" data-max-file-size="3MB" data-max-files="1" accepted-file-types="image/*">
                                         <!-- <img src="<?= $profile_image_url ?>" alt="User Profile" class="img-fluid rounded-circle mb-2" width="200" height="200" /> -->
-                                        <h5 class="card-title mb-0"><?= $fullname ?></h5>
+                                        <h5 class="card-title mb-0"><?= $loggedin_user_fullname ?></h5>
                                     </div>
                                     <div class="card-body">
                                         <div class="mb-3">
